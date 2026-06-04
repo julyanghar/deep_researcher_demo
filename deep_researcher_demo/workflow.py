@@ -1,0 +1,168 @@
+"""Workflow loop for the simplified deep researcher."""
+
+import asyncio
+
+from deep_researcher_demo.agents import FinalWriter, Researcher, Supervisor
+from deep_researcher_demo.progress import (
+    NullProgressReporter,
+    ProgressEvent,
+    ProgressReporter,
+    format_list,
+)
+from deep_researcher_demo.schemas import WorkflowResult
+
+
+class DeepResearchWorkflow:
+    """Plain Python implementation of the simplified deep research workflow."""
+
+    def __init__(
+        self,
+        *,
+        supervisor: Supervisor,
+        researcher: Researcher,
+        final_writer: FinalWriter,
+        search_provider,
+        max_iterations: int = 3,
+        max_followups: int = 3,
+        max_queries_per_researcher: int = 3,
+        max_concurrency: int = 3,
+        max_results: int = 5,
+        reporter: ProgressReporter | None = None,
+        output_path: str | None = None,
+    ) -> None:
+        self.supervisor = supervisor
+        self.researcher = researcher
+        self.final_writer = final_writer
+        self.search_provider = search_provider
+        self.max_iterations = max_iterations
+        self.max_followups = max_followups
+        self.max_queries_per_researcher = max_queries_per_researcher
+        self.max_concurrency = max_concurrency
+        self.max_results = max_results
+        self.reporter = reporter or NullProgressReporter()
+        self.output_path = output_path
+
+    async def run(self, original_question: str) -> WorkflowResult:
+        self.reporter.emit(
+            ProgressEvent(
+                "starting_research",
+                f"Starting research: {original_question}",
+                {"original_question": original_question},
+            )
+        )
+        initial = await self.supervisor.initialize_question(
+            original_question,
+            max_questions=self.max_followups,
+        )
+        initial_questions = initial.research_questions or [original_question]
+        self.reporter.emit(
+            ProgressEvent(
+                "initial_questions",
+                f"{len(initial_questions)} questions: {format_list(initial_questions)}",
+                {"research_questions": initial_questions},
+            )
+        )
+        pending_questions = initial_questions
+        seen_questions = set(initial_questions)
+        summaries: list[str] = []
+        supervisor_reasons: list[str] = []
+
+        for iteration in range(1, self.max_iterations + 1):
+            if not pending_questions:
+                break
+
+            current_questions = pending_questions[: self.max_followups]
+            self.reporter.emit(
+                ProgressEvent(
+                    "iteration_start",
+                    f"iteration {iteration}/{self.max_iterations}, questions {len(current_questions)}",
+                    {"iteration": iteration, "question_count": len(current_questions)},
+                )
+            )
+            round_results = await self._run_researchers(current_questions)
+            round_summaries = [summary for summary, _ in round_results]
+            round_backup_urls = [url for _, urls in round_results for url in urls]
+            summaries.extend(round_summaries)
+
+            # max_followups 是：supervisor 每一轮最多可以提出多少个后续研究问题。
+            decision = await self.supervisor.decide(
+                original_question=original_question,
+                summaries=summaries,
+                max_followups=self.max_followups,
+            )
+            supervisor_reasons.append(decision.reason)
+            if decision.status == "continue":
+                decision_message = (
+                    f"continue: {decision.reason}; followups: {format_list(decision.followup_questions)}"
+                )
+            else:
+                decision_message = f"complete: {decision.reason}"
+            self.reporter.emit(
+                ProgressEvent(
+                    "supervisor_decision",
+                    decision_message,
+                    {
+                        "status": decision.status,
+                        "reason": decision.reason,
+                        "followup_questions": decision.followup_questions,
+                        "backup_url_count": len(round_backup_urls),
+                    },
+                )
+            )
+
+            if decision.status == "complete":
+                break
+
+            pending_questions = []
+            for question in decision.followup_questions:
+                if question not in seen_questions:
+                    seen_questions.add(question)
+                    pending_questions.append(question)
+
+        self.reporter.emit(
+            ProgressEvent(
+                "final_report",
+                f"Writing final report from {len(summaries)} summaries",
+                {"summary_count": len(summaries)},
+            )
+        )
+        final_report = await self.final_writer.write(
+            original_question=original_question,
+            summaries=summaries,
+        )
+        self.reporter.emit(
+            ProgressEvent(
+                "completed",
+                f"Completed with {len(summaries)} summaries; output: {self.output_path or 'stdout'}",
+                {"summary_count": len(summaries), "output_path": self.output_path},
+            )
+        )
+        return WorkflowResult(
+            original_question=original_question,
+            initial_research_questions=initial_questions,
+            summaries=summaries,
+            supervisor_reasons=supervisor_reasons,
+            final_report=final_report,
+        )
+
+    async def _run_researchers(self, questions: list[str]) -> list[tuple[str, list[str]]]:
+        semaphore = asyncio.Semaphore(max(1, self.max_concurrency))
+
+        async def run_one(question: str) -> tuple[str, list[str]]:
+            async with semaphore:
+                self.reporter.emit(
+                    ProgressEvent(
+                        "researcher_start",
+                        f"Researcher started: {question}",
+                        {"question": question},
+                    )
+                )
+                return await self.researcher.research(
+                    question,
+                    self.search_provider,
+                    self.max_results,
+                    max_queries=self.max_queries_per_researcher,
+                    reporter=self.reporter,
+                )
+
+        return list(await asyncio.gather(*(run_one(question) for question in questions)))
