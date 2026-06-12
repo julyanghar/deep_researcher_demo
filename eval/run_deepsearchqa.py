@@ -15,7 +15,13 @@ from deep_researcher_demo.agents import FinalWriter, Researcher, Supervisor
 from deep_researcher_demo.cli import load_env
 from deep_researcher_demo.config import AppConfig
 from deep_researcher_demo.llm import OpenAICompatibleClient
-from deep_researcher_demo.progress import ConsoleProgressReporter, NullProgressReporter
+from deep_researcher_demo.progress import (
+    CompositeProgressReporter,
+    ConsoleProgressReporter,
+    MemoryProgressReporter,
+    NullProgressReporter,
+    event_to_dict,
+)
 from deep_researcher_demo.search import create_search_provider
 from deep_researcher_demo.workflow import DeepResearchWorkflow
 from eval.judge import rate_report
@@ -76,6 +82,7 @@ async def async_main(argv: list[str] | None = None) -> int:
     validate_judge_config(config, mode=args.mode)
     output_dir = Path(args.output_dir)
     reports_path = output_dir / "reports.jsonl"
+    traces_path = output_dir / "workflow_traces.jsonl"
     predictions_path = output_dir / "predictions.jsonl"
     metrics_path = output_dir / "metrics.json"
     failures_path = output_dir / "failures.jsonl"
@@ -83,6 +90,7 @@ async def async_main(argv: list[str] | None = None) -> int:
     prepare_outputs(
         output_dir=output_dir,
         reports_path=reports_path,
+        traces_path=traces_path,
         predictions_path=predictions_path,
         metrics_path=metrics_path,
         failures_path=failures_path,
@@ -104,6 +112,7 @@ async def async_main(argv: list[str] | None = None) -> int:
             examples_to_generate,
             runner=runner,
             reports_path=reports_path,
+            traces_path=traces_path,
             sample_concurrency=args.sample_concurrency,
             total_count=len(examples),
         )
@@ -225,33 +234,44 @@ class EvalRunner:
     async def generate_report(self, example: dict[str, Any]) -> dict[str, Any]:
         start_time = time.perf_counter()
         started_at = utc_now_iso()
+        memory_reporter = MemoryProgressReporter()
+        workflow_events: list[dict[str, Any]] = []
+        workflow_stats: dict[str, Any] = {}
         try:
-            workflow = self.build_workflow()
+            workflow = self.build_workflow(reporter=self.build_progress_reporter(memory_reporter))
             eval_prompt = build_eval_prompt(example["problem"])
             result = await workflow.run(eval_prompt)
+            workflow_events = [event_to_dict(event) for event in memory_reporter.events]
+            workflow_stats = build_workflow_stats(workflow_events)
             final_report = result.final_report
             final_answer = extract_final_answer(final_report)
             completed_at = utc_now_iso()
             latency_seconds = round(time.perf_counter() - start_time, 3)
-            return {
+            record = {
                 **example,
                 "input_problem": eval_prompt,
                 "final_report": final_report,
                 "final_answer": final_answer,
+                "workflow_stats": workflow_stats,
                 "report_generation_started_at": started_at,
                 "report_generation_completed_at": completed_at,
                 "report_generation_latency_seconds": latency_seconds,
                 "latency_seconds": latency_seconds,
                 "error": None,
             }
+            record["_workflow_trace"] = build_workflow_trace_record(record, workflow_events)
+            return record
         except Exception as exc:
+            workflow_events = [event_to_dict(event) for event in memory_reporter.events]
+            workflow_stats = build_workflow_stats(workflow_events)
             completed_at = utc_now_iso()
             latency_seconds = round(time.perf_counter() - start_time, 3)
-            return {
+            record = {
                 **example,
                 "input_problem": build_eval_prompt(example["problem"]),
                 "final_report": "",
                 "final_answer": "",
+                "workflow_stats": workflow_stats,
                 "report_generation_started_at": started_at,
                 "report_generation_completed_at": completed_at,
                 "report_generation_latency_seconds": latency_seconds,
@@ -259,6 +279,8 @@ class EvalRunner:
                 "error": str(exc),
                 "traceback": traceback.format_exc(limit=5),
             }
+            record["_workflow_trace"] = build_workflow_trace_record(record, workflow_events)
+            return record
 
     async def rate_report_record(self, report_record: dict[str, Any]) -> dict[str, Any]:
         local_scores = score_answer(
@@ -302,7 +324,7 @@ class EvalRunner:
         )
         return record
 
-    def build_workflow(self) -> DeepResearchWorkflow:
+    def build_workflow(self, reporter=None) -> DeepResearchWorkflow:
         llm = self.build_llm()
         search_provider = create_search_provider(
             self.config.search_provider,
@@ -311,11 +333,12 @@ class EvalRunner:
             fetch_timeout=self.config.fetch_timeout,
             fetch_concurrency=self.config.fetch_concurrency,
         )
-        reporter = NullProgressReporter() if self.quiet else ConsoleProgressReporter()
         supervisor_model = self.config.supervisor_model or self.config.model
         researcher_model = self.config.researcher_model or self.config.model
         summary_model = self.config.summary_model or self.config.model
         final_model = self.config.final_model or self.config.model
+        if reporter is None:
+            reporter = NullProgressReporter() if self.quiet else ConsoleProgressReporter()
         return DeepResearchWorkflow(
             supervisor=Supervisor(llm, supervisor_model),
             researcher=Researcher(llm, researcher_model, summary_model),
@@ -329,6 +352,11 @@ class EvalRunner:
             reporter=reporter,
             output_path=None,
         )
+
+    def build_progress_reporter(self, memory_reporter: MemoryProgressReporter):
+        if self.quiet:
+            return memory_reporter
+        return CompositeProgressReporter(memory_reporter, ConsoleProgressReporter())
 
     def build_llm(self):
         return OpenAICompatibleClient(
@@ -362,6 +390,7 @@ async def run_generation_phase(
     *,
     runner: EvalRunner,
     reports_path: Path,
+    traces_path: Path,
     sample_concurrency: int,
     total_count: int,
 ) -> list[dict[str, Any]]:
@@ -388,7 +417,10 @@ async def run_generation_phase(
     ]
     for task in asyncio.as_completed(tasks):
         record = await task
+        trace_record = record.pop("_workflow_trace", build_workflow_trace_record(record, []))
+        record.setdefault("workflow_stats", trace_record.get("workflow_stats") or build_workflow_stats([]))
         append_jsonl(reports_path, record)
+        append_jsonl(traces_path, trace_record)
         records.append(record)
         completed_count += 1
         print(
@@ -466,14 +498,19 @@ def prepare_outputs(
     overwrite: bool,
     mode: str = "all",
     reports_path: Path | None = None,
+    traces_path: Path | None = None,
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     if mode == "generate":
-        output_paths = [path for path in [reports_path] if path is not None]
+        output_paths = [path for path in [reports_path, traces_path] if path is not None]
     elif mode == "score":
         output_paths = [predictions_path, metrics_path, failures_path]
     else:
-        output_paths = [path for path in [reports_path, predictions_path, metrics_path, failures_path] if path is not None]
+        output_paths = [
+            path
+            for path in [reports_path, traces_path, predictions_path, metrics_path, failures_path]
+            if path is not None
+        ]
     existing = [path for path in output_paths if path.exists()]
     if overwrite:
         for path in existing:
@@ -529,6 +566,72 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
             if line:
                 records.append(json.loads(line))
     return records
+
+
+def build_workflow_trace_record(
+    report_record: dict[str, Any],
+    workflow_events: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Build a per-sample workflow trace record for workflow_traces.jsonl."""
+    workflow_stats = report_record.get("workflow_stats") or build_workflow_stats(workflow_events)
+    return {
+        "sample_id": report_record.get("sample_id"),
+        "problem_category": report_record.get("problem_category", ""),
+        "workflow_events": workflow_events,
+        "workflow_stats": workflow_stats,
+        "error": report_record.get("error"),
+    }
+
+
+def build_workflow_stats(events: list[dict[str, Any]]) -> dict[str, Any]:
+    """Aggregate branch and step counts from serialized progress events."""
+    initial_questions = []
+    branches_by_iteration: list[int] = []
+    queries_by_researcher: list[list[str]] = []
+    supervisor_decisions: list[dict[str, Any]] = []
+    search_result_count = 0
+    backup_url_count = 0
+
+    for event in events:
+        step = event.get("step")
+        data = event.get("data") or {}
+        if step == "initial_questions":
+            initial_questions = list(data.get("research_questions") or [])
+        elif step == "iteration_start":
+            branches_by_iteration.append(int(data.get("question_count") or 0))
+        elif step == "queries_planned":
+            queries_by_researcher.append(list(data.get("queries") or []))
+        elif step == "subquery_search_complete":
+            search_result_count += int(data.get("result_count") or 0)
+            backup_url_count += int(data.get("backup_url_count") or 0)
+        elif step == "supervisor_decision":
+            followups = list(data.get("followup_questions") or [])
+            supervisor_decisions.append(
+                {
+                    "status": data.get("status", ""),
+                    "reason": data.get("reason", ""),
+                    "followup_count": len(followups),
+                }
+            )
+
+    return {
+        "num_events": len(events),
+        "num_iterations": count_events(events, "iteration_start"),
+        "initial_question_count": len(initial_questions),
+        "researcher_count": count_events(events, "researcher_start"),
+        "subquery_count": count_events(events, "subquery_start"),
+        "search_result_count": search_result_count,
+        "queries_per_researcher": [len(queries) for queries in queries_by_researcher],
+        "queries_by_researcher": queries_by_researcher,
+        "branches_by_iteration": branches_by_iteration,
+        "supervisor_decisions": supervisor_decisions,
+        "completed": any(event.get("step") == "completed" for event in events),
+        "backup_url_count": backup_url_count,
+    }
+
+
+def count_events(events: list[dict[str, Any]], step: str) -> int:
+    return sum(1 for event in events if event.get("step") == step)
 
 
 def append_jsonl(path: Path, record: dict[str, Any]) -> None:

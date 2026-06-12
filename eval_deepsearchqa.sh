@@ -134,14 +134,14 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-OUTPUT_DIR="${OUTPUT_DIR:-eval/results/deepsearchqa_50_qwen_flash_new}"
-MODE="${MODE:-score}"
-# score all
-LIMIT="${LIMIT:-50}"
+OUTPUT_DIR="${OUTPUT_DIR:-eval/results/deepsearchqa_10_test_lmcache}"
+MODE="${MODE:-generate}"
+# score all generate
+LIMIT="${LIMIT:-10}"
 START="${START:-0}"
 IDS="${IDS:-}"
 CATEGORY="${CATEGORY:-}"
-SAMPLE_CONCURRENCY="${SAMPLE_CONCURRENCY:-2}"
+SAMPLE_CONCURRENCY="${SAMPLE_CONCURRENCY:-1}"
 RESUME="${RESUME:-0}"
 OVERWRITE="${OVERWRITE:-1}"
 QUIET="${QUIET:-1}"

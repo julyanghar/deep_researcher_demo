@@ -11,9 +11,11 @@ from eval.run_deepsearchqa import (
     async_main,
     build_config,
     build_eval_prompt,
+    build_workflow_stats,
     load_selected_report_records,
     prepare_outputs,
     read_completed_ids,
+    read_jsonl,
     select_examples,
     validate_judge_config,
 )
@@ -173,8 +175,15 @@ def test_mode_generate_only_writes_reports(monkeypatch, tmp_path):
     )
 
     assert (tmp_path / "reports.jsonl").exists()
+    assert (tmp_path / "workflow_traces.jsonl").exists()
     assert not (tmp_path / "predictions.jsonl").exists()
     assert not (tmp_path / "metrics.json").exists()
+    report_record = read_jsonl(tmp_path / "reports.jsonl")[0]
+    trace_record = read_jsonl(tmp_path / "workflow_traces.jsonl")[0]
+    assert "workflow_events" not in report_record
+    assert "workflow_stats" in report_record
+    assert "workflow_events" in trace_record
+    assert "workflow_stats" in trace_record
 
 
 def test_mode_score_uses_existing_reports(monkeypatch, tmp_path):
@@ -216,6 +225,7 @@ def test_mode_score_uses_existing_reports(monkeypatch, tmp_path):
     )
 
     assert (tmp_path / "reports.jsonl").exists()
+    assert (tmp_path / "workflow_traces.jsonl").exists()
     assert (tmp_path / "predictions.jsonl").exists()
     assert (tmp_path / "metrics.json").exists()
     assert (tmp_path / "failures.jsonl").exists()
@@ -253,6 +263,51 @@ def test_eval_prompt_does_not_include_gold_metadata():
     assert "Question text" in prompt
     assert "answer_type" not in prompt
     assert "gold" not in prompt.lower()
+
+
+def test_workflow_stats_preserve_queries_from_events():
+    events = [
+        {
+            "step": "initial_questions",
+            "message": "2 questions",
+            "data": {"research_questions": ["q1", "q2"]},
+        },
+        {
+            "step": "iteration_start",
+            "message": "iteration 1",
+            "data": {"question_count": 2},
+        },
+        {"step": "researcher_start", "message": "r1", "data": {"question": "q1"}},
+        {
+            "step": "queries_planned",
+            "message": "2 queries",
+            "data": {"question": "q1", "queries": ["query a", "query b"]},
+        },
+        {
+            "step": "subquery_search_complete",
+            "message": "5 results",
+            "data": {"query": "query a", "result_count": 5, "backup_url_count": 5},
+        },
+        {
+            "step": "supervisor_decision",
+            "message": "complete",
+            "data": {"status": "complete", "reason": "done", "followup_questions": []},
+        },
+        {"step": "completed", "message": "done", "data": {}},
+    ]
+
+    stats = build_workflow_stats(events)
+
+    assert stats["num_events"] == len(events)
+    assert stats["num_iterations"] == 1
+    assert stats["initial_question_count"] == 2
+    assert stats["researcher_count"] == 1
+    assert stats["queries_per_researcher"] == [2]
+    assert stats["queries_by_researcher"] == [["query a", "query b"]]
+    assert stats["branches_by_iteration"] == [2]
+    assert stats["search_result_count"] == 5
+    assert stats["backup_url_count"] == 5
+    assert stats["completed"] is True
 
 
 def test_judge_model_priority(monkeypatch):

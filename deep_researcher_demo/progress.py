@@ -34,6 +34,17 @@ class NullProgressReporter:
         return None
 
 
+class CompositeProgressReporter:
+    """Progress reporter that forwards events to multiple reporters."""
+
+    def __init__(self, *reporters: ProgressReporter) -> None:
+        self.reporters = reporters
+
+    def emit(self, event: ProgressEvent) -> None:
+        for reporter in self.reporters:
+            reporter.emit(event)
+
+
 class MemoryProgressReporter:
     """Progress reporter useful for tests."""
 
@@ -42,6 +53,15 @@ class MemoryProgressReporter:
 
     def emit(self, event: ProgressEvent) -> None:
         self.events.append(event)
+
+
+def event_to_dict(event: ProgressEvent) -> dict[str, Any]:
+    """Serialize one progress event without dropping event data."""
+    return {
+        "step": event.step,
+        "message": event.message,
+        "data": dict(event.data or {}),
+    }
 
 
 def format_event(event: ProgressEvent) -> str:
@@ -64,4 +84,3 @@ def format_list(values: list[str], max_items: int = 5) -> str:
     visible = values[:max_items]
     suffix = "" if len(values) <= max_items else f", ... +{len(values) - max_items}"
     return "; ".join(truncate(value, 80) for value in visible) + suffix
-
