@@ -3,12 +3,19 @@
 import asyncio
 import os
 import re
+import threading
+import time
 from typing import Protocol
 
 import httpx
 from bs4 import BeautifulSoup
 
 from deep_researcher_demo.schemas import SearchResult
+
+# Process-wide pacing for DuckDuckGo/ddgs calls (see _search_one).
+_DDG_THROTTLE_LOCK = threading.Lock()
+_DDG_MIN_INTERVAL = float(os.getenv("DDG_MIN_INTERVAL", "1.5"))
+_DDG_LAST_CALL = 0.0
 
 
 class SearchProvider(Protocol):
@@ -61,8 +68,33 @@ class DuckDuckGoSearchProvider:
                 "DuckDuckGo search requires the `ddgs` package. Install with `pip install -e .`."
             ) from exc
 
-        with DDGS() as ddgs:
-            raw_results = list(ddgs.text(query, max_results=max_results))
+        # Sustained bursts (several researchers searching concurrently) get
+        # this host rate-limited/blocked by the search backends, which then
+        # fail whole benchmark samples. Serialize all ddgs calls process-wide
+        # with a minimum interval, retry with backoff on transient errors,
+        # and treat "no results" as an empty result set instead of a failure.
+        raw_results: list = []
+        attempts = 4
+        for attempt in range(attempts):
+            try:
+                with _DDG_THROTTLE_LOCK:
+                    global _DDG_LAST_CALL
+                    wait = _DDG_MIN_INTERVAL - (time.monotonic() - _DDG_LAST_CALL)
+                    if wait > 0:
+                        time.sleep(wait)
+                    try:
+                        with DDGS() as ddgs:
+                            raw_results = list(ddgs.text(query, max_results=max_results))
+                    finally:
+                        _DDG_LAST_CALL = time.monotonic()
+                break
+            except Exception as exc:  # noqa: BLE001 - backend errors are diverse
+                if "no results" in str(exc).lower():
+                    raw_results = []
+                    break
+                if attempt == attempts - 1:
+                    raise
+                time.sleep(5.0 * (attempt + 1))
 
         normalized: list[SearchResult] = []
         for item in raw_results:

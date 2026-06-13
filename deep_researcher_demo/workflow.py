@@ -50,6 +50,15 @@ class DeepResearchWorkflow:
                 {"original_question": original_question},
             )
         )
+        if getattr(self.supervisor, "kv_reuse_separator", ""):
+            # KV-reuse mode: prime the constant prompt prefixes of the
+            # supervisor-decision and final-report roles so that the blend
+            # lookup (which requires contiguous hits from token 0) can reach
+            # the researcher-summary segments on their very first use.
+            await asyncio.gather(
+                self.supervisor.warmup_kv_prefix(self.max_followups),
+                self.final_writer.warmup_kv_prefix(),
+            )
         initial = await self.supervisor.initialize_question(
             original_question,
             max_questions=self.max_followups,

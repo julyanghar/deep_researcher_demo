@@ -33,6 +33,13 @@ class AppConfig:
     fetch_concurrency: int = 8
     search_provider: str = "duckduckgo"
     output: str | None = None
+    # When non-empty, researcher summaries are embedded between this separator
+    # in downstream prompts (supervisor decisions / final report) so an
+    # LMCache-blend backend can reuse the decode-generated KV of each summary.
+    # Must equal the server's LMCACHE_BLEND_SPECIAL_STR and should be an
+    # atomic special token of the served model (e.g. "<|fim_pad|>" for Qwen),
+    # which tokenizes identically in any surrounding context.
+    kv_reuse_separator: str = ""
 
     @classmethod
     def from_env(cls) -> "AppConfig":
@@ -60,6 +67,7 @@ class AppConfig:
             fetch_concurrency=_env_int("FETCH_CONCURRENCY", 8),
             search_provider=os.getenv("SEARCH_PROVIDER", "duckduckgo"),
             output=os.getenv("OUTPUT") or None,
+            kv_reuse_separator=os.getenv("KV_REUSE_SEPARATOR", ""),
         )
 
     def apply_model_override(self, model: str | None) -> None:

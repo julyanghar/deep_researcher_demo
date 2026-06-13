@@ -79,9 +79,12 @@ async def async_main(argv: list[str] | None = None) -> int:
     reporter = NullProgressReporter() if args.quiet else ConsoleProgressReporter()
 
     workflow = DeepResearchWorkflow(
-        supervisor=Supervisor(llm, supervisor_model),
-        researcher=Researcher(llm, researcher_model, summary_model),
-        final_writer=FinalWriter(llm, final_model),
+        supervisor=Supervisor(llm, supervisor_model, config.kv_reuse_separator),
+        researcher=Researcher(
+            llm, researcher_model, summary_model,
+            kv_reuse_separator=config.kv_reuse_separator,
+        ),
+        final_writer=FinalWriter(llm, final_model, config.kv_reuse_separator),
         search_provider=search_provider,
         max_iterations=config.max_iterations,
         max_followups=config.max_followups,

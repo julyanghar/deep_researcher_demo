@@ -14,20 +14,45 @@ from deep_researcher_demo.schemas import (
     SupervisorDecision,
 )
 
+import os
+
 INITIAL_QUESTIONS_MAX_TOKENS = 1000
 SUPERVISOR_DECISION_MAX_TOKENS = 1000
 QUERY_PLAN_MAX_TOKENS = 1000
-RESEARCH_SUMMARY_MAX_TOKENS = 5000
+RESEARCH_SUMMARY_MAX_TOKENS = int(os.getenv("RESEARCH_SUMMARY_MAX_TOKENS", "5000"))
 JSON_REPAIR_MAX_TOKENS = 2000
 FINAL_REPORT_MAX_TOKENS = 10000
+
+# When set (e.g. SUMMARY_DETAILED=1), researchers write long, information-dense
+# digests instead of tight compressions. Used to scale up the reusable-context
+# size for KV-reuse experiments; applies identically to all serving backends.
+SUMMARY_DETAILED = os.getenv("SUMMARY_DETAILED", "").strip().lower() in {"1", "true", "yes"}
+
+
+def join_reusable_segments(parts: list[str], separator: str) -> str:
+    """Join generated texts so each one becomes a reusable KV segment.
+
+    With an empty separator this is the original "\\n\\n---\\n\\n" join. With a
+    non-empty separator (the server's LMCACHE_BLEND_SPECIAL_STR, ideally an
+    atomic special token such as "<|fim_pad|>"), every part is delimited on
+    BOTH sides, so the LMCache-blend backend splits each part into its own
+    content-hashed segment and reuses the KV that blend_store_generated saved
+    when the part was originally generated. Parts must be embedded verbatim:
+    any added or stripped character changes the token sequence and the
+    content hash misses entirely.
+    """
+    if not separator:
+        return "\n\n---\n\n".join(parts)
+    return separator + separator.join(parts) + separator
 
 
 class Agent:
     """Base class with JSON repair support."""
 
-    def __init__(self, llm: ChatClient, model: str) -> None:
+    def __init__(self, llm: ChatClient, model: str, kv_reuse_separator: str = "") -> None:
         self.llm = llm
         self.model = model
+        self.kv_reuse_separator = kv_reuse_separator
 
     async def call_json(
         self,
@@ -107,6 +132,51 @@ class Supervisor(Agent):
         ]
         return typed_initial
 
+    @staticmethod
+    def _decide_system(max_followups: int) -> str:
+        return (
+            "SUPERVISOR_DECISION_JSON\n"
+            "You are the research supervisor. Decide only whether more research is needed. "
+            "If more research is needed, produce concrete follow-up questions for researchers. "
+            f"Return at most {max_followups} follow-up questions. Return only JSON with this shape: "
+            '{"status": "continue|complete", "followup_questions": ["..."], "reason": "..."}'
+        )
+
+    def _decide_user(self, original_question: str, findings: str) -> str:
+        if self.kv_reuse_separator:
+            # KV-reuse layout: summaries first, question after. The blend
+            # lookup only counts segments that hit contiguously from token 0,
+            # so everything before the first separator must be a constant,
+            # cacheable prefix (chat template + system + this fixed header).
+            return (
+                f"<research_summaries>\n{findings}\n</research_summaries>\n\n"
+                f"<original_question>\n{original_question}\n</original_question>"
+            )
+        return (
+            f"<original_question>\n{original_question}\n</original_question>\n\n"
+            f"<research_summaries>\n{findings}\n</research_summaries>"
+        )
+
+    async def warmup_kv_prefix(self, max_followups: int) -> None:
+        """Prime the constant prompt prefix (segment 0) in the KV cache.
+
+        The first segment of the decide() prompt (chat template + system +
+        fixed user header) must already be cached for the blend lookup to
+        reach the summary segments. A tiny request whose final save stores
+        exactly that prefix makes even the first decide() of a session hit.
+        """
+        if not self.kv_reuse_separator:
+            return
+        findings = join_reusable_segments(["warmup"], self.kv_reuse_separator)
+        messages = [
+            {"role": "system", "content": self._decide_system(max_followups)},
+            {"role": "user", "content": self._decide_user("warmup", findings)},
+        ]
+        try:
+            await self.llm.chat(messages, model=self.model, temperature=0.0, max_tokens=8)
+        except Exception:  # noqa: BLE001 - warmup is best-effort
+            pass
+
     async def decide(
         self,
         *,
@@ -114,24 +184,15 @@ class Supervisor(Agent):
         summaries: list[str],
         max_followups: int,
     ) -> SupervisorDecision:
-        findings = "\n\n---\n\n".join(summaries)
+        findings = join_reusable_segments(summaries, self.kv_reuse_separator)
         messages = [
             {
                 "role": "system",
-                "content": (
-                    "SUPERVISOR_DECISION_JSON\n"
-                    "You are the research supervisor. Decide only whether more research is needed. "
-                    "If more research is needed, produce concrete follow-up questions for researchers. "
-                    f"Return at most {max_followups} follow-up questions. Return only JSON with this shape: "
-                    '{"status": "continue|complete", "followup_questions": ["..."], "reason": "..."}'
-                ),
+                "content": self._decide_system(max_followups),
             },
             {
                 "role": "user",
-                "content": (
-                    f"<original_question>\n{original_question}\n</original_question>\n\n"
-                    f"<research_summaries>\n{findings}\n</research_summaries>"
-                ),
+                "content": self._decide_user(original_question, findings),
             },
         ]
         decision = await self.call_json(
@@ -156,9 +217,16 @@ class Supervisor(Agent):
 class Researcher:
     """Turns a question into search queries and summarizes search results."""
 
-    def __init__(self, llm: ChatClient, planner_model: str, summary_model: str) -> None:
+    def __init__(
+        self,
+        llm: ChatClient,
+        planner_model: str,
+        summary_model: str,
+        kv_reuse_separator: str = "",
+    ) -> None:
         self.planner = Agent(llm, planner_model)
         self.summarizer = Agent(llm, summary_model)
+        self.kv_reuse_separator = kv_reuse_separator
 
     async def plan_queries(self, question: str, max_queries: int) -> QueryPlan:
         messages = [
@@ -199,15 +267,27 @@ class Researcher:
         queries: list[str],
         results: list[SearchResult],
     ) -> str:
+        if SUMMARY_DETAILED:
+            summary_instruction = (
+                "RESEARCH_SUMMARY_TEXT\n"
+                "Write a detailed, information-dense research digest of the provided "
+                "search results for the current sub-query. Preserve all facts, "
+                "figures, dates, names, definitions, and source attributions that "
+                "could be relevant to the overall research question. Organize the "
+                "digest by source. Be thorough rather than brief. "
+                "Write plain text only."
+            )
+        else:
+            summary_instruction = (
+                "RESEARCH_SUMMARY_TEXT\n"
+                "Compress the provided search results for the current sub-query. "
+                "Only Extract key information that is relevant to the overall research question. "
+                "Write plain text only."
+            )
         messages = [
             {
                 "role": "system",
-                "content": (
-                    "RESEARCH_SUMMARY_TEXT\n"
-                    "Compress the provided search results for the current sub-query. "
-                    "Only Extract key information that is relevant to the overall research question. "
-                    "Write plain text only."
-                ),
+                "content": summary_instruction,
             },
             {
                 "role": "user",
@@ -223,6 +303,12 @@ class Researcher:
             temperature=0.0,
             max_tokens=RESEARCH_SUMMARY_MAX_TOKENS,
         )
+        if self.kv_reuse_separator:
+            # Keep the text byte-exact: downstream prompts embed it verbatim
+            # between separators, and the serving side must re-tokenize it to
+            # the same token ids that were stored when it was generated.
+            # Stripping even one whitespace character breaks the KV reuse.
+            return summary if summary.strip() else "No relevant information was found."
         return summary.strip() or "No relevant information was found."
 
     async def _process_sub_query(
@@ -315,7 +401,17 @@ class Researcher:
         )
         sub_summaries = [summary for summary, _ in sub_results]
         backup_urls = dedupe_urls([url for _, urls in sub_results for url in urls])
-        combined_summary = "\n\n".join(sub_summaries) or "No relevant information was found."
+        if self.kv_reuse_separator:
+            # Each sub-summary is a separate generation (its own stored KV
+            # segment), so they must stay individually delimited. The
+            # supervisor/final-writer add the outer separators via
+            # join_reusable_segments, giving: SEP s1 SEP s2 ... SEP.
+            combined_summary = (
+                self.kv_reuse_separator.join(sub_summaries)
+                or "No relevant information was found."
+            )
+        else:
+            combined_summary = "\n\n".join(sub_summaries) or "No relevant information was found."
         reporter.emit(
             ProgressEvent(
                 "search_complete",
@@ -344,23 +440,49 @@ class Researcher:
 class FinalWriter(Agent):
     """Writes the final report from accumulated researcher summaries."""
 
+    _SYSTEM = (
+        "FINAL_REPORT_MARKDOWN\n"
+        "Write a clear, well-structured Markdown research report. "
+        "Use the same language as the user's original question. Include source links where useful."
+    )
+
+    def _write_user(self, original_question: str, findings: str) -> str:
+        if self.kv_reuse_separator:
+            # See Supervisor._decide_user: constant prefix before the first
+            # separator so the blend lookup reaches the summary segments.
+            return (
+                f"<findings>\n{findings}\n</findings>\n\n"
+                f"<original_question>\n{original_question}\n</original_question>"
+            )
+        return (
+            f"<original_question>\n{original_question}\n</original_question>\n\n"
+            f"<findings>\n{findings}\n</findings>"
+        )
+
+    async def warmup_kv_prefix(self) -> None:
+        """Prime the constant prompt prefix (segment 0) in the KV cache."""
+        if not self.kv_reuse_separator:
+            return
+        findings = join_reusable_segments(["warmup"], self.kv_reuse_separator)
+        messages = [
+            {"role": "system", "content": self._SYSTEM},
+            {"role": "user", "content": self._write_user("warmup", findings)},
+        ]
+        try:
+            await self.llm.chat(messages, model=self.model, temperature=0.0, max_tokens=8)
+        except Exception:  # noqa: BLE001 - warmup is best-effort
+            pass
+
     async def write(self, *, original_question: str, summaries: list[str]) -> str:
-        findings = "\n\n---\n\n".join(summaries)
+        findings = join_reusable_segments(summaries, self.kv_reuse_separator)
         messages = [
             {
                 "role": "system",
-                "content": (
-                    "FINAL_REPORT_MARKDOWN\n"
-                    "Write a clear, well-structured Markdown research report. "
-                    "Use the same language as the user's original question. Include source links where useful."
-                ),
+                "content": self._SYSTEM,
             },
             {
                 "role": "user",
-                "content": (
-                    f"<original_question>\n{original_question}\n</original_question>\n\n"
-                    f"<findings>\n{findings}\n</findings>"
-                ),
+                "content": self._write_user(original_question, findings),
             },
         ]
         return await self.llm.chat(

@@ -276,7 +276,9 @@ class EvalRunner:
                 "report_generation_completed_at": completed_at,
                 "report_generation_latency_seconds": latency_seconds,
                 "latency_seconds": latency_seconds,
-                "error": str(exc),
+                # str(exc) is empty for some exceptions (e.g. httpx.ReadTimeout),
+                # which would make the failure invisible to truthiness checks.
+                "error": str(exc) or repr(exc),
                 "traceback": traceback.format_exc(limit=5),
             }
             record["_workflow_trace"] = build_workflow_trace_record(record, workflow_events)
@@ -340,9 +342,12 @@ class EvalRunner:
         if reporter is None:
             reporter = NullProgressReporter() if self.quiet else ConsoleProgressReporter()
         return DeepResearchWorkflow(
-            supervisor=Supervisor(llm, supervisor_model),
-            researcher=Researcher(llm, researcher_model, summary_model),
-            final_writer=FinalWriter(llm, final_model),
+            supervisor=Supervisor(llm, supervisor_model, self.config.kv_reuse_separator),
+            researcher=Researcher(
+                llm, researcher_model, summary_model,
+                kv_reuse_separator=self.config.kv_reuse_separator,
+            ),
+            final_writer=FinalWriter(llm, final_model, self.config.kv_reuse_separator),
             search_provider=search_provider,
             max_iterations=self.config.max_iterations,
             max_followups=self.config.max_followups,
