@@ -60,6 +60,7 @@ class Agent:
         schema: type[BaseModel],
         *,
         max_tokens: int = JSON_REPAIR_MAX_TOKENS,
+        tag: str | None = None,
     ) -> BaseModel:
         """Call an LLM and validate JSON output, with one repair attempt."""
         content = await self.llm.chat(
@@ -67,6 +68,7 @@ class Agent:
             model=self.model,
             temperature=0.0,
             max_tokens=max_tokens,
+            tag=tag,
         )
         try:
             return parse_model_json(content, schema)
@@ -75,7 +77,6 @@ class Agent:
                 {
                     "role": "system",
                     "content": (
-                        "REPAIR_JSON\n"
                         "Convert the user's text into one valid JSON object that matches the requested schema. "
                         "Return only JSON.\n\n"
                         f"Schema name: {schema.__name__}\n"
@@ -89,6 +90,7 @@ class Agent:
                 model=self.model,
                 temperature=0.0,
                 max_tokens=JSON_REPAIR_MAX_TOKENS,
+                tag="REPAIR_JSON",
             )
             try:
                 return parse_model_json(repaired, schema)
@@ -106,7 +108,6 @@ class Supervisor(Agent):
             {
                 "role": "system",
                 "content": (
-                    "INITIAL_RESEARCH_QUESTIONS_JSON\n"
                     "Decompose the user's original question into standalone research sub-questions. "
                     "Each sub-question must be complete enough to hand directly to a researcher. "
                     f"Return at most {max_questions} sub-questions. "
@@ -123,6 +124,7 @@ class Supervisor(Agent):
             messages,
             InitialResearchQuestions,
             max_tokens=INITIAL_QUESTIONS_MAX_TOKENS,
+            tag="INITIAL_RESEARCH_QUESTIONS_JSON",
         )
         typed_initial = initial  # type: ignore[assignment]
         typed_initial.research_questions = [
@@ -135,7 +137,6 @@ class Supervisor(Agent):
     @staticmethod
     def _decide_system(max_followups: int) -> str:
         return (
-            "SUPERVISOR_DECISION_JSON\n"
             "You are the research supervisor. Decide only whether more research is needed. "
             "If more research is needed, produce concrete follow-up questions for researchers. "
             f"Return at most {max_followups} follow-up questions. Return only JSON with this shape: "
@@ -173,7 +174,12 @@ class Supervisor(Agent):
             {"role": "user", "content": self._decide_user("warmup", findings)},
         ]
         try:
-            await self.llm.chat(messages, model=self.model, temperature=0.0, max_tokens=8)
+            # Warmup primes the constant prefix segment; store it so the blend
+            # lookup (contiguous-from-token-0) can reach the summary segments.
+            await self.llm.chat(
+                messages, model=self.model, temperature=0.0, max_tokens=8,
+                store_generated_kv=True, tag="SUPERVISOR_DECISION_JSON",
+            )
         except Exception:  # noqa: BLE001 - warmup is best-effort
             pass
 
@@ -199,6 +205,7 @@ class Supervisor(Agent):
             messages,
             SupervisorDecision,
             max_tokens=SUPERVISOR_DECISION_MAX_TOKENS,
+            tag="SUPERVISOR_DECISION_JSON",
         )
         typed_decision = decision  # type: ignore[assignment]
         typed_decision.followup_questions = [
@@ -233,7 +240,6 @@ class Researcher:
             {
                 "role": "system",
                 "content": (
-                    "QUERY_PLAN_JSON\n"
                     "Break the research question into concise web search queries. "
                     f"Return at most {max_queries} search queries. "
                     "Return only JSON with this shape: "
@@ -249,6 +255,7 @@ class Researcher:
             messages,
             QueryPlan,
             max_tokens=QUERY_PLAN_MAX_TOKENS,
+            tag="QUERY_PLAN_JSON",
         )
         typed_plan = plan  # type: ignore[assignment]
         typed_plan.queries = [
@@ -269,7 +276,6 @@ class Researcher:
     ) -> str:
         if SUMMARY_DETAILED:
             summary_instruction = (
-                "RESEARCH_SUMMARY_TEXT\n"
                 "Write a detailed, information-dense research digest of the provided "
                 "search results for the current sub-query. Preserve all facts, "
                 "figures, dates, names, definitions, and source attributions that "
@@ -279,7 +285,6 @@ class Researcher:
             )
         else:
             summary_instruction = (
-                "RESEARCH_SUMMARY_TEXT\n"
                 "Compress the provided search results for the current sub-query. "
                 "Only Extract key information that is relevant to the overall research question. "
                 "Write plain text only."
@@ -302,6 +307,10 @@ class Researcher:
             model=self.summarizer.model,
             temperature=0.0,
             max_tokens=RESEARCH_SUMMARY_MAX_TOKENS,
+            # The researcher summary is the reusable segment: opt in to storing
+            # its decode-generated KV (only meaningful in KV-reuse mode).
+            store_generated_kv=bool(self.kv_reuse_separator),
+            tag="RESEARCH_SUMMARY_TEXT",
         )
         if self.kv_reuse_separator:
             # Keep the text byte-exact: downstream prompts embed it verbatim
@@ -441,7 +450,6 @@ class FinalWriter(Agent):
     """Writes the final report from accumulated researcher summaries."""
 
     _SYSTEM = (
-        "FINAL_REPORT_MARKDOWN\n"
         "Write a clear, well-structured Markdown research report. "
         "Use the same language as the user's original question. Include source links where useful."
     )
@@ -469,7 +477,12 @@ class FinalWriter(Agent):
             {"role": "user", "content": self._write_user("warmup", findings)},
         ]
         try:
-            await self.llm.chat(messages, model=self.model, temperature=0.0, max_tokens=8)
+            # Warmup primes the constant prefix segment; store it so the blend
+            # lookup (contiguous-from-token-0) can reach the summary segments.
+            await self.llm.chat(
+                messages, model=self.model, temperature=0.0, max_tokens=8,
+                store_generated_kv=True, tag="FINAL_REPORT_MARKDOWN",
+            )
         except Exception:  # noqa: BLE001 - warmup is best-effort
             pass
 
@@ -490,6 +503,7 @@ class FinalWriter(Agent):
             model=self.model,
             temperature=0.0,
             max_tokens=FINAL_REPORT_MAX_TOKENS,
+            tag="FINAL_REPORT_MARKDOWN",
         )
 
 

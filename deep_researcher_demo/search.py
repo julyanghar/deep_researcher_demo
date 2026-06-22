@@ -1,10 +1,14 @@
 """Search provider abstractions for the simplified deep researcher."""
 
 import asyncio
+import hashlib
+import json
 import os
 import re
 import threading
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Protocol
 
 import httpx
@@ -262,3 +266,173 @@ def create_search_provider(
     if normalized == "tavily":
         return TavilySearchProvider()
     raise ValueError(f"Unknown search provider: {name}. Expected duckduckgo or tavily.")
+
+
+def _strip_front_matter(text: str) -> str:
+    """Drop the leading `---\\n...\\n---\\n` YAML block written by _write_md."""
+    if text.startswith("---"):
+        parts = text.split("\n---\n", 1)
+        if len(parts) == 2:
+            return parts[1].lstrip("\n")
+    return text
+
+
+class CachingSearchProvider:
+    """Record/replay decorator over a real SearchProvider.
+
+    Makes end-to-end timing hermetic: record the live web search once into a
+    per-question document pool (markdown per URL), then replay from the pool
+    on every subsequent run with zero network so latency/results are fixed.
+
+    Modes:
+      - "record": run the wrapped provider live and persist every result
+        (one markdown file per URL + a manifest) into the per-question dir.
+        Returns the live results unchanged.
+      - "replay": serve from the per-question pool, returning the first
+        `fix_n` docs (manifest order; 0 = all) for every query -- a shared
+        pool, so the documents are identical no matter which queries the LLM
+        generates (A/B fairness). On a cold pool (never recorded) it falls
+        back to a live search, records it, and flags the question via
+        `misses` so the sample can be excluded from timing analysis.
+    """
+
+    def __init__(
+        self,
+        base: SearchProvider,
+        *,
+        mode: str,
+        cache_dir: str,
+        fix_n: int = 0,
+        sample_id: object = None,
+    ) -> None:
+        self.base = base
+        self.mode = mode
+        self.fix_n = fix_n
+        self.sample_id = sample_id
+        self.root = Path(cache_dir)
+        self.qdir = self.root / f"q{sample_id}"
+        # Queries that missed the cache in replay and triggered a live
+        # fallback; non-empty means this question's timing is contaminated.
+        self.misses: list[str] = []
+        self._lock = asyncio.Lock()
+
+    async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
+        if self.mode == "replay":
+            pool = self._load_pool()
+            if pool:
+                return self._select(pool, queries)
+            # Cold pool: fall back to a live search, persist it, flag the miss.
+            results = await self.base.search(queries, max_results=max_results)
+            await self._persist(results)
+            self.misses.extend(queries)
+            self._log_miss(queries)
+            return self._select(self._load_pool(), queries)
+        # record mode (and any unknown mode degrades to live + persist)
+        results = await self.base.search(queries, max_results=max_results)
+        await self._persist(results)
+        return results
+
+    # -- persistence -----------------------------------------------------
+
+    async def _persist(self, results: list[SearchResult]) -> None:
+        self.qdir.mkdir(parents=True, exist_ok=True)
+        async with self._lock:
+            manifest = self._read_manifest()
+            seen = {entry["url"] for entry in manifest}
+            for result in results:
+                url = (result.url or "").strip()
+                if not url or url in seen:
+                    continue
+                content = result.raw_content or result.snippet or ""
+                if not content.strip():
+                    continue  # failed fetch with no snippet -> nothing to reuse
+                fname = hashlib.sha1(url.encode("utf-8")).hexdigest()[:16] + ".md"
+                self._write_md(self.qdir / fname, result, content)
+                manifest.append(
+                    {"url": url, "file": fname, "title": result.title, "query": result.query}
+                )
+                seen.add(url)
+            self._write_manifest(manifest)
+
+    @staticmethod
+    def _write_md(path: Path, result: SearchResult, content: str) -> None:
+        front_matter = (
+            "---\n"
+            f"url: {json.dumps(result.url, ensure_ascii=False)}\n"
+            f"title: {json.dumps(result.title, ensure_ascii=False)}\n"
+            f"query: {json.dumps(result.query, ensure_ascii=False)}\n"
+            f"fetched_at: {datetime.now(timezone.utc).isoformat()}\n"
+            "---\n\n"
+        )
+        tmp = path.with_suffix(".md.tmp")
+        tmp.write_text(front_matter + content, encoding="utf-8")
+        tmp.replace(path)
+
+    def _read_manifest(self) -> list[dict]:
+        path = self.qdir / "manifest.json"
+        if path.exists():
+            try:
+                return json.loads(path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                return []
+        return []
+
+    def _write_manifest(self, manifest: list[dict]) -> None:
+        path = self.qdir / "manifest.json"
+        tmp = path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp.replace(path)
+
+    def _load_pool(self) -> list[tuple[dict, str]]:
+        pool: list[tuple[dict, str]] = []
+        for entry in self._read_manifest():
+            path = self.qdir / entry["file"]
+            if not path.exists():
+                continue
+            body = _strip_front_matter(path.read_text(encoding="utf-8"))
+            pool.append((entry, body))
+        return pool
+
+    def _select(self, pool: list[tuple[dict, str]], queries: list[str]) -> list[SearchResult]:
+        n = self.fix_n if self.fix_n and self.fix_n > 0 else len(pool)
+        query = queries[0] if queries else ""
+        return [
+            SearchResult(
+                query=query,
+                title=entry.get("title", ""),
+                url=entry.get("url", ""),
+                snippet="",
+                raw_content=body,
+            )
+            for entry, body in pool[:n]
+        ]
+
+    def _log_miss(self, queries: list[str]) -> None:
+        self.root.mkdir(parents=True, exist_ok=True)
+        path = self.root / "cache_misses.jsonl"
+        ts = datetime.now(timezone.utc).isoformat()
+        with path.open("a", encoding="utf-8") as file:
+            for query in queries:
+                file.write(
+                    json.dumps(
+                        {"sample_id": self.sample_id, "query": query, "ts": ts},
+                        ensure_ascii=False,
+                    )
+                    + "\n"
+                )
+
+
+def wrap_with_cache(
+    base: SearchProvider,
+    *,
+    mode: str,
+    cache_dir: str,
+    fix_n: int = 0,
+    sample_id: object = None,
+) -> SearchProvider:
+    """Wrap a provider with record/replay caching; `off`/unknown -> passthrough."""
+    if mode not in {"record", "replay"}:
+        return base
+    return CachingSearchProvider(
+        base, mode=mode, cache_dir=cache_dir, fix_n=fix_n, sample_id=sample_id
+    )

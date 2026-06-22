@@ -17,10 +17,12 @@ class StubChatClient:
         model: str,
         temperature: float = 0.0,
         max_tokens: int | None = None,
+        store_generated_kv: bool = False,
+        tag: str | None = None,
     ) -> str:
         joined = "\n".join(message.get("content", "") for message in messages)
 
-        if "INITIAL_RESEARCH_QUESTIONS_JSON" in joined:
+        if tag == "INITIAL_RESEARCH_QUESTIONS_JSON":
             question = _between(joined, "<original_question>", "</original_question>") or "the user question"
             return json.dumps(
                 {
@@ -31,11 +33,11 @@ class StubChatClient:
                 }
             )
 
-        if "QUERY_PLAN_JSON" in joined:
+        if tag == "QUERY_PLAN_JSON":
             question = _between(joined, "<research_question>", "</research_question>") or "topic"
             return json.dumps({"queries": [f"{question} overview", f"{question} evidence"]})
 
-        if "RESEARCH_SUMMARY_TEXT" in joined:
+        if tag == "RESEARCH_SUMMARY_TEXT":
             self.research_summary_calls += 1
             question = _between(joined, "<research_question>", "</research_question>") or "topic"
             query = _between(joined, "Query:", "\n") or "unknown query"
@@ -44,7 +46,7 @@ class StubChatClient:
                 "The search results suggest several relevant facts."
             )
 
-        if "SUPERVISOR_DECISION_JSON" in joined:
+        if tag == "SUPERVISOR_DECISION_JSON":
             self.supervisor_decision_calls += 1
             if self.supervisor_decision_calls == 1:
                 return json.dumps(
@@ -65,7 +67,7 @@ class StubChatClient:
                 }
             )
 
-        if "FINAL_REPORT_MARKDOWN" in joined:
+        if tag == "FINAL_REPORT_MARKDOWN":
             original = _between(joined, "<original_question>", "</original_question>") or "the topic"
             return (
                 "# Stub Deep Research Report\n\n"
@@ -74,6 +76,7 @@ class StubChatClient:
                 "## Final Answer\nStub Answer\n"
             )
 
+        # Judge/autorater calls carry no tag; route them by prompt content.
         if "Answer Correctness Task" in joined and "<response>" in joined:
             answer = _between_last(joined, "<answer>", "</answer>")
             answer_type = _between(joined, "Prompt Type:", "<answer>").strip()
@@ -93,7 +96,7 @@ class StubChatClient:
                 }
             )
 
-        if "REPAIR_JSON" in joined:
+        if tag == "REPAIR_JSON":
             return "{}"
 
         return "{}"

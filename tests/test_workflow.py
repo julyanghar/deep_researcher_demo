@@ -45,13 +45,17 @@ def test_workflow_falls_back_to_original_question_when_initial_decomposition_is_
 
 
 class EmptyInitialQuestionsChatClient(StubChatClient):
-    async def chat(self, messages, *, model, temperature=0.0, max_tokens=None):
-        joined = "\n".join(message.get("content", "") for message in messages)
-        if "INITIAL_RESEARCH_QUESTIONS_JSON" in joined:
+    async def chat(
+        self, messages, *, model, temperature=0.0, max_tokens=None,
+        store_generated_kv=False, tag=None,
+    ):
+        if tag == "INITIAL_RESEARCH_QUESTIONS_JSON":
             return '{"research_questions": []}'
         return await super().chat(
             messages,
             model=model,
             temperature=temperature,
             max_tokens=max_tokens,
+            store_generated_kv=store_generated_kv,
+            tag=tag,
         )

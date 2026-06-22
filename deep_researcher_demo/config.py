@@ -40,6 +40,15 @@ class AppConfig:
     # atomic special token of the served model (e.g. "<|fim_pad|>" for Qwen),
     # which tokenizes identically in any surrounding context.
     kv_reuse_separator: str = ""
+    # Record/replay web-search cache for hermetic end-to-end timing.
+    #   off    : passthrough, live search (default, unchanged behavior)
+    #   record : live search + persist docs per question (markdown pool)
+    #   replay : serve from the per-question pool (no network)
+    # search_cache_fix_n caps replay to the first N pooled docs (0 = all);
+    # search_cache_dir is the persistent root (NOT a per-run OUTPUT_DIR).
+    search_cache_mode: str = "off"
+    search_cache_fix_n: int = 0
+    search_cache_dir: str = "eval/results/search_cache"
 
     @classmethod
     def from_env(cls) -> "AppConfig":
@@ -68,6 +77,9 @@ class AppConfig:
             search_provider=os.getenv("SEARCH_PROVIDER", "duckduckgo"),
             output=os.getenv("OUTPUT") or None,
             kv_reuse_separator=os.getenv("KV_REUSE_SEPARATOR", ""),
+            search_cache_mode=(os.getenv("SEARCH_CACHE", "off") or "off").strip().lower(),
+            search_cache_fix_n=_env_int("SEARCH_CACHE_FIX_N", 0),
+            search_cache_dir=os.getenv("SEARCH_CACHE_DIR", "eval/results/search_cache"),
         )
 
     def apply_model_override(self, model: str | None) -> None:

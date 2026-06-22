@@ -17,6 +17,41 @@ Message = dict[str, str]
 _CALL_LOG_PATH = os.getenv("LLM_CALL_LOG", "")
 _CALL_LOG_LOCK = threading.Lock()
 
+# Truncated-summary KV-reuse fix (opt-in via KV_REUSE_TOKENIZER=<tokenizer path>).
+# When a stored-for-reuse generation hits max_tokens (finish_reason="length"),
+# the server only stored output[:-1] (the last sampled token has no KV), yet the
+# API `content` includes that last token -> the downstream content-hash misses.
+# We re-embed decode(token_ids[:-1]) so it matches the stored M-1 segment. This
+# needs the SAME tokenizer the server uses. Unset -> feature off (no behavior
+# change; truncated summaries simply remain non-reusable).
+_TOKENIZER_PATH = os.getenv("KV_REUSE_TOKENIZER", "")
+_TOKENIZER = None
+_TOKENIZER_LOADED = False
+_TOKENIZER_LOCK = threading.Lock()
+
+
+def _get_reuse_tokenizer():
+    """Lazily load the client tokenizer; returns None if disabled/unavailable."""
+    global _TOKENIZER, _TOKENIZER_LOADED
+    if _TOKENIZER_LOADED:
+        return _TOKENIZER
+    with _TOKENIZER_LOCK:
+        if not _TOKENIZER_LOADED:
+            if _TOKENIZER_PATH:
+                try:
+                    from transformers import AutoTokenizer
+
+                    _TOKENIZER = AutoTokenizer.from_pretrained(_TOKENIZER_PATH)
+                except Exception as exc:  # noqa: BLE001 - best-effort feature
+                    print(
+                        f"[kv-reuse] tokenizer load failed ({_TOKENIZER_PATH!r}): "
+                        f"{exc}; truncated-summary fix disabled",
+                        flush=True,
+                    )
+                    _TOKENIZER = None
+            _TOKENIZER_LOADED = True
+    return _TOKENIZER
+
 
 def _infer_call_tag(messages: list[Message]) -> str:
     if messages and messages[0].get("role") == "system":
@@ -45,6 +80,8 @@ class ChatClient(Protocol):
         model: str,
         temperature: float = 0.0,
         max_tokens: int | None = None,
+        store_generated_kv: bool = False,
+        tag: str | None = None,
     ) -> str:
         """Return assistant text for a chat-completion request."""
 
@@ -75,6 +112,8 @@ class OpenAICompatibleClient:
         model: str,
         temperature: float = 0.0,
         max_tokens: int | None = None,
+        store_generated_kv: bool = False,
+        tag: str | None = None,
     ) -> str:
         payload: dict = {
             "model": model,
@@ -83,6 +122,15 @@ class OpenAICompatibleClient:
         }
         if max_tokens is not None:
             payload["max_tokens"] = max_tokens
+        if store_generated_kv:
+            # Per-request opt-in: tell the LMCache blend backend to store this
+            # request's decode-generated KV as a reusable segment. vLLM forwards
+            # top-level kv_transfer_params into sampling_params.extra_args, where
+            # LMCache's extract_request_configs picks up the lmcache.* keys.
+            payload["kv_transfer_params"] = {"lmcache.blend_store_generated": True}
+            # Ask for the exact generated token ids so we can drop the last one
+            # on truncation (see the finish_reason="length" fix below).
+            payload["return_token_ids"] = True
 
         headers = {"Authorization": f"Bearer {self.api_key}"}
         start_wall = time.time()
@@ -98,14 +146,34 @@ class OpenAICompatibleClient:
         elapsed = time.perf_counter() - start
 
         try:
-            content = data["choices"][0]["message"]["content"]
+            choice = data["choices"][0]
+            content = choice["message"]["content"]
         except (KeyError, IndexError, TypeError) as exc:
             raise RuntimeError(f"Unexpected chat completion response: {data}") from exc
 
+        # Truncated-summary KV-reuse fix: only for stored-for-reuse requests that
+        # ended by hitting max_tokens (finish_reason="length"). The server stored
+        # output[:-1] (M-1 tokens); the API content has M tokens -> the downstream
+        # content-hash would miss. Re-embed decode(token_ids[:-1]) to match the
+        # stored M-1 segment. Natural-EOS ("stop") content already == stored, so
+        # it is left untouched (dropping there would over-trim -> a different miss).
+        if store_generated_kv and choice.get("finish_reason") == "length":
+            token_ids = choice.get("token_ids")
+            tokenizer = _get_reuse_tokenizer()
+            if tokenizer is not None and token_ids and len(token_ids) > 1:
+                content = tokenizer.decode(token_ids[:-1])
+
         usage = data.get("usage") or {}
+        # Server-side per-request phase timing (present when vLLM is launched
+        # with VLLM_RESP_TIMING=1); merged inline so each call log row carries
+        # both the role tag and the prefill/decode split (no offline join).
+        timing = data.get("timing") or {}
         _log_call(
             {
-                "tag": _infer_call_tag(messages),
+                # Explicit tag from the caller wins; otherwise fall back to
+                # inferring from the system prompt's first line.
+                "tag": tag or _infer_call_tag(messages),
+                "req_id": data.get("id"),
                 "start_ts": round(start_wall, 3),
                 "end_ts": round(start_wall + elapsed, 3),
                 "elapsed_s": round(elapsed, 3),
@@ -113,6 +181,11 @@ class OpenAICompatibleClient:
                 "completion_tokens": usage.get("completion_tokens"),
                 "max_tokens": max_tokens,
                 "model": model,
+                "prefill_s": timing.get("prefill_s"),
+                "decode_s": timing.get("decode_s"),
+                "ttft_s": timing.get("ttft_s"),
+                "queued_s": timing.get("queued_s"),
+                "inference_s": timing.get("inference_s"),
             }
         )
         return content or ""

@@ -22,7 +22,7 @@ from deep_researcher_demo.progress import (
     NullProgressReporter,
     event_to_dict,
 )
-from deep_researcher_demo.search import create_search_provider
+from deep_researcher_demo.search import create_search_provider, wrap_with_cache
 from deep_researcher_demo.workflow import DeepResearchWorkflow
 from eval.judge import rate_report
 from eval.scoring import (
@@ -237,8 +237,12 @@ class EvalRunner:
         memory_reporter = MemoryProgressReporter()
         workflow_events: list[dict[str, Any]] = []
         workflow_stats: dict[str, Any] = {}
+        workflow = None
         try:
-            workflow = self.build_workflow(reporter=self.build_progress_reporter(memory_reporter))
+            workflow = self.build_workflow(
+                reporter=self.build_progress_reporter(memory_reporter),
+                cache_key=example["sample_id"],
+            )
             eval_prompt = build_eval_prompt(example["problem"])
             result = await workflow.run(eval_prompt)
             workflow_events = [event_to_dict(event) for event in memory_reporter.events]
@@ -247,6 +251,7 @@ class EvalRunner:
             final_answer = extract_final_answer(final_report)
             completed_at = utc_now_iso()
             latency_seconds = round(time.perf_counter() - start_time, 3)
+            cache_misses = _search_cache_misses(workflow)
             record = {
                 **example,
                 "input_problem": eval_prompt,
@@ -257,6 +262,8 @@ class EvalRunner:
                 "report_generation_completed_at": completed_at,
                 "report_generation_latency_seconds": latency_seconds,
                 "latency_seconds": latency_seconds,
+                "search_cache_miss": bool(cache_misses),
+                "search_cache_miss_queries": cache_misses,
                 "error": None,
             }
             record["_workflow_trace"] = build_workflow_trace_record(record, workflow_events)
@@ -276,6 +283,8 @@ class EvalRunner:
                 "report_generation_completed_at": completed_at,
                 "report_generation_latency_seconds": latency_seconds,
                 "latency_seconds": latency_seconds,
+                "search_cache_miss": bool(_search_cache_misses(workflow)),
+                "search_cache_miss_queries": _search_cache_misses(workflow),
                 # str(exc) is empty for some exceptions (e.g. httpx.ReadTimeout),
                 # which would make the failure invisible to truthiness checks.
                 "error": str(exc) or repr(exc),
@@ -326,7 +335,7 @@ class EvalRunner:
         )
         return record
 
-    def build_workflow(self, reporter=None) -> DeepResearchWorkflow:
+    def build_workflow(self, reporter=None, cache_key=None) -> DeepResearchWorkflow:
         llm = self.build_llm()
         search_provider = create_search_provider(
             self.config.search_provider,
@@ -334,6 +343,15 @@ class EvalRunner:
             max_content_chars=self.config.max_content_chars,
             fetch_timeout=self.config.fetch_timeout,
             fetch_concurrency=self.config.fetch_concurrency,
+        )
+        # Record/replay cache keyed by sample_id makes timing hermetic; `off`
+        # (default) leaves the live provider untouched.
+        search_provider = wrap_with_cache(
+            search_provider,
+            mode=self.config.search_cache_mode,
+            cache_dir=self.config.search_cache_dir,
+            fix_n=self.config.search_cache_fix_n,
+            sample_id=cache_key,
         )
         supervisor_model = self.config.supervisor_model or self.config.model
         researcher_model = self.config.researcher_model or self.config.model
@@ -374,6 +392,13 @@ class EvalRunner:
             base_url=self.config.judge_base_url,
             api_key=self.config.judge_api_key,
         )
+
+
+def _search_cache_misses(workflow: Any) -> list[str]:
+    """Queries that fell back to live search in replay mode (empty unless the
+    question's cache was cold); a non-empty list flags contaminated timing."""
+    provider = getattr(workflow, "search_provider", None)
+    return list(getattr(provider, "misses", []) or [])
 
 
 def build_eval_prompt(problem: str) -> str:
