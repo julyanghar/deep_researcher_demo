@@ -2,6 +2,8 @@
 
 import argparse
 import asyncio
+import hashlib
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -10,7 +12,7 @@ from deep_researcher_demo.agents import FinalWriter, Researcher, Supervisor
 from deep_researcher_demo.config import AppConfig
 from deep_researcher_demo.llm import OpenAICompatibleClient
 from deep_researcher_demo.progress import ConsoleProgressReporter, NullProgressReporter
-from deep_researcher_demo.search import create_search_provider
+from deep_researcher_demo.search import create_search_provider, wrap_with_cache
 from deep_researcher_demo.workflow import DeepResearchWorkflow
 
 
@@ -71,6 +73,22 @@ async def async_main(argv: list[str] | None = None) -> int:
         fetch_timeout=config.fetch_timeout,
         fetch_concurrency=config.fetch_concurrency,
     )
+    # Wrap with the two-level (query->urls, url->content) per-question cache so a
+    # trajectory can be recorded once and then replayed frozen — Exp A needs the
+    # exact same retrieval across the truth/swap teacher-forcing passes. Off by
+    # default (SEARCH_CACHE=off). The per-question dir id is SEARCH_CACHE_SAMPLE_ID
+    # if given, else a short hash of the question so distinct questions don't mix.
+    if config.search_cache_mode != "off":
+        sample_id = os.getenv("SEARCH_CACHE_SAMPLE_ID") or hashlib.sha1(
+            question.encode("utf-8")
+        ).hexdigest()[:12]
+        search_provider = wrap_with_cache(
+            search_provider,
+            mode=config.search_cache_mode,
+            cache_dir=config.search_cache_dir,
+            fix_n=config.search_cache_fix_n,
+            sample_id=sample_id,
+        )
 
     supervisor_model = config.supervisor_model or config.model
     researcher_model = config.researcher_model or config.model
@@ -88,6 +106,7 @@ async def async_main(argv: list[str] | None = None) -> int:
         search_provider=search_provider,
         max_iterations=config.max_iterations,
         max_followups=config.max_followups,
+        min_rounds=config.min_rounds,
         max_queries_per_researcher=config.max_queries_per_researcher,
         max_concurrency=config.max_concurrency,
         max_results=config.max_results,

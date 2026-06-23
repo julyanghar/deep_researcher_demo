@@ -24,6 +24,7 @@ class AppConfig:
     judge_api_key: str | None = None
     max_iterations: int = 3
     max_followups: int = 3
+    min_rounds: int = 0  # Exp A: force >= this many research rounds (0 = off)
     max_queries_per_researcher: int = 3
     max_concurrency: int = 3
     max_results: int = 5
@@ -71,6 +72,7 @@ class AppConfig:
             judge_api_key=os.getenv("JUDGE_API_KEY") or None,
             max_iterations=_env_int("MAX_ITERATIONS", 3),
             max_followups=_env_int("MAX_FOLLOWUPS", 3),
+            min_rounds=_env_int("MIN_ROUNDS", 0),
             max_queries_per_researcher=_env_int("MAX_QUERIES_PER_RESEARCHER", 3),
             max_concurrency=_env_int("MAX_CONCURRENCY", 3),
             max_results=_env_int("MAX_RESULTS", 5),

@@ -32,6 +32,7 @@ class DeepResearchWorkflow:
         max_queries_per_researcher: int = 3,
         max_concurrency: int = 3,
         max_results: int = 5,
+        min_rounds: int = 0,
         reporter: ProgressReporter | None = None,
         output_path: str | None = None,
     ) -> None:
@@ -41,6 +42,9 @@ class DeepResearchWorkflow:
         self.search_provider = search_provider
         self.max_iterations = max_iterations
         self.max_followups = max_followups
+        # Exp A: force at least this many research rounds (override an early
+        # "complete") so trajectories accumulate multiple summary segments. 0 = off.
+        self.min_rounds = min_rounds
         self.max_queries_per_researcher = max_queries_per_researcher
         self.max_concurrency = max_concurrency
         self.max_results = max_results
@@ -134,7 +138,11 @@ class DeepResearchWorkflow:
                 )
             )
 
-            if decision.status == "complete":
+            # Exp A: force multi-round. Don't stop on "complete" until we've done
+            # min_rounds; if forced past a complete with no follow-ups, deepen with
+            # a generic probe so the extra round still yields a real new summary.
+            forced = iteration < self.min_rounds
+            if decision.status == "complete" and not forced:
                 break
 
             pending_questions = []
@@ -142,6 +150,11 @@ class DeepResearchWorkflow:
                 if question not in seen_questions:
                     seen_questions.add(question)
                     pending_questions.append(question)
+            if forced and not pending_questions:
+                probe = self._forced_followup(original_question, seen_questions)
+                if probe:
+                    seen_questions.add(probe)
+                    pending_questions.append(probe)
 
         self.reporter.emit(
             ProgressEvent(
@@ -169,6 +182,22 @@ class DeepResearchWorkflow:
             supervisor_reasonings=reasonings,
             final_report=final_report,
         )
+
+    # Generic deepening probes, used only when min_rounds forces another round but
+    # the supervisor offered no follow-ups. Content-bearing so the extra round
+    # produces a real (non-degenerate) summary segment rather than an empty one.
+    _FORCED_PROBES = (
+        "What are the main limitations, caveats, or sources of uncertainty regarding: {q}",
+        "What are notable counterarguments, alternative views, or contradicting evidence on: {q}",
+        "What recent developments, data, or concrete examples are most relevant to: {q}",
+    )
+
+    def _forced_followup(self, original_question: str, seen: set[str]) -> str | None:
+        for tmpl in self._FORCED_PROBES:
+            cand = tmpl.format(q=original_question)
+            if cand not in seen:
+                return cand
+        return None
 
     async def _run_researchers(self, questions: list[str]) -> list[tuple[str, list[str]]]:
         semaphore = asyncio.Semaphore(max(1, self.max_concurrency))
