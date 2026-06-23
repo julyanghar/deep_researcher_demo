@@ -27,15 +27,17 @@ def test_supervisor_initial_question_decomposition_respects_limit():
 def test_supervisor_decides_continue_then_complete():
     llm = StubChatClient()
     supervisor = Supervisor(llm, "stub-model")
-    first = asyncio.run(
+    first, first_raw = asyncio.run(
         supervisor.decide(original_question="topic", summaries=[], max_followups=2)
     )
-    second = asyncio.run(
+    second, _ = asyncio.run(
         supervisor.decide(original_question="topic", summaries=[], max_followups=2)
     )
     assert first.status == "continue"
     assert len(first.followup_questions) == 2
     assert second.status == "complete"
+    # decide() now also returns the raw decoded JSON (the reusable r_t segment).
+    assert isinstance(first_raw, str) and '"status"' in first_raw
 
 
 def test_researcher_plans_search_and_summarizes():

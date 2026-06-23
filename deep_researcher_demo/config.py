@@ -40,11 +40,15 @@ class AppConfig:
     # atomic special token of the served model (e.g. "<|fim_pad|>" for Qwen),
     # which tokenizes identically in any surrounding context.
     kv_reuse_separator: str = ""
-    # Record/replay web-search cache for hermetic end-to-end timing.
+    # Query-keyed web-search cache for reproducible multi-round search. One
+    # directory per question (<dir>/q<sample_id>/), each with its own two-level
+    # maps (search_cache.json {query:[urls]} + pages_index.json/pages {url:content}).
     #   off    : passthrough, live search (default, unchanged behavior)
-    #   record : live search + persist docs per question (markdown pool)
-    #   replay : serve from the per-question pool (no network)
-    # search_cache_fix_n caps replay to the first N pooled docs (0 = all);
+    #   record : live search + persist query->urls and url->content
+    #            (per question, deduped within it, first-write-wins)
+    #   replay : resolve query->urls->content from that question's cache (no
+    #            network) so re-running the question is deterministic
+    # search_cache_fix_n caps replay to the first N URLs per query (0 = all);
     # search_cache_dir is the persistent root (NOT a per-run OUTPUT_DIR).
     search_cache_mode: str = "off"
     search_cache_fix_n: int = 0

@@ -3,7 +3,13 @@ import asyncio
 import pytest
 
 from deep_researcher_demo.schemas import SearchResult
-from deep_researcher_demo.search import DuckDuckGoSearchProvider, TavilySearchProvider, create_search_provider, extract_text
+from deep_researcher_demo.search import (
+    DuckDuckGoSearchProvider,
+    TavilySearchProvider,
+    create_search_provider,
+    extract_text,
+    wrap_with_cache,
+)
 
 
 def test_search_provider_factory_duckduckgo():
@@ -217,3 +223,73 @@ class FakeTavilyClient:
 class FailingTavilyClient:
     async def post(self, url: str, **kwargs) -> FakeTavilyResponse:
         raise RuntimeError("tavily failed")
+
+
+class RecordingBase:
+    """Fake search provider whose per-query results are deterministic."""
+
+    def __init__(self) -> None:
+        self.calls: list[str] = []
+
+    async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
+        query = queries[0]
+        self.calls.append(query)
+        # Two URLs; "a" content is query-specific so we can assert the persisted
+        # (first-write-wins) copy is what replay returns.
+        return [
+            SearchResult(query=query, title="Ta", url="https://a.com", snippet="", raw_content=f"content-a::{query}"),
+            SearchResult(query=query, title="Tb", url="https://b.com", snippet="", raw_content="content-b"),
+        ]
+
+
+def test_cache_record_then_replay_is_query_faithful_and_offline(tmp_path):
+    cache_dir = str(tmp_path / "cache")
+
+    rec_base = RecordingBase()
+    rec = wrap_with_cache(rec_base, mode="record", cache_dir=cache_dir, fix_n=0)
+    rec_results = asyncio.run(rec.search(["weather today"]))
+    assert [r.url for r in rec_results] == ["https://a.com", "https://b.com"]
+    assert rec_base.calls == ["weather today"]
+
+    # Replay serves from cache with zero network and the exact persisted content.
+    rep_base = RecordingBase()
+    rep = wrap_with_cache(rep_base, mode="replay", cache_dir=cache_dir, fix_n=0)
+    rep_results = asyncio.run(rep.search(["weather today"]))
+    assert rep_base.calls == []  # no live search on a cache hit
+    assert [r.url for r in rep_results] == ["https://a.com", "https://b.com"]
+    assert rep_results[0].raw_content == "content-a::weather today"
+    assert rep.misses == []
+
+
+def test_cache_replay_cold_query_falls_back_and_flags_miss(tmp_path):
+    cache_dir = str(tmp_path / "cache")
+    base = RecordingBase()
+    rep = wrap_with_cache(base, mode="replay", cache_dir=cache_dir, fix_n=0)
+    results = asyncio.run(rep.search(["brand new query"]))
+    assert base.calls == ["brand new query"]  # cold -> single live fallback
+    assert rep.misses == ["brand new query"]
+    assert [r.url for r in results] == ["https://a.com", "https://b.com"]
+
+
+def test_cache_fix_n_caps_urls_per_query(tmp_path):
+    cache_dir = str(tmp_path / "cache")
+    asyncio.run(wrap_with_cache(RecordingBase(), mode="record", cache_dir=cache_dir).search(["q"]))
+    rep = wrap_with_cache(RecordingBase(), mode="replay", cache_dir=cache_dir, fix_n=1)
+    results = asyncio.run(rep.search(["q"]))
+    assert [r.url for r in results] == ["https://a.com"]
+
+
+def test_cache_url_content_first_write_wins(tmp_path):
+    cache_dir = str(tmp_path / "cache")
+    # Record two distinct queries that share url b.com; its content must stay
+    # the first-written copy (url->content is stable across queries).
+    rec = wrap_with_cache(RecordingBase(), mode="record", cache_dir=cache_dir)
+    asyncio.run(rec.search(["q1"]))
+    asyncio.run(rec.search(["q2"]))
+    rep = wrap_with_cache(RecordingBase(), mode="replay", cache_dir=cache_dir)
+    r1 = asyncio.run(rep.search(["q1"]))
+    r2 = asyncio.run(rep.search(["q2"]))
+    # a.com content is query-specific and first-written per query.
+    assert r1[0].raw_content == "content-a::q1"
+    assert r2[0].raw_content == "content-a::q1"  # q2's a.com kept q1's content
+    assert r1[1].raw_content == r2[1].raw_content == "content-b"

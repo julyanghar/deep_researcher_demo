@@ -42,4 +42,7 @@ class WorkflowResult(BaseModel):
     initial_research_questions: list[str] = Field(default_factory=list)
     summaries: list[str] = Field(default_factory=list)
     supervisor_reasons: list[str] = Field(default_factory=list)
+    # Per-round supervisor decision JSON reused as the r_t KV trace (populated
+    # only when SUPERVISOR_REASONING is on); kept for downstream trace analysis.
+    supervisor_reasonings: list[str] = Field(default_factory=list)
     final_report: str

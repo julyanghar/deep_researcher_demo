@@ -17,6 +17,26 @@ Message = dict[str, str]
 _CALL_LOG_PATH = os.getenv("LLM_CALL_LOG", "")
 _CALL_LOG_LOCK = threading.Lock()
 
+# Drift-measurement harvest (Exp A). When DRIFT_HARVEST=<path> is set, the
+# relevant chat() calls append a record (prompt messages + decoded content +
+# generated token_ids) to that JSONL. The offline harness reconstructs, per
+# reused summary / r_t segment, the worker context (for KV^w) and the
+# supervisor context (for KV*) by matching segment text across records, so no
+# per-request id needs to be threaded through. Unset -> no overhead.
+#
+# Only the two call types Exp A actually consumes are harvested:
+#   RESEARCH_SUMMARY_TEXT    -> worker context + s_i (reconstructs KV^w)
+#   SUPERVISOR_DECISION_JSON -> supervisor context (interleaved s_i + r_t; KV*/KV^r)
+# The rest (initial questions, query plan, the up-to-10k-token final report,
+# repair) are dead weight. Override via DRIFT_HARVEST_TAGS (comma-sep; "*"=all).
+_HARVEST_PATH = os.getenv("DRIFT_HARVEST", "")
+_HARVEST_LOCK = threading.Lock()
+_HARVEST_TAGS_RAW = os.getenv("DRIFT_HARVEST_TAGS", "RESEARCH_SUMMARY_TEXT,SUPERVISOR_DECISION_JSON")
+_HARVEST_TAGS = (
+    None if _HARVEST_TAGS_RAW.strip() == "*"
+    else {t.strip() for t in _HARVEST_TAGS_RAW.split(",") if t.strip()}
+)
+
 # Truncated-summary KV-reuse fix (opt-in via KV_REUSE_TOKENIZER=<tokenizer path>).
 # When a stored-for-reuse generation hits max_tokens (finish_reason="length"),
 # the server only stored output[:-1] (the last sampled token has no KV), yet the
@@ -67,6 +87,15 @@ def _log_call(record: dict) -> None:
     line = json.dumps(record, ensure_ascii=False)
     with _CALL_LOG_LOCK:
         with open(_CALL_LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
+
+
+def _harvest_call(record: dict) -> None:
+    if not _HARVEST_PATH:
+        return
+    line = json.dumps(record, ensure_ascii=False)
+    with _HARVEST_LOCK:
+        with open(_HARVEST_PATH, "a", encoding="utf-8") as f:
             f.write(line + "\n")
 
 
@@ -131,6 +160,13 @@ class OpenAICompatibleClient:
             # Ask for the exact generated token ids so we can drop the last one
             # on truncation (see the finish_reason="length" fix below).
             payload["return_token_ids"] = True
+        harvest_this = bool(_HARVEST_PATH) and (
+            _HARVEST_TAGS is None or (tag or _infer_call_tag(messages)) in _HARVEST_TAGS
+        )
+        if harvest_this:
+            # Harvest wants the generated token ids (even for calls not stored for
+            # reuse) so the offline harness can verify byte-exactness.
+            payload["return_token_ids"] = True
 
         headers = {"Authorization": f"Bearer {self.api_key}"}
         start_wall = time.time()
@@ -151,14 +187,16 @@ class OpenAICompatibleClient:
         except (KeyError, IndexError, TypeError) as exc:
             raise RuntimeError(f"Unexpected chat completion response: {data}") from exc
 
+        finish_reason = choice.get("finish_reason")
+        token_ids = choice.get("token_ids")
+
         # Truncated-summary KV-reuse fix: only for stored-for-reuse requests that
         # ended by hitting max_tokens (finish_reason="length"). The server stored
         # output[:-1] (M-1 tokens); the API content has M tokens -> the downstream
         # content-hash would miss. Re-embed decode(token_ids[:-1]) to match the
         # stored M-1 segment. Natural-EOS ("stop") content already == stored, so
         # it is left untouched (dropping there would over-trim -> a different miss).
-        if store_generated_kv and choice.get("finish_reason") == "length":
-            token_ids = choice.get("token_ids")
+        if store_generated_kv and finish_reason == "length":
             tokenizer = _get_reuse_tokenizer()
             if tokenizer is not None and token_ids and len(token_ids) > 1:
                 content = tokenizer.decode(token_ids[:-1])
@@ -188,4 +226,22 @@ class OpenAICompatibleClient:
                 "inference_s": timing.get("inference_s"),
             }
         )
+        # Full-payload harvest for Exp A drift measurement (only the whitelisted
+        # call types; see _HARVEST_TAGS). `content` here is post-truncation-fix
+        # (== the byte-exact reusable segment text), and `token_ids` is the full
+        # generated id list (stored segment = [:-1]).
+        if harvest_this:
+            _harvest_call(
+                {
+                    "tag": tag or _infer_call_tag(messages),
+                    "req_id": data.get("id"),
+                    "model": model,
+                    "store_generated_kv": store_generated_kv,
+                    "finish_reason": finish_reason,
+                    "max_tokens": max_tokens,
+                    "messages": messages,
+                    "content": content,
+                    "token_ids": token_ids,
+                }
+            )
         return content or ""

@@ -28,6 +28,13 @@ FINAL_REPORT_MAX_TOKENS = 10000
 # size for KV-reuse experiments; applies identically to all serving backends.
 SUMMARY_DETAILED = os.getenv("SUMMARY_DETAILED", "").strip().lower() in {"1", "true", "yes"}
 
+# When set (SUPERVISOR_REASONING=1), the supervisor's per-round decision JSON is
+# stored as a reusable KV segment (r_t) and interleaved into later decide()
+# contexts: [sys] SEP out_1 SEP r_1 SEP out_2 SEP r_2 ... This turns the
+# supervisor into a recurrent reasoning trace (reuse error can compound across
+# rounds). Default off -> behavior identical to the summaries-only baseline.
+SUPERVISOR_REASONING = os.getenv("SUPERVISOR_REASONING", "").strip().lower() in {"1", "true", "yes"}
+
 
 def join_reusable_segments(parts: list[str], separator: str) -> str:
     """Join generated texts so each one becomes a reusable KV segment.
@@ -46,6 +53,22 @@ def join_reusable_segments(parts: list[str], separator: str) -> str:
     return separator + separator.join(parts) + separator
 
 
+def interleave_segments(summaries: list[str], reasonings: list[str]) -> list[str]:
+    """Interleave worker outputs and supervisor reasonings: out_1, r_1, out_2, ...
+
+    `reasonings` is typically one shorter than `summaries` (the current round's
+    r_t is not generated yet), so the returned flat list ends with the latest
+    worker output out_t. With an empty `reasonings` this returns `summaries`
+    unchanged (the summaries-only baseline).
+    """
+    parts: list[str] = []
+    for index, summary in enumerate(summaries):
+        parts.append(summary)
+        if index < len(reasonings):
+            parts.append(reasonings[index])
+    return parts
+
+
 class Agent:
     """Base class with JSON repair support."""
 
@@ -61,17 +84,27 @@ class Agent:
         *,
         max_tokens: int = JSON_REPAIR_MAX_TOKENS,
         tag: str | None = None,
-    ) -> BaseModel:
-        """Call an LLM and validate JSON output, with one repair attempt."""
+        store_generated_kv: bool = False,
+    ) -> tuple[BaseModel, str]:
+        """Call an LLM and validate JSON output, with one repair attempt.
+
+        Returns (parsed_model, raw_content) where raw_content is the FIRST
+        decode's text. When store_generated_kv is set, that first decode's KV is
+        stored as a reusable segment; raw_content is exactly what callers must
+        embed verbatim downstream to hit it. A repair re-generation does NOT
+        overwrite raw_content, so the stored segment and the embedded text stay
+        in sync even when the first decode was malformed JSON.
+        """
         content = await self.llm.chat(
             messages,
             model=self.model,
             temperature=0.0,
             max_tokens=max_tokens,
+            store_generated_kv=store_generated_kv,
             tag=tag,
         )
         try:
-            return parse_model_json(content, schema)
+            return parse_model_json(content, schema), content
         except Exception as first_error:
             repair_messages = [
                 {
@@ -93,7 +126,7 @@ class Agent:
                 tag="REPAIR_JSON",
             )
             try:
-                return parse_model_json(repaired, schema)
+                return parse_model_json(repaired, schema), content
             except Exception as second_error:
                 raise JSONParseError(
                     f"Could not parse model output as {schema.__name__}: {first_error}; repair failed: {second_error}"
@@ -120,7 +153,7 @@ class Supervisor(Agent):
                 "content": f"<original_question>\n{original_question}\n</original_question>",
             },
         ]
-        initial = await self.call_json(
+        initial, _ = await self.call_json(
             messages,
             InitialResearchQuestions,
             max_tokens=INITIAL_QUESTIONS_MAX_TOKENS,
@@ -188,9 +221,17 @@ class Supervisor(Agent):
         *,
         original_question: str,
         summaries: list[str],
+        reasonings: list[str] | None = None,
         max_followups: int,
-    ) -> SupervisorDecision:
-        findings = join_reusable_segments(summaries, self.kv_reuse_separator)
+        store_generated_kv: bool = False,
+    ) -> tuple[SupervisorDecision, str]:
+        # Interleave worker outputs and prior supervisor reasonings:
+        #   SEP out_1 SEP r_1 SEP ... SEP out_{t-1} SEP r_{t-1} SEP out_t
+        # `reasonings` is one behind `summaries` (r_t not generated yet), so the
+        # context ends with the latest out_t. With reasonings empty this reduces
+        # to the summaries-only baseline (identical bytes -> identical behavior).
+        parts = interleave_segments(summaries, reasonings or [])
+        findings = join_reusable_segments(parts, self.kv_reuse_separator)
         messages = [
             {
                 "role": "system",
@@ -201,11 +242,16 @@ class Supervisor(Agent):
                 "content": self._decide_user(original_question, findings),
             },
         ]
-        decision = await self.call_json(
+        # Store this round's decision JSON as the reusable r_t segment only when
+        # asked AND in KV-reuse mode. raw_content is the exact stored text, which
+        # the caller embeds verbatim next round to hit this segment.
+        store = store_generated_kv and bool(self.kv_reuse_separator)
+        decision, raw_content = await self.call_json(
             messages,
             SupervisorDecision,
             max_tokens=SUPERVISOR_DECISION_MAX_TOKENS,
             tag="SUPERVISOR_DECISION_JSON",
+            store_generated_kv=store,
         )
         typed_decision = decision  # type: ignore[assignment]
         typed_decision.followup_questions = [
@@ -218,7 +264,7 @@ class Supervisor(Agent):
         if typed_decision.status == "continue" and not typed_decision.followup_questions:
             typed_decision.status = "complete"
             typed_decision.reason = typed_decision.reason or "No follow-up questions were provided."
-        return typed_decision
+        return typed_decision, raw_content
 
 
 class Researcher:
@@ -251,7 +297,7 @@ class Researcher:
                 "content": f"<research_question>\n{question}\n</research_question>",
             },
         ]
-        plan = await self.planner.call_json(
+        plan, _ = await self.planner.call_json(
             messages,
             QueryPlan,
             max_tokens=QUERY_PLAN_MAX_TOKENS,

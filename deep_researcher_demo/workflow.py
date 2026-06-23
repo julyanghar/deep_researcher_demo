@@ -2,7 +2,12 @@
 
 import asyncio
 
-from deep_researcher_demo.agents import FinalWriter, Researcher, Supervisor
+from deep_researcher_demo.agents import (
+    SUPERVISOR_REASONING,
+    FinalWriter,
+    Researcher,
+    Supervisor,
+)
 from deep_researcher_demo.progress import (
     NullProgressReporter,
     ProgressEvent,
@@ -75,6 +80,10 @@ class DeepResearchWorkflow:
         seen_questions = set(initial_questions)
         summaries: list[str] = []
         supervisor_reasons: list[str] = []
+        # r_t trace: each round's decision JSON, stored as a reusable KV segment
+        # and interleaved into later decide() contexts when SUPERVISOR_REASONING
+        # is on. Off -> stays empty -> summaries-only baseline.
+        reasonings: list[str] = []
 
         for iteration in range(1, self.max_iterations + 1):
             if not pending_questions:
@@ -94,11 +103,17 @@ class DeepResearchWorkflow:
             summaries.extend(round_summaries)
 
             # max_followups 是：supervisor 每一轮最多可以提出多少个后续研究问题。
-            decision = await self.supervisor.decide(
+            decision, round_reasoning = await self.supervisor.decide(
                 original_question=original_question,
                 summaries=summaries,
+                reasonings=reasonings,
                 max_followups=self.max_followups,
+                store_generated_kv=SUPERVISOR_REASONING,
             )
+            if SUPERVISOR_REASONING:
+                # Append the stored r_t so the next round interleaves it. Off ->
+                # reasonings stays empty -> identical to the summaries-only path.
+                reasonings.append(round_reasoning)
             supervisor_reasons.append(decision.reason)
             if decision.status == "continue":
                 decision_message = (
@@ -151,6 +166,7 @@ class DeepResearchWorkflow:
             initial_research_questions=initial_questions,
             summaries=summaries,
             supervisor_reasons=supervisor_reasons,
+            supervisor_reasonings=reasonings,
             final_report=final_report,
         )
 

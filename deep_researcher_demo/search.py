@@ -268,32 +268,44 @@ def create_search_provider(
     raise ValueError(f"Unknown search provider: {name}. Expected duckduckgo or tavily.")
 
 
-def _strip_front_matter(text: str) -> str:
-    """Drop the leading `---\\n...\\n---\\n` YAML block written by _write_md."""
-    if text.startswith("---"):
-        parts = text.split("\n---\n", 1)
-        if len(parts) == 2:
-            return parts[1].lstrip("\n")
-    return text
+# Process-wide guard for the global query-keyed cache files.
+_CACHE_LOCK = threading.Lock()
+
+
+def _norm_query(query: str) -> str:
+    """Normalize a query for cache keying (collapse whitespace, strip)."""
+    return " ".join((query or "").split())
+
+
+def _url_filename(url: str) -> str:
+    return hashlib.sha1(url.encode("utf-8")).hexdigest()[:16] + ".txt"
 
 
 class CachingSearchProvider:
-    """Record/replay decorator over a real SearchProvider.
+    """Record/replay decorator keyed by query, with deduplicated page content.
 
-    Makes end-to-end timing hermetic: record the live web search once into a
-    per-question document pool (markdown per URL), then replay from the pool
-    on every subsequent run with zero network so latency/results are fixed.
+    One directory **per question** (sample): each question keeps its own
+    two-level cache, so re-running a question replays exactly its own searches
+    and questions never interfere even if they issue the same query string.
+    Within a question, the same query always resolves to the same URLs and each
+    URL to the same content -- preserving the query->url->content relationship,
+    so a different query (e.g. after a decision flips) retrieves its OWN recorded
+    sources rather than a shared pool that would mask trajectory divergence.
+
+      <cache_dir>/q<sample_id>/
+        search_cache.json : {normalized_query: [url, ...]}
+        pages_index.json  : {url: {"file": <name>, "title": <title>}}
+        pages/<name>      : page content (one file per URL, deduped within the question)
 
     Modes:
-      - "record": run the wrapped provider live and persist every result
-        (one markdown file per URL + a manifest) into the per-question dir.
-        Returns the live results unchanged.
-      - "replay": serve from the per-question pool, returning the first
-        `fix_n` docs (manifest order; 0 = all) for every query -- a shared
-        pool, so the documents are identical no matter which queries the LLM
-        generates (A/B fairness). On a cold pool (never recorded) it falls
-        back to a live search, records it, and flags the question via
-        `misses` so the sample can be excluded from timing analysis.
+      - "record": run the wrapped provider live (one search per query so the
+        per-query URL list is faithful) and persist query->urls + url->content.
+        First-write-wins: existing entries are never overwritten, so recording
+        is idempotent and reproducible. Returns the live results.
+      - "replay": resolve each query from search_cache.json -> urls ->
+        pages_index -> content with zero network. A query absent from the cache
+        (cold) falls back to a single live search, is recorded, and is flagged
+        in `misses` so the sample can be excluded from analysis.
     """
 
     def __init__(
@@ -310,102 +322,162 @@ class CachingSearchProvider:
         self.fix_n = fix_n
         self.sample_id = sample_id
         self.root = Path(cache_dir)
+        # Per-question directory: each question saves its own two-level cache.
         self.qdir = self.root / f"q{sample_id}"
+        self.pages_dir = self.qdir / "pages"
+        self.query_map_path = self.qdir / "search_cache.json"
+        self.pages_index_path = self.qdir / "pages_index.json"
         # Queries that missed the cache in replay and triggered a live
-        # fallback; non-empty means this question's timing is contaminated.
+        # fallback; non-empty means this question's timing/sources are
+        # contaminated and the sample should be excluded.
         self.misses: list[str] = []
-        self._lock = asyncio.Lock()
 
     async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
         if self.mode == "replay":
-            pool = self._load_pool()
-            if pool:
-                return self._select(pool, queries)
-            # Cold pool: fall back to a live search, persist it, flag the miss.
-            results = await self.base.search(queries, max_results=max_results)
-            await self._persist(results)
-            self.misses.extend(queries)
-            self._log_miss(queries)
-            return self._select(self._load_pool(), queries)
-        # record mode (and any unknown mode degrades to live + persist)
-        results = await self.base.search(queries, max_results=max_results)
-        await self._persist(results)
-        return results
+            return await self._search_replay(queries, max_results)
+        # record mode (and any unknown mode degrades to live + persist). One
+        # live search per query keeps the per-query URL list faithful.
+        merged: list[SearchResult] = []
+        seen: set[str] = set()
+        for query in queries:
+            results = await self.base.search([query], max_results=max_results)
+            self._record_query(query, results)
+            for result in results:
+                url = (result.url or "").strip()
+                if url and url in seen:
+                    continue
+                if url:
+                    seen.add(url)
+                merged.append(result)
+        return merged
+
+    async def _search_replay(self, queries: list[str], max_results: int) -> list[SearchResult]:
+        query_map = self._load_json(self.query_map_path)
+        pages_index = self._load_json(self.pages_index_path)
+        merged: list[SearchResult] = []
+        seen: set[str] = set()
+        cold: list[str] = []
+        for query in queries:
+            urls = query_map.get(_norm_query(query))
+            if urls is None:
+                cold.append(query)
+                continue
+            self._extend(merged, seen, self._results_for(query, urls, pages_index))
+        if cold:
+            # Cold queries: one live search each, record, flag, then re-resolve
+            # from the freshly written cache so the returned content is the
+            # persisted (reproducible) copy.
+            for query in cold:
+                results = await self.base.search([query], max_results=max_results)
+                self._record_query(query, results)
+            self.misses.extend(cold)
+            self._log_miss(cold)
+            query_map = self._load_json(self.query_map_path)
+            pages_index = self._load_json(self.pages_index_path)
+            for query in cold:
+                urls = query_map.get(_norm_query(query), [])
+                self._extend(merged, seen, self._results_for(query, urls, pages_index))
+        return merged
+
+    # -- resolution ------------------------------------------------------
+
+    @staticmethod
+    def _extend(
+        merged: list[SearchResult],
+        seen: set[str],
+        results: list[SearchResult],
+    ) -> None:
+        for result in results:
+            if result.url and result.url in seen:
+                continue
+            if result.url:
+                seen.add(result.url)
+            merged.append(result)
+
+    def _results_for(
+        self,
+        query: str,
+        urls: list[str],
+        pages_index: dict,
+    ) -> list[SearchResult]:
+        n = self.fix_n if self.fix_n and self.fix_n > 0 else len(urls)
+        out: list[SearchResult] = []
+        for url in urls[:n]:
+            entry = pages_index.get(url)
+            if not entry:
+                continue
+            path = self.pages_dir / entry["file"]
+            if not path.exists():
+                continue
+            out.append(
+                SearchResult(
+                    query=query,
+                    title=entry.get("title", ""),
+                    url=url,
+                    snippet="",
+                    raw_content=path.read_text(encoding="utf-8"),
+                )
+            )
+        return out
 
     # -- persistence -----------------------------------------------------
 
-    async def _persist(self, results: list[SearchResult]) -> None:
-        self.qdir.mkdir(parents=True, exist_ok=True)
-        async with self._lock:
-            manifest = self._read_manifest()
-            seen = {entry["url"] for entry in manifest}
-            for result in results:
-                url = (result.url or "").strip()
-                if not url or url in seen:
+    def _record_query(self, query: str, results: list[SearchResult]) -> None:
+        key = _norm_query(query)
+        urls: list[str] = []
+        seen: set[str] = set()
+        pages: list[tuple[str, str, str]] = []  # (url, title, content)
+        for result in results:
+            url = (result.url or "").strip()
+            if not url or url in seen:
+                continue
+            content = result.raw_content or result.snippet or ""
+            if not content.strip():
+                continue  # failed fetch with no snippet -> nothing to reuse
+            seen.add(url)
+            urls.append(url)
+            pages.append((url, result.title or "", content))
+        if not urls:
+            return
+        with _CACHE_LOCK:
+            self.pages_dir.mkdir(parents=True, exist_ok=True)
+            query_map = self._load_json(self.query_map_path)
+            if key not in query_map:  # first-write-wins keeps query->urls stable
+                query_map[key] = urls
+                self._write_json(self.query_map_path, query_map)
+            pages_index = self._load_json(self.pages_index_path)
+            changed = False
+            for url, title, content in pages:
+                if url in pages_index:  # first-write-wins keeps url->content stable
                     continue
-                content = result.raw_content or result.snippet or ""
-                if not content.strip():
-                    continue  # failed fetch with no snippet -> nothing to reuse
-                fname = hashlib.sha1(url.encode("utf-8")).hexdigest()[:16] + ".md"
-                self._write_md(self.qdir / fname, result, content)
-                manifest.append(
-                    {"url": url, "file": fname, "title": result.title, "query": result.query}
-                )
-                seen.add(url)
-            self._write_manifest(manifest)
+                fname = _url_filename(url)
+                self._write_text(self.pages_dir / fname, content)
+                pages_index[url] = {"file": fname, "title": title}
+                changed = True
+            if changed:
+                self._write_json(self.pages_index_path, pages_index)
 
     @staticmethod
-    def _write_md(path: Path, result: SearchResult, content: str) -> None:
-        front_matter = (
-            "---\n"
-            f"url: {json.dumps(result.url, ensure_ascii=False)}\n"
-            f"title: {json.dumps(result.title, ensure_ascii=False)}\n"
-            f"query: {json.dumps(result.query, ensure_ascii=False)}\n"
-            f"fetched_at: {datetime.now(timezone.utc).isoformat()}\n"
-            "---\n\n"
-        )
-        tmp = path.with_suffix(".md.tmp")
-        tmp.write_text(front_matter + content, encoding="utf-8")
-        tmp.replace(path)
-
-    def _read_manifest(self) -> list[dict]:
-        path = self.qdir / "manifest.json"
+    def _load_json(path: Path) -> dict:
         if path.exists():
             try:
                 return json.loads(path.read_text(encoding="utf-8"))
             except (json.JSONDecodeError, OSError):
-                return []
-        return []
+                return {}
+        return {}
 
-    def _write_manifest(self, manifest: list[dict]) -> None:
-        path = self.qdir / "manifest.json"
-        tmp = path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    @staticmethod
+    def _write_json(path: Path, data: dict) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         tmp.replace(path)
 
-    def _load_pool(self) -> list[tuple[dict, str]]:
-        pool: list[tuple[dict, str]] = []
-        for entry in self._read_manifest():
-            path = self.qdir / entry["file"]
-            if not path.exists():
-                continue
-            body = _strip_front_matter(path.read_text(encoding="utf-8"))
-            pool.append((entry, body))
-        return pool
-
-    def _select(self, pool: list[tuple[dict, str]], queries: list[str]) -> list[SearchResult]:
-        n = self.fix_n if self.fix_n and self.fix_n > 0 else len(pool)
-        query = queries[0] if queries else ""
-        return [
-            SearchResult(
-                query=query,
-                title=entry.get("title", ""),
-                url=entry.get("url", ""),
-                snippet="",
-                raw_content=body,
-            )
-            for entry, body in pool[:n]
-        ]
+    @staticmethod
+    def _write_text(path: Path, content: str) -> None:
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(content, encoding="utf-8")
+        tmp.replace(path)
 
     def _log_miss(self, queries: list[str]) -> None:
         self.root.mkdir(parents=True, exist_ok=True)
