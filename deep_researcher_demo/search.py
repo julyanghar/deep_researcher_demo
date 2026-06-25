@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import json
+import logging
 import os
 import re
 import threading
@@ -15,6 +16,10 @@ import httpx
 from bs4 import BeautifulSoup
 
 from deep_researcher_demo.schemas import SearchResult
+
+# 用 warning 级别(像 LMCache 的 BLEND_PATH 一样保证可见):每次 search 打一条 SEARCH_PATH=...,
+# grep 即可判定到底走了缓存(CACHE)还是 live 联网(LIVE),不靠猜。
+logger = logging.getLogger(__name__)
 
 # Process-wide pacing for DuckDuckGo/ddgs calls (see _search_one).
 _DDG_THROTTLE_LOCK = threading.Lock()
@@ -337,6 +342,8 @@ class CachingSearchProvider:
             return await self._search_replay(queries, max_results)
         # record mode (and any unknown mode degrades to live + persist). One
         # live search per query keeps the per-query URL list faithful.
+        logger.warning("SEARCH_PATH=LIVE(record) q%s | %d queries 全部联网(不读缓存)",
+                       self.sample_id, len(queries))
         merged: list[SearchResult] = []
         seen: set[str] = set()
         for query in queries:
@@ -363,6 +370,8 @@ class CachingSearchProvider:
                 cold.append(query)
                 continue
             self._extend(merged, seen, self._results_for(query, urls, pages_index))
+        logger.warning("SEARCH_PATH=CACHE(replay) q%s | 命中=%d cold_live=%d",
+                       self.sample_id, len(queries) - len(cold), len(cold))
         if cold:
             # Cold queries: one live search each, record, flag, then re-resolve
             # from the freshly written cache so the returned content is the

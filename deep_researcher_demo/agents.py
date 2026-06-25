@@ -201,6 +201,16 @@ class Supervisor(Agent):
         """
         if not self.kv_reuse_separator:
             return
+        # The real original_question is already available here, but we pass a
+        # throwaway ("warmup") on purpose. Only segment 0 -- everything before
+        # the first separator (chat template + system + summaries header) -- is
+        # what we prime; the dummy question and dummy summary sit after it and
+        # are never matched. Keeping the question OUT of the prefix is the whole
+        # point: that prefix is then byte-identical for every question and every
+        # session, so it is primed once and stays hit across the entire run.
+        # Folding the real question into the prefix would only cache its handful
+        # of tokens (re-prefilled cheaply each round anyway) while making the
+        # prefix per-question and unshareable -- a zero-gain trade.
         findings = join_reusable_segments(["warmup"], self.kv_reuse_separator)
         messages = [
             {"role": "system", "content": self._decide_system(max_followups)},
@@ -517,6 +527,9 @@ class FinalWriter(Agent):
         """Prime the constant prompt prefix (segment 0) in the KV cache."""
         if not self.kv_reuse_separator:
             return
+        # Throwaway "warmup" question on purpose, not original_question -- see
+        # Supervisor.warmup_kv_prefix: keeping the question out of segment 0 keeps
+        # the primed prefix a question-agnostic constant shared across all runs.
         findings = join_reusable_segments(["warmup"], self.kv_reuse_separator)
         messages = [
             {"role": "system", "content": self._SYSTEM},

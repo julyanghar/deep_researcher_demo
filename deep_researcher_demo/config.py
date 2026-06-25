@@ -41,6 +41,13 @@ class AppConfig:
     # atomic special token of the served model (e.g. "<|fim_pad|>" for Qwen),
     # which tokenizes identically in any surrounding context.
     kv_reuse_separator: str = ""
+    # Per-role override of kv_reuse_separator (default inherits the global one).
+    # Lets a single run mix reuse/prefill per role — e.g. exp-test-supervisor sets
+    # final_kv_reuse_separator="" so the Writer runs full prefill while the
+    # Supervisor (+Researcher, to store the summary KV) still reuse.
+    supervisor_kv_reuse_separator: str = ""
+    researcher_kv_reuse_separator: str = ""
+    final_kv_reuse_separator: str = ""
     # Query-keyed web-search cache for reproducible multi-round search. One
     # directory per question (<dir>/q<sample_id>/), each with its own two-level
     # maps (search_cache.json {query:[urls]} + pages_index.json/pages {url:content}).
@@ -59,6 +66,7 @@ class AppConfig:
     def from_env(cls) -> "AppConfig":
         """Load defaults from environment variables."""
         model = os.getenv("MODEL", "gpt-4.1")
+        sep = os.getenv("KV_REUSE_SEPARATOR", "")  # 全局;下面三角色默认继承、各自可 env 覆盖
         return cls(
             openai_base_url=os.getenv("OPENAI_BASE_URL", "http://localhost:30000/v1"),
             openai_api_key=os.getenv("OPENAI_API_KEY", "dummy"),
@@ -82,7 +90,10 @@ class AppConfig:
             fetch_concurrency=_env_int("FETCH_CONCURRENCY", 8),
             search_provider=os.getenv("SEARCH_PROVIDER", "duckduckgo"),
             output=os.getenv("OUTPUT") or None,
-            kv_reuse_separator=os.getenv("KV_REUSE_SEPARATOR", ""),
+            kv_reuse_separator=sep,
+            supervisor_kv_reuse_separator=os.getenv("SUPERVISOR_KV_REUSE_SEPARATOR", sep),
+            researcher_kv_reuse_separator=os.getenv("RESEARCHER_KV_REUSE_SEPARATOR", sep),
+            final_kv_reuse_separator=os.getenv("FINAL_KV_REUSE_SEPARATOR", sep),
             search_cache_mode=(os.getenv("SEARCH_CACHE", "off") or "off").strip().lower(),
             search_cache_fix_n=_env_int("SEARCH_CACHE_FIX_N", 0),
             search_cache_dir=os.getenv("SEARCH_CACHE_DIR", "eval/results/search_cache"),
