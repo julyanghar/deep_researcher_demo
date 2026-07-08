@@ -24,8 +24,8 @@ from deep_researcher_demo.progress import (
 )
 from deep_researcher_demo.search import create_search_provider, wrap_with_cache
 from deep_researcher_demo.workflow import DeepResearchWorkflow
-from eval.judge import rate_report
-from eval.scoring import (
+from eval.deepresearchqa.judge import rate_report
+from eval.deepresearchqa.scoring import (
     aggregate_metrics,
     aggregate_starter_metrics,
     build_item_rating_from_report,
@@ -37,6 +37,8 @@ from eval.scoring import (
 
 DATASET_NAME = "google/deepsearchqa"
 DATASET_SPLIT = "eval"
+# 自包含:题集落本地 jsonl,不在则从 HF 下载并落盘,之后纯离线读本地
+LOCAL_DATASET = Path(__file__).resolve().parent / "data" / "deepsearchqa.jsonl"
 DEFAULT_OUTPUT_DIR = Path("eval/results")
 
 
@@ -200,13 +202,27 @@ def load_examples(args: argparse.Namespace) -> list[dict[str, Any]]:
 
 
 def load_dataset_rows():
+    # 本地优先:有本地 jsonl 直接读(离线)
+    if LOCAL_DATASET.exists():
+        with open(LOCAL_DATASET, encoding="utf-8") as f:
+            rows = [json.loads(line) for line in f if line.strip()]
+        print(f"[dataset] loaded {len(rows)} rows from local {LOCAL_DATASET}", flush=True)
+        return rows
+    # 不在本地 → 从 HF 下载,落盘到本地,再用(之后纯离线)
     try:
         from datasets import load_dataset
     except ImportError as exc:
         raise SystemExit(
             "The `datasets` package is required for DeepSearchQA. Install with `pip install -e '.[eval]'."
         ) from exc
-    return load_dataset(DATASET_NAME, split=DATASET_SPLIT)
+    ds = load_dataset(DATASET_NAME, split=DATASET_SPLIT)
+    rows = [dict(r) for r in ds]
+    LOCAL_DATASET.parent.mkdir(parents=True, exist_ok=True)
+    with open(LOCAL_DATASET, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    print(f"[dataset] downloaded {len(rows)} rows from HF -> {LOCAL_DATASET}", flush=True)
+    return rows
 
 
 def select_examples(

@@ -4,9 +4,9 @@ from argparse import Namespace
 
 import pytest
 
-import eval.run_deepsearchqa as eval_module
+import eval.deepresearchqa.run_deepsearchqa as eval_module
 from deep_researcher_demo.config import AppConfig, DEFAULT_JUDGE_BASE_URL, DEFAULT_JUDGE_MODEL
-from eval.run_deepsearchqa import (
+from eval.deepresearchqa.run_deepsearchqa import (
     EvalRunner,
     async_main,
     build_config,

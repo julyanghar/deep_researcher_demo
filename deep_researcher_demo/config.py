@@ -61,6 +61,19 @@ class AppConfig:
     search_cache_mode: str = "off"
     search_cache_fix_n: int = 0
     search_cache_dir: str = "eval/results/search_cache"
+    # research 模式:online(联网:搜+crawl4ai抓+存本地+过滤)/ local(纯离线:读本地+过滤)/
+    # off(沿用 SEARCH_CACHE 旧行为)。online→search_cache_mode=record、local→replay。
+    research_mode: str = "off"
+    # 缓存按 benchmark名+题目index 分类:<search_cache_dir>/<benchmark>/q<index>/。
+    search_benchmark: str = ""
+    # 正文抓取后端:crawl4ai(无头浏览器,默认)/ httpx(轻量兜底)。
+    search_fetcher: str = "crawl4ai"
+    # cache 层块级 embedding 检索(online 存块向量、local 读块向量做 top-k)。
+    # online/local 默认开;它一开,relevance 的 top-k 在 cache 层做。
+    cache_relevance: bool = False
+    # 外层 RelevanceFilteringProvider 开关:仅 RELEVANCE_FILTER 显式开(给老 SEARCH_CACHE
+    # 直连/off 路径用)。online/local 走 cache_relevance,**不**用外层(免重复 embed)。
+    relevance_enabled: bool = False
 
     @classmethod
     def from_env(cls) -> "AppConfig":
@@ -94,9 +107,14 @@ class AppConfig:
             supervisor_kv_reuse_separator=os.getenv("SUPERVISOR_KV_REUSE_SEPARATOR", sep),
             researcher_kv_reuse_separator=os.getenv("RESEARCHER_KV_REUSE_SEPARATOR", sep),
             final_kv_reuse_separator=os.getenv("FINAL_KV_REUSE_SEPARATOR", sep),
-            search_cache_mode=(os.getenv("SEARCH_CACHE", "off") or "off").strip().lower(),
+            search_cache_mode=_resolve_cache_mode(),
             search_cache_fix_n=_env_int("SEARCH_CACHE_FIX_N", 0),
             search_cache_dir=os.getenv("SEARCH_CACHE_DIR", "eval/results/search_cache"),
+            research_mode=(os.getenv("RESEARCH_MODE", "off") or "off").strip().lower(),
+            search_benchmark=(os.getenv("SEARCH_BENCHMARK", "") or "").strip(),
+            search_fetcher=(os.getenv("SEARCH_FETCHER", "crawl4ai") or "crawl4ai").strip().lower(),
+            cache_relevance=_resolve_cache_relevance(),
+            relevance_enabled=_resolve_relevance_enabled(),
         )
 
     def apply_model_override(self, model: str | None) -> None:
@@ -108,6 +126,28 @@ class AppConfig:
         self.researcher_model = model
         self.summary_model = model
         self.final_model = model
+
+
+def _resolve_cache_mode() -> str:
+    """RESEARCH_MODE 优先:online→record、local→replay;否则沿用旧 SEARCH_CACHE。"""
+    rm = (os.getenv("RESEARCH_MODE", "") or "").strip().lower()
+    if rm == "online":
+        return "record"
+    if rm == "local":
+        return "replay"
+    return (os.getenv("SEARCH_CACHE", "off") or "off").strip().lower()
+
+
+def _resolve_cache_relevance() -> bool:
+    """online/local → cache 层做块级 embedding 检索;CACHE_RELEVANCE 可显式覆盖。"""
+    rm = (os.getenv("RESEARCH_MODE", "") or "").strip().lower()
+    return _env_bool("CACHE_RELEVANCE", rm in {"online", "local"})
+
+
+def _resolve_relevance_enabled() -> bool:
+    """外层过滤:online/local 走 cache 层(故默认关外层);仅 RELEVANCE_FILTER 显式开
+    (给老 SEARCH_CACHE 直连/off 路径)。"""
+    return _env_bool("RELEVANCE_FILTER", False)
 
 
 def _env_int(name: str, default: int) -> int:

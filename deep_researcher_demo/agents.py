@@ -22,6 +22,9 @@ QUERY_PLAN_MAX_TOKENS = 1000
 RESEARCH_SUMMARY_MAX_TOKENS = int(os.getenv("RESEARCH_SUMMARY_MAX_TOKENS", "5000"))
 JSON_REPAIR_MAX_TOKENS = 2000
 FINAL_REPORT_MAX_TOKENS = 10000
+# REPORT_MODE: "answer"(默认,deepsearchqa 短答案式,KV 复用路径完全不变)
+#            | "detailed_cited"(benchmark 评测用:分章节长报告 + inline [URL] 引用 + References)
+REPORT_MODE = os.getenv("REPORT_MODE", "answer")
 
 # When set (e.g. SUMMARY_DETAILED=1), researchers write long, information-dense
 # digests instead of tight compressions. Used to scale up the reusable-context
@@ -345,6 +348,17 @@ class Researcher:
                 "Only Extract key information that is relevant to the overall research question. "
                 "Write plain text only."
             )
+        if os.getenv("SUMMARY_QUOTE") == "1":
+            # L3 实验:逐字引用让 summary 输出"可收割"(suffix 投机解码在长连续照搬处才有加速),
+            # 同时逐字引用本身可能减少改写失真。默认关,不影响任何现有路径。
+            summary_instruction += (
+                " When a source contains directly relevant sentences, QUOTE them "
+                "VERBATIM (copy the exact wording, do not paraphrase or translate) as "
+                "bullet points, and put the source URL right after each quote. Only "
+                "paraphrase when no source sentence is directly usable. Be selective: "
+                "at most 2-3 short quotes per source, and keep the whole digest no "
+                "longer than a normal concise digest (do not exceed about 600 words)."
+            )
         messages = [
             {
                 "role": "system",
@@ -510,6 +524,20 @@ class FinalWriter(Agent):
         "Use the same language as the user's original question. Include source links where useful."
     )
 
+    # detailed_cited 模式(benchmark 评测):长报告 + inline [URL] 引用 + References。
+    _SYSTEM_DETAILED = (
+        "You are an expert research report writer. Using ONLY the provided findings, write a "
+        "comprehensive, well-structured research report in Markdown that thoroughly answers the question.\n"
+        "Requirements:\n"
+        "1. Organize into clear sections with `##` headings; be detailed and analytical "
+        "(cover multiple relevant angles, explain causes/implications, not just list facts).\n"
+        "2. Cite sources INLINE: right after each factual claim, put the supporting source URL(s) in "
+        "square brackets, e.g. [https://example.com]. ONLY cite URLs that appear in the findings' "
+        "`sources:` lines below. Do not invent URLs.\n"
+        "3. End with a `## References` section listing every URL you cited.\n"
+        "Use the same language as the user's original question."
+    )
+
     def _write_user(self, original_question: str, findings: str) -> str:
         if self.kv_reuse_separator:
             # See Supervisor._decide_user: constant prefix before the first
@@ -545,7 +573,11 @@ class FinalWriter(Agent):
         except Exception:  # noqa: BLE001 - warmup is best-effort
             pass
 
-    async def write(self, *, original_question: str, summaries: list[str]) -> str:
+    async def write(self, *, original_question: str, summaries: list[str],
+                    summary_sources: list[list[str]] | None = None) -> str:
+        # 实时读 env(而非 import 期常量),runner 进程内设置也能生效
+        if os.getenv("REPORT_MODE", REPORT_MODE) == "detailed_cited":
+            return await self._write_detailed_cited(original_question, summaries, summary_sources)
         findings = join_reusable_segments(summaries, self.kv_reuse_separator)
         messages = [
             {
@@ -556,6 +588,35 @@ class FinalWriter(Agent):
                 "role": "user",
                 "content": self._write_user(original_question, findings),
             },
+        ]
+        return await self.llm.chat(
+            messages,
+            model=self.model,
+            temperature=0.0,
+            max_tokens=FINAL_REPORT_MAX_TOKENS,
+            tag="FINAL_REPORT_MARKDOWN",
+        )
+
+    async def _write_detailed_cited(
+        self, original_question: str, summaries: list[str],
+        summary_sources: list[list[str]] | None,
+    ) -> str:
+        """benchmark 评测用:分章节长报告 + inline [URL] 引用。不走 KV 复用拼接
+        (复用路径只在默认 answer 模式),每条 finding 带上它的来源 URL 供 writer 引用。"""
+        srcs = summary_sources or [[] for _ in summaries]
+        blocks = []
+        for i, (summ, urls) in enumerate(zip(summaries, srcs), 1):
+            uniq = list(dict.fromkeys(u for u in (urls or []) if u))
+            src_line = "sources: " + (", ".join(uniq) if uniq else "(none)")
+            blocks.append(f"[Finding {i}] {src_line}\n{summ}")
+        findings_block = "\n\n".join(blocks)
+        user = (
+            f"<original_question>\n{original_question}\n</original_question>\n\n"
+            f"<findings>\n{findings_block}\n</findings>"
+        )
+        messages = [
+            {"role": "system", "content": self._SYSTEM_DETAILED},
+            {"role": "user", "content": user},
         ]
         return await self.llm.chat(
             messages,

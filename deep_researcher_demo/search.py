@@ -6,8 +6,10 @@ import json
 import logging
 import os
 import re
+import sys
 import threading
 import time
+from collections import OrderedDict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Protocol
@@ -44,11 +46,14 @@ class DuckDuckGoSearchProvider:
         max_content_chars: int = 12000,
         fetch_timeout: float = 10.0,
         fetch_concurrency: int = 8,
+        fetcher: str = "crawl4ai",
     ) -> None:
         self.fetch_webpages = fetch_webpages
         self.max_content_chars = max_content_chars
         self.fetch_timeout = fetch_timeout
         self.fetch_concurrency = fetch_concurrency
+        # 正文抓取后端:crawl4ai(无头浏览器,默认,正文命中率高)或 httpx(轻量兜底)
+        self.fetcher = (fetcher or "crawl4ai").strip().lower()
 
     async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
         tasks = [asyncio.to_thread(self._search_one, query, max_results) for query in queries]
@@ -119,6 +124,29 @@ class DuckDuckGoSearchProvider:
         return normalized
 
     async def _fetch_raw_content(self, results: list[SearchResult]) -> list[SearchResult]:
+        if self.fetcher == "crawl4ai":
+            return await self._fetch_with_crawl4ai(results)
+        return await self._fetch_with_httpx(results)
+
+    async def _fetch_with_crawl4ai(self, results: list[SearchResult]) -> list[SearchResult]:
+        """用 crawl4ai(无头浏览器渲染)抓正文,按 url 回填 raw_content。"""
+        from deep_researcher_demo import scrape_crawl4ai
+
+        urls = [r.url for r in results if r.url]
+        try:
+            pages = await scrape_crawl4ai.fetch_pages(
+                urls, max_content_chars=self.max_content_chars
+            )
+        except Exception as exc:  # noqa: BLE001 - 浏览器/依赖问题不应整批失败
+            logger.warning("crawl4ai fetch 失败,本批留空正文: %s", str(exc)[:200])
+            return results
+        for result in results:
+            text = pages.get(result.url)
+            if text:
+                result.raw_content = text
+        return results
+
+    async def _fetch_with_httpx(self, results: list[SearchResult]) -> list[SearchResult]:
         semaphore = asyncio.Semaphore(max(1, self.fetch_concurrency))
         headers = {
             "User-Agent": (
@@ -258,6 +286,7 @@ def create_search_provider(
     max_content_chars: int = 12000,
     fetch_timeout: float = 10.0,
     fetch_concurrency: int = 8,
+    fetcher: str = "crawl4ai",
 ) -> SearchProvider:
     """Create a search provider by name."""
     normalized = name.lower().strip()
@@ -267,6 +296,7 @@ def create_search_provider(
             max_content_chars=max_content_chars,
             fetch_timeout=fetch_timeout,
             fetch_concurrency=fetch_concurrency,
+            fetcher=fetcher,
         )
     if normalized == "tavily":
         return TavilySearchProvider()
@@ -275,6 +305,28 @@ def create_search_provider(
 
 # Process-wide guard for the global query-keyed cache files.
 _CACHE_LOCK = threading.Lock()
+
+# Process-wide memoization of parsed chunks.jsonl. replay 模式下同一题的 23MB 块索引
+# 一次 run 内不变,却被每次 search() 完整 JSON 解析两遍(_indexed_urls + _load_chunk_index),
+# 每题 ~36 遍。这里按 (path, mtime_ns, size) 签名缓存解析结果:签名不变直接复用,
+# append 写文件后签名变 → 自动失效重解析(正确性保住)。独立锁,避免与 _CACHE_LOCK 重入。
+# LRU + 内存上限:缓存的 records 常驻内存(每题 ~百 MB,主要是 emb 浮点),总量超上限就踢
+# 最久没用的那道题(至少保留刚加载的当前题)。上限默认 16GB,env CHUNK_CACHE_MAX_GB 可调。
+_CHUNK_INDEX_CACHE: "OrderedDict[str, tuple]" = OrderedDict()  # path -> (sig, records, nbytes)
+_CHUNK_INDEX_LOCK = threading.Lock()
+_CHUNK_CACHE_MAX_BYTES = int(float(os.getenv("CHUNK_CACHE_MAX_GB", "16")) * (1024 ** 3))
+
+
+def _estimate_records_bytes(records: list[dict]) -> int:
+    """估一份块索引常驻内存的字节数。大头是每块 emb 的浮点表:list 容器 + 每个 float ~24B;
+    另加 text/url 字符串与每条 dict 的固定开销。用于 LRU 按内存(而非题数)驱逐。"""
+    total = 0
+    for r in records:
+        emb = r.get("emb") or ()
+        total += sys.getsizeof(emb) + len(emb) * 24  # 浮点对象各 ~24B(CPython 不缓存 float)
+        total += sys.getsizeof(r.get("text") or "") + sys.getsizeof(r.get("url") or "")
+        total += 200  # dict + ci 等杂项每条固定开销
+    return total
 
 
 def _norm_query(query: str) -> str:
@@ -321,17 +373,27 @@ class CachingSearchProvider:
         cache_dir: str,
         fix_n: int = 0,
         sample_id: object = None,
+        benchmark: str | None = None,
+        relevance: bool = False,
     ) -> None:
         self.base = base
         self.mode = mode
         self.fix_n = fix_n
         self.sample_id = sample_id
+        self.benchmark = (benchmark or "").strip() or None
+        # relevance=True:在 cache 层做块级 embedding 检索(online 存块向量、local 读块向量
+        # 做 top-k),不再依赖 query→url 精确匹配;False 走旧 query→url 行为(向后兼容)。
+        self.relevance = bool(relevance)
         self.root = Path(cache_dir)
-        # Per-question directory: each question saves its own two-level cache.
-        self.qdir = self.root / f"q{sample_id}"
+        # 按 benchmark名+题目index 一等公民分类:有 benchmark 时落
+        # <root>/<benchmark>/q<index>/,否则退回 <root>/q<index>(向后兼容)。
+        base_dir = self.root / self.benchmark if self.benchmark else self.root
+        self.qdir = base_dir / f"q{sample_id}"
         self.pages_dir = self.qdir / "pages"
         self.query_map_path = self.qdir / "search_cache.json"
         self.pages_index_path = self.qdir / "pages_index.json"
+        # 块嵌入索引(每行 {"url","ci","text","emb"}):online 建、local 读。
+        self.chunks_path = self.qdir / "chunks.jsonl"
         # Queries that missed the cache in replay and triggered a live
         # fallback; non-empty means this question's timing/sources are
         # contaminated and the sample should be excluded.
@@ -339,23 +401,32 @@ class CachingSearchProvider:
 
     async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
         if self.mode == "replay":
+            if self.relevance:
+                return await self._search_replay_embed(queries, max_results)
             return await self._search_replay(queries, max_results)
         # record mode (and any unknown mode degrades to live + persist). One
         # live search per query keeps the per-query URL list faithful.
-        logger.warning("SEARCH_PATH=LIVE(record) q%s | %d queries 全部联网(不读缓存)",
-                       self.sample_id, len(queries))
+        logger.warning("SEARCH_PATH=LIVE(record%s) q%s | %d queries 全部联网(不读缓存)",
+                       "+embed" if self.relevance else "", self.sample_id, len(queries))
         merged: list[SearchResult] = []
         seen: set[str] = set()
         for query in queries:
             results = await self.base.search([query], max_results=max_results)
-            self._record_query(query, results)
-            for result in results:
-                url = (result.url or "").strip()
-                if url and url in seen:
-                    continue
-                if url:
-                    seen.add(url)
-                merged.append(result)
+            new_pages = self._record_query(query, results)
+            if self.relevance:
+                # 新页切块+embed存索引(只此一次),return 用块向量做该查询 top-k
+                if new_pages:
+                    await asyncio.to_thread(self._append_chunk_index, new_pages)
+                self._extend(merged, seen, await asyncio.to_thread(
+                    self._embed_select_for_query, query, [r.url for r in results]))
+            else:
+                for result in results:
+                    url = (result.url or "").strip()
+                    if url and url in seen:
+                        continue
+                    if url:
+                        seen.add(url)
+                    merged.append(result)
         return merged
 
     async def _search_replay(self, queries: list[str], max_results: int) -> list[SearchResult]:
@@ -431,7 +502,9 @@ class CachingSearchProvider:
 
     # -- persistence -----------------------------------------------------
 
-    def _record_query(self, query: str, results: list[SearchResult]) -> None:
+    def _record_query(self, query: str, results: list[SearchResult]) -> list[tuple[str, str]]:
+        """存 query->urls(provenance) + url->content;返回本次**新存的页** [(url, content)]
+        (供 relevance 模式建块嵌入索引,只对新页 embed)。"""
         key = _norm_query(query)
         urls: list[str] = []
         seen: set[str] = set()
@@ -447,7 +520,8 @@ class CachingSearchProvider:
             urls.append(url)
             pages.append((url, result.title or "", content))
         if not urls:
-            return
+            return []
+        new_pages: list[tuple[str, str]] = []
         with _CACHE_LOCK:
             self.pages_dir.mkdir(parents=True, exist_ok=True)
             query_map = self._load_json(self.query_map_path)
@@ -462,9 +536,128 @@ class CachingSearchProvider:
                 fname = _url_filename(url)
                 self._write_text(self.pages_dir / fname, content)
                 pages_index[url] = {"file": fname, "title": title}
+                new_pages.append((url, content))  # 走到这就是"新存的页"
                 changed = True
             if changed:
                 self._write_json(self.pages_index_path, pages_index)
+        return new_pages
+
+    # -- 块嵌入索引(relevance 模式)----------------------------------------
+    def _indexed_urls(self) -> set[str]:
+        # 从(已缓存的)块索引派生 url 集合,不再独立全解析 → 省掉 _ensure_chunk_index 里那遍 2.5s。
+        return {r["url"] for r in self._load_chunk_index() if "url" in r}
+
+    def _load_chunk_index(self) -> list[dict]:
+        if not self.chunks_path.exists():
+            return []
+        st = self.chunks_path.stat()
+        key = str(self.chunks_path)
+        sig = (st.st_mtime_ns, st.st_size)
+        with _CHUNK_INDEX_LOCK:
+            hit = _CHUNK_INDEX_CACHE.get(key)
+            if hit is not None and hit[0] == sig:
+                _CHUNK_INDEX_CACHE.move_to_end(key)  # 标记最近使用(LRU)
+                return hit[1]
+        # 缓存未命中(首次 / 文件变了):真正解析一遍。放锁外做慢活,解析完再存。
+        if os.getenv("MCDBG"):
+            logger.warning("MCDBG_parse %s", key)
+        records: list[dict] = []
+        for line in self.chunks_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+        nbytes = _estimate_records_bytes(records)
+        with _CHUNK_INDEX_LOCK:
+            _CHUNK_INDEX_CACHE[key] = (sig, records, nbytes)
+            _CHUNK_INDEX_CACHE.move_to_end(key)
+            # 超内存上限就踢最久没用的;至少保留当前刚加载这份(len>1 才踢)。
+            while (len(_CHUNK_INDEX_CACHE) > 1 and
+                   sum(v[2] for v in _CHUNK_INDEX_CACHE.values()) > _CHUNK_CACHE_MAX_BYTES):
+                _CHUNK_INDEX_CACHE.popitem(last=False)
+        return records
+
+    def _append_chunk_index(self, pages: list[tuple[str, str]]) -> None:
+        """对新页切块(~1000token)+embed,追加 chunks.jsonl(url first-write-wins 幂等)。
+        block 向量只在这里算一次,online return + 所有 local 查询都复用它。"""
+        from deep_researcher_demo import relevance
+        with _CACHE_LOCK:
+            existing = self._indexed_urls()
+        todo = [(u, c) for u, c in pages if u and u not in existing and (c or "").strip()]
+        if not todo:
+            return
+        lines: list[str] = []
+        for url, content in todo:
+            chunks = relevance.chunk_by_tokens(content)
+            embs = relevance.embed_texts(chunks)
+            for ci, (text, emb) in enumerate(zip(chunks, embs)):
+                lines.append(json.dumps(
+                    {"url": url, "ci": ci, "text": text, "emb": emb}, ensure_ascii=False))
+        with _CACHE_LOCK:
+            self.qdir.mkdir(parents=True, exist_ok=True)
+            with self.chunks_path.open("a", encoding="utf-8") as fh:
+                fh.write("\n".join(lines) + "\n")
+
+    def _ensure_chunk_index(self) -> None:
+        """local:缺索引/有未索引的页 → 从 pages 现切现 embed 补上(老缓存懒升级)。"""
+        pages_index = self._load_json(self.pages_index_path)
+        indexed = self._indexed_urls()
+        missing: list[tuple[str, str]] = []
+        for url, entry in pages_index.items():
+            if url in indexed:
+                continue
+            path = self.pages_dir / entry.get("file", "")
+            if path.exists():
+                missing.append((url, path.read_text(encoding="utf-8")))
+        if missing:
+            self._append_chunk_index(missing)
+
+    def _title_for(self, url: str, pages_index: dict) -> str:
+        return (pages_index.get(url) or {}).get("title", "")
+
+    def _embed_select_for_query(self, query: str, urls: list[str]) -> list[SearchResult]:
+        """online return:用已存块向量对该查询取 top-k(只 embed query,不重算块)。"""
+        from deep_researcher_demo import relevance
+        wanted = {u for u in urls if u}
+        records = [r for r in self._load_chunk_index() if r.get("url") in wanted]
+        if not records:
+            return []
+        by_url = relevance.select_topk(relevance.embed_query(query), records)
+        pages_index = self._load_json(self.pages_index_path)
+        return [
+            SearchResult(query=query, title=self._title_for(url, pages_index),
+                         url=url, snippet="", raw_content="\n\n".join(texts))
+            for url, texts in by_url.items()
+        ]
+
+    async def _search_replay_embed(self, queries: list[str], max_results: int) -> list[SearchResult]:
+        """local:embedding 块级语义检索(全题页池)。无索引则懒构建;无任何页则退老 replay。"""
+        await asyncio.to_thread(self._ensure_chunk_index)
+        records = self._load_chunk_index()
+        if not records:
+            return await self._search_replay(queries, max_results)
+        pages_index = self._load_json(self.pages_index_path)
+        merged: list[SearchResult] = []
+        seen: set[str] = set()
+        hit = 0
+
+        def _select(q: str):
+            from deep_researcher_demo import relevance
+            return relevance.select_topk(relevance.embed_query(q), records)
+
+        for query in queries:
+            by_url = await asyncio.to_thread(_select, query)
+            hit += sum(len(v) for v in by_url.values())
+            self._extend(merged, seen, [
+                SearchResult(query=query, title=self._title_for(url, pages_index),
+                             url=url, snippet="", raw_content="\n\n".join(texts))
+                for url, texts in by_url.items()
+            ])
+        logger.warning("SEARCH_PATH=CACHE(embed) q%s | 池块=%d 命中块=%d",
+                       self.sample_id, len(records), hit)
+        return merged
 
     @staticmethod
     def _load_json(path: Path) -> dict:
@@ -510,10 +703,48 @@ def wrap_with_cache(
     cache_dir: str,
     fix_n: int = 0,
     sample_id: object = None,
+    benchmark: str | None = None,
+    relevance: bool = False,
 ) -> SearchProvider:
-    """Wrap a provider with record/replay caching; `off`/unknown -> passthrough."""
+    """Wrap a provider with record/replay caching; `off`/unknown -> passthrough.
+    relevance=True 时 cache 层做块级 embedding 检索(online 存块向量、local 读块向量 top-k)。"""
     if mode not in {"record", "replay"}:
         return base
     return CachingSearchProvider(
-        base, mode=mode, cache_dir=cache_dir, fix_n=fix_n, sample_id=sample_id
+        base, mode=mode, cache_dir=cache_dir, fix_n=fix_n,
+        sample_id=sample_id, benchmark=benchmark, relevance=relevance,
     )
+
+
+class RelevanceFilteringProvider:
+    """在任意 provider 外再包一层:返回前按子查询做 embedding 相关性过滤。
+
+    gpt-researcher 式提质——把"搜得到/抓得到"与"喂给 LLM 的内容"解耦:每个结果的
+    raw_content 被裁剪成只剩与其 .query 相关的块。online/local 两模式都套这一层
+    (online 抓存后过滤,local 读盘后过滤),所以相关性逻辑只此一处、与后端无关。
+    """
+
+    def __init__(self, base: SearchProvider) -> None:
+        self.base = base
+
+    async def search(self, queries: list[str], max_results: int = 5) -> list[SearchResult]:
+        results = await self.base.search(queries, max_results=max_results)
+        if not results:
+            return results
+        from deep_researcher_demo import relevance
+        try:
+            # 同步、可能多次调 embedding API → 丢线程,别阻塞事件循环
+            return await asyncio.to_thread(relevance.filter_results, results)
+        except Exception as exc:  # noqa: BLE001 - 过滤失败不该毁掉整轮检索
+            logger.warning("relevance 过滤失败,返回未过滤结果: %s", str(exc)[:200])
+            return results
+
+    # 透传 record/replay 的 misses(供上层判定缓存命中情况)
+    @property
+    def misses(self) -> list[str]:
+        return getattr(self.base, "misses", [])
+
+
+def wrap_with_relevance(base: SearchProvider, *, enabled: bool) -> SearchProvider:
+    """enabled 时套上 embedding 相关性过滤层,否则原样返回。"""
+    return RelevanceFilteringProvider(base) if enabled else base

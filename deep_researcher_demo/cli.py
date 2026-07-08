@@ -12,7 +12,7 @@ from deep_researcher_demo.agents import FinalWriter, Researcher, Supervisor
 from deep_researcher_demo.config import AppConfig
 from deep_researcher_demo.llm import OpenAICompatibleClient
 from deep_researcher_demo.progress import ConsoleProgressReporter, NullProgressReporter
-from deep_researcher_demo.search import create_search_provider, wrap_with_cache
+from deep_researcher_demo.search import create_search_provider, wrap_with_cache, wrap_with_relevance
 from deep_researcher_demo.workflow import DeepResearchWorkflow
 
 
@@ -72,6 +72,7 @@ async def async_main(argv: list[str] | None = None) -> int:
         max_content_chars=config.max_content_chars,
         fetch_timeout=config.fetch_timeout,
         fetch_concurrency=config.fetch_concurrency,
+        fetcher=config.search_fetcher,
     )
     # Wrap with the two-level (query->urls, url->content) per-question cache so a
     # trajectory can be recorded once and then replayed frozen — Exp A needs the
@@ -88,7 +89,12 @@ async def async_main(argv: list[str] | None = None) -> int:
             cache_dir=config.search_cache_dir,
             fix_n=config.search_cache_fix_n,
             sample_id=sample_id,
+            benchmark=config.search_benchmark,   # <root>/<benchmark>/q<index>/
+            relevance=config.cache_relevance,    # online/local:cache 层做块级 embedding 检索
         )
+    # 外层 embedding 过滤:仅老 SEARCH_CACHE 直连/off 路径用(RELEVANCE_FILTER 显式开)。
+    # online/local 的 top-k 已在 cache 层做(cache_relevance),这里默认关,免重复 embed。
+    search_provider = wrap_with_relevance(search_provider, enabled=config.relevance_enabled)
 
     supervisor_model = config.supervisor_model or config.model
     researcher_model = config.researcher_model or config.model

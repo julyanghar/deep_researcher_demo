@@ -1,5 +1,5 @@
-from eval.judge import build_grader_prompt
-from eval.scoring import (
+from eval.deepresearchqa.judge import build_grader_prompt
+from eval.deepresearchqa.scoring import (
     ItemRating,
     aggregate_ratings,
     calculate_metric,

@@ -59,11 +59,16 @@ class DeepResearchWorkflow:
                 {"original_question": original_question},
             )
         )
-        if getattr(self.supervisor, "kv_reuse_separator", ""):
+        if (getattr(self.supervisor, "kv_reuse_separator", "")
+                or getattr(self.final_writer, "kv_reuse_separator", "")):
             # KV-reuse mode: prime the constant prompt prefixes of the
             # supervisor-decision and final-report roles so that the blend
             # lookup (which requires contiguous hits from token 0) can reach
             # the researcher-summary segments on their very first use.
+            # Gate on EITHER role's separator (each warmup_kv_prefix self-guards
+            # on its own separator): otherwise a writer-reuse-only config (e.g.
+            # supervisor prefill + writer reuse) would skip the writer warmup and
+            # silently break writer reuse.
             await asyncio.gather(
                 self.supervisor.warmup_kv_prefix(self.max_followups),
                 self.final_writer.warmup_kv_prefix(),
@@ -83,6 +88,7 @@ class DeepResearchWorkflow:
         pending_questions = initial_questions
         seen_questions = set(initial_questions)
         summaries: list[str] = []
+        summary_sources: list[list[str]] = []  # 与 summaries 对齐:每条的来源 URL
         supervisor_reasons: list[str] = []
         # r_t trace: each round's decision JSON, stored as a reusable KV segment
         # and interleaved into later decide() contexts when SUPERVISOR_REASONING
@@ -105,6 +111,8 @@ class DeepResearchWorkflow:
             round_summaries = [summary for summary, _ in round_results]
             round_backup_urls = [url for _, urls in round_results for url in urls]
             summaries.extend(round_summaries)
+            # 与 summaries 一一对齐:每条 summary 的来源 URL,供 detailed_cited 报告模式引用
+            summary_sources.extend([list(urls) for _, urls in round_results])
 
             # max_followups 是：supervisor 每一轮最多可以提出多少个后续研究问题。
             decision, round_reasoning = await self.supervisor.decide(
@@ -166,6 +174,7 @@ class DeepResearchWorkflow:
         final_report = await self.final_writer.write(
             original_question=original_question,
             summaries=summaries,
+            summary_sources=summary_sources,
         )
         self.reporter.emit(
             ProgressEvent(
