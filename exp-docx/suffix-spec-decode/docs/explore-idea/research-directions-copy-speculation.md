@@ -202,6 +202,10 @@ server 端收到后,把这几份 hint 文本 tokenize、插进**该请求专属*
 
 prefill 侧的跨模型/跨 agent 复用已有(DroidSpeak、我们的 KVCOMM);**decode 侧的跨 agent 草稿复用,截至知识截止未见成体系工作**——这是要用文献核查钉死的主张(见 §五行动清单)。若核查发现近似工作,D1 收缩为"图谱定向 + 两层合并 + 可携带性"的系统增量,故事仍然成立但调门降一档。
 
+> **2026-07-07 文献核查(SoT / 并行生成轴,已查):** SoT 的后代(APAR、PASTA ICML'25、**Plato COLM'25**、Multiverse NeurIPS'25、DoT WWW'25)全是 **orchestration 级"大纲→并行段"= 角色②**,不碰 token 级 decode 草稿路由;我们的 **GADS(decode 侧图谱感知草稿源 = 角色③)不在其射程内——空地仍在**。
+> 另核实三家的 **KV 复用全是"位置相关"**、**无一做位置无关复用**:① **Plato** 单调前缀累加(P→P+A∗→…),§4.2.2 明言"若只取依赖子集,B∗/C∗ 落到不同位置 → 生成全新 KV"(`/home/yilin/tmp/plato.txt` L353-356);② **PASTA** 预测块长提前分配 position id + 注意力掩码 + 单连续 KV 池,"generated once, not reused at different positions";③ **Multiverse** 训练式 Multiverse Attention 让分支在**相同位置**跑、Reduce 收敛到 max position、radix **原位拼接** KV 索引(`/home/yilin/tmp/multiverse.txt` L438-464),且**要 SFT**。→ 我们的**位置无关跨 agent 复用(CacheBlend/KVCOMM)vs 三者均可区分,且免训练**(PASTA/Multiverse 要 SFT)。
+> **⚠️ 但这一轴不是判 GADS 新颖性的关键轴**——真正要查的是 §五#5 的 **spec-decode-drafting 轴**(REST / SAM-decoding / PLD-lookahead / GraphSpec / cascade drafting):**decode 侧"定向草稿源"若撞车,会撞在那条轴上,而 SoT 综述没覆盖它、仍未查**。GADS 新颖性未最终判定,以该轴核查为准。
+
 ---
 
 ## 二、D2:copy-state 感知的混合仲裁
@@ -270,7 +274,7 @@ cascade drafting、adaptive speculation length(SpecDec++ 等)已有文献;我们
 2. ⬜ **P0 第 0 步:离线仿真定参**(半天、零 GPU)——v2 100 题接受序列上扫 W×τ×R,出误杀率/省draft率 Pareto(见 §P0.3);
 3. ⬜ **P0 落地**(单文件 ~30 行,env 门控)+ 三组评测(sanity/e2e/洪水救援,判定门槛已预写死于 §P0.5);
 4. ⬜ 模拟器算 D2 混合 oracle 上界(半天、零 GPU)——决定 EAGLE 臂值不值得上;
-5. ⬜ **文献核查**(一天,新颖性红线),清单及一句话画像:**REST**(检索式投机:从外部语料库检索草稿)、**SAM-decoding**(后缀自动机做检索草稿)、**PLD/lookahead**(prompt lookup / n-gram 系,ngram_gpu 的学术源头)、**cascade & adaptive drafting**(SpecDec++ 等:动态调草稿长度/级联多个 drafter——**P0 的近邻,重点比对"请求级 on/off 门控+题型先验"是否已有**)、**DroidSpeak**(跨 LLM 的 prefill KV 复用——我们 D1 的 prefill 侧近亲)——重点钉"**decode 侧**跨 agent 草稿复用有没有人做过";
+5. 🔶 **文献核查**(一天,新颖性红线)——**SoT/并行生成轴已查完**(见 §1.5:APAR/PASTA/Plato/Multiverse/DoT 全是角色② orchestration,不撞 decode 侧 GADS;且三家 KV 复用均位置相关、我们位置无关可区分)。**下列 spec-decode-drafting 轴才是判 GADS 新颖性的关键、仍未查**:**REST**(检索式投机:从外部语料库检索草稿)、**SAM-decoding**(后缀自动机做检索草稿)、**PLD/lookahead**(prompt lookup / n-gram 系,ngram_gpu 的学术源头)、**cascade & adaptive drafting**(SpecDec++ 等:动态调草稿长度/级联多个 drafter——**P0 的近邻,重点比对"请求级 on/off 门控+题型先验"是否已有**)、**DroidSpeak**(跨 LLM 的 prefill KV 复用——我们 D1 的 prefill 侧近亲)——重点钉"**decode 侧**跨 agent 草稿复用有没有人做过";
 6. ⬜ GADS 最小原型(L-a,1~2 天):per-request draft_hints 注入 arctic 本地树,用现有 replay 的 report 请求验证 H1。
 
 **红线**:全程无损(验证端不动);所有加速主张配质量复核;单条数字必长度归一(勘误教训)。
