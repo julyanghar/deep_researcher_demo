@@ -57,6 +57,34 @@
 
 **总账**:decode 28385→23246,**省 5139s(−18%)**;单题 wallclock 252.2→233.1,**−7.6%**(decode 只占墙钟一部分,超长 prefill + 非 LLM 检索把 −18% 稀释到 −7.6%)。
 
+## 相比原生 vanilla vLLM(无投机)能省多少(粗略估算)
+
+本实验只实测 suffix vs router(都开投机),**没跑 vanilla(无投机)臂**。用 DRGym 自己各阶段的 decode + 接受率反推 vanilla。
+
+**关键前提:这个 workload 是 summary 主导。** 各阶段 decode 时间总和(suffix 配置,40 题):
+
+| 阶段 | suffix decode | 占比 | suffix vs vanilla(cudagraph)倍数 |
+|---|--:|--:|--:|
+| **summary** | 23044s | **81%** | ~1.05×(suffix 短板,LATEST x1.00-1.07) |
+| report | 4615s | 16% | ~2.0×(照抄大赚) |
+| supervisor+query_plan | 726s | 3% | ~1.4× |
+
+summary 占 decode **81%**(deep_researcher 里 summary 调用 504 次 >> report 40 次,3 迭代×3 researcher 撑成大头)。
+**这决定了 suffix vs vanilla 被 summary 稀释**——summary(81%)几乎打平、report(16%)翻倍,加权后:
+
+- 估 vanilla(cudagraph)decode ≈ 24200(summary×1.05) + 9200(report×2.0) + 1020 ≈ **34400s**
+- suffix 28385 → **suffix vs vanilla 省 ~18%**;router 23246 → **router vs vanilla 省 ~32%**
+
+### 综合:本实验 router 相比 vanilla 约省 **~30%**;suffix 单独只省 ~18%
+
+**⚠️ 强烈依赖 workload 的 summary/report 占比**(这是最容易搞错的):
+- **report 主导场景**(如 suffix-spec-decode 的 DRBench:长报告占 decode 大头):suffix 单独就 vs vanilla **省 ~50%**(report 2.37× 主导),router 增量小。
+- **summary 主导场景**(本 DRGym 实验,summary 占 81%):suffix 被自己的短板(summary)拖累,vs vanilla 只 ~18%;**router 把 summary 换 eagle 补短板,增量才大(summary decode 省 23%)** → router vs vanilla ~32%。
+
+→ **一句话:report 主导时 suffix 已够猛、router 增量小;summary 主导时 suffix 被短板拖累、router 补 summary 的价值才凸显——这正是 router 该出场的场景。**
+
+**诚实标注**:① vanilla 臂未实测,倍数用 DRGym 接受率 + LATEST-CONCLUSIONS 口径估;② vanilla 基线取 cudagraph(无投机不需 eager);若 vanilla 也 eager,suffix/router 相对它省更多(summary ~1.3× → router vs vanilla_eager ~44%);③ 要精确需补跑 vanilla 臂(同 DRGym 40 题)。
+
 ## 口径与诚实边界
 
 1. **两配置都 enforce-eager**:所以这是干净的 proposer 对比。但要注意——router 里的 eagle 被迫 enforce-eager
