@@ -85,24 +85,31 @@ async def generate(tag, reports_root, queries, n, concurrency):
 async def score(tag, reports_root, metrics, model):
     JA.apply_dashscope_env()                         # 必须在 import DRGym scorer 之前
     summary = {}
+    _sp = Path(reports_root) / tag / "summary.json"
+
+    def _flush():                                    # 每个指标算完即落盘(2026-07-25)
+        _sp.write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
 
     if "quality" in metrics:
         import eval_quality_async as Q
         qres = await Q.evaluate_folder_async(tag, model, str(reports_root))
         summary["quality"] = _mean_quality(qres)
         print(f"[quality] {summary['quality']}", flush=True)
+        _flush()
 
     if "kpr" in metrics:
         import eval_kpr_async as K
         results = await K.evaluate_folder_async(tag, model, str(reports_root), str(KEY_POINT_DIR))
         summary["kpr"] = _mean_kpr(results)
         print(f"[kpr] {summary['kpr']}", flush=True)
+        _flush()
 
     if "citation_recall" in metrics:
         import eval_citation_recall_async as CR
         out = await CR.evaluate_folder_async(tag, model, str(reports_root))
         summary["citation_recall"] = out[1] if isinstance(out, tuple) else out
         print(f"[citation_recall] {summary['citation_recall']}", flush=True)
+        _flush()
 
     if "citation_precision" in metrics:
         # 用 demo 缓存核引用,不需要 crawl4ai → 注入 stub 让模块顶部 import 通过

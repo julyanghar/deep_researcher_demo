@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: aaai2027.bst
+Database file #1: aaai2027.bib
+Warning--string name "july" is undefined
+--line 60 of file aaai2027.bib
+Warning--empty booktitle in osd
+Warning--empty booktitle in cacheblend
+Warning--empty booktitle in radixattention
+You've used 25 entries,
+            2840 wiz_defined-function locations,
+            697 strings with 10188 characters,
+and the built_in function-call counts, 19535 in all, are:
+= -- 1321
+> -- 1726
+< -- 0
++ -- 637
+- -- 613
+* -- 1658
+:= -- 3450
+add.period$ -- 97
+call.type$ -- 25
+change.case$ -- 291
+chr.to.int$ -- 26
+cite$ -- 28
+duplicate$ -- 1087
+empty$ -- 877
+format.name$ -- 684
+if$ -- 3501
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 280
+newline$ -- 125
+num.names$ -- 100
+pop$ -- 682
+preamble$ -- 1
+purify$ -- 287
+quote$ -- 0
+skip$ -- 503
+stack$ -- 0
+substring$ -- 307
+swap$ -- 599
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 225
+warning$ -- 3
+while$ -- 103
+width$ -- 0
+write$ -- 297
+(There were 4 warnings)

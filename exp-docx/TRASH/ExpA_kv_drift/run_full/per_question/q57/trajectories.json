@@ -1,0 +1,92 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research confirms that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question specifically asked for the names of the parties they ran under when first elected, and the Republican Party is the only relevant party in this context.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504081726074219,
+      "14737": -0.004081491846591234
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The question has been fully answered. The last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. At that time, the major parties in New York included the Republican Party and the Democratic Party, with smaller parties also fielding candidates.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.773252487182617,
+      "14737": -0.02325255051255226
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The information provided confirms that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.1269514560699463,
+      "14737": -0.1269514560699463
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.0181565284729,
+      "14737": -0.01815675012767315
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered with the relevant information.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -9.250096321105957,
+      "14737": -9.679325739853084e-05
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered with the relevant information.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -9.00012493133545,
+      "14737": -0.00012468514614738524
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered with the relevant information.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758620262145996,
+      "14737": -0.008620312437415123
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research confirms that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264166831970215,
+      "14737": -0.014166857115924358
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully answered with the relevant information.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504082679748535,
+      "14737": -0.004082441329956055
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the last Republican to win the New York gubernatorial election was George Pataki, who was first elected in 1994 under the Republican Party. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753184795379639,
+      "14737": -0.0031847255304455757
+    }
+  }
+}

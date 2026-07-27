@@ -1,0 +1,15 @@
+# B 臂先行版(TP2):LMCache blend(attn-guided)+ APC + router 投机
+# 底稿 = config-b-blend-router.yaml,差异:tp 4→2、gpu-mem 0.85→0.9
+model: /data/yilin/huggingface/Qwen3-32B
+served-model-name: Qwen3-32B
+host: 0.0.0.0
+port: 30000
+tensor-parallel-size: 2
+gpu-memory-utilization: 0.9
+max-model-len: 40960
+enable-log-requests: true
+disable-custom-all-reduce: true
+default-chat-template-kwargs: '{"enable_thinking": false}'
+kv-transfer-config: '{"kv_connector":"LMCacheConnectorV1","kv_role":"kv_both"}'
+enforce-eager: true
+speculative-config: '{"method":"router","model":"/home/yilin/deep_researcher_demo/phase2-12k-3ep","num_speculative_tokens":3}'

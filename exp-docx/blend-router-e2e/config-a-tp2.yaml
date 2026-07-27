@@ -1,0 +1,13 @@
+# A 臂先行版(TP2):纯 vanilla vLLM,底稿 = server/vllm/config_no_lmcache.yaml
+# 差异:tp 4→2、gpu-mem 0.85→0.9(32B TP2 先例口径,HANDOFF:32B TP2 各 48GB gpu-mem 0.9)
+model: /data/yilin/huggingface/Qwen3-32B
+served-model-name: Qwen3-32B
+host: 0.0.0.0
+port: 30000
+tensor-parallel-size: 2
+gpu-memory-utilization: 0.9
+max-model-len: 40960
+enable-log-requests: true
+disable-custom-all-reduce: true
+default-chat-template-kwargs: '{"enable_thinking": false}'
+# 原生模式:vLLM 自带 prefix caching 默认开,不设 kv-transfer-config

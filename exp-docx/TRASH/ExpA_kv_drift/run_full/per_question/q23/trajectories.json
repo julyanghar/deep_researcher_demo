@@ -1,0 +1,173 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is supported by detailed production figures and is available in the survey reports.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.51106071472168,
+      "14737": -0.011060593649744987
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, published on gov.scot, provides the required data. Based on the survey, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. These rankings are derived from the survey's detailed production data by region.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264209747314453,
+      "14737": -0.014209521003067493
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, available on gov.scot, provides the required data. The five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. These rankings are based on the survey's detailed production data by region.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.0181803703308105,
+      "14737": -0.018180398270487785
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, published on gov.scot, provides the required data. Based on the survey, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is available in the survey report and supplementary tables.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264190673828125,
+      "14737": -0.014190598390996456
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. No further research is required.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501508712768555,
+      "14737": -0.0015086471103131771
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, available on gov.scot, provides the necessary data to answer the question. The five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.25524377822876,
+      "14737": -0.005243833642452955
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, published on gov.scot, provides the necessary data to answer the question. Based on the data, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.25524377822876,
+      "14737": -0.005243714898824692
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, published on gov.scot, provides the necessary data to answer the question. Based on the survey, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.25193452835083,
+      "14737": -0.0019345632754266262
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, published on gov.scot, provides the necessary data to answer the question. Based on the data, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753185749053955,
+      "14737": -0.003185913898050785
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions, in order, are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. No further research is required.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504087924957275,
+      "14737": -0.004087783861905336
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, available on gov.scot, provides the necessary data to answer the question. Based on the survey, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.7586283683776855,
+      "14737": -0.008628349751234055
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is supported by detailed production figures and is available in the survey reports.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.5110650062561035,
+      "14737": -0.01106483768671751
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey 2024, available on gov.scot, provides the necessary data to answer the question. Based on the data, the five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504085063934326,
+      "14737": -0.004085290711373091
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey data from gov.scot provides the necessary information to answer the question. The five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006724834442139,
+      "14737": -0.006724703591316938
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The top five regions are Shetland, Highland, Strathclyde, Western Isles, and Orkney. The data is supported by detailed production figures and regional breakdowns from the 2024 and 2025 surveys.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.01816987991333,
+      "14737": -0.018169745802879333
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The ranking is: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is supported by detailed reports and supplementary tables available on the gov.scot website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255243301391602,
+      "14737": -0.005243359133601189
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is supported by detailed production figures and is available in the survey reports.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006732940673828,
+      "14737": -0.006732991896569729
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the five Scottish regions with the highest mean common mussel production between 2020 and 2024, based on data from the Scottish Shellfish Farm Production Survey published on gov.scot. The regions, in order, are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney. The data is supported by detailed annual reports and supplementary tables available on the gov.scot website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758632183074951,
+      "14737": -0.008632367476820946
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The Scottish Shellfish Farm Production Survey on gov.scot provides the required data. The five Scottish regions with the highest mean common mussel production between 2020 and 2024 are: 1. Shetland, 2. Highland, 3. Strathclyde, 4. Western Isles, and 5. Orkney.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758627414703369,
+      "14737": -0.008627403527498245
+    }
+  }
+}

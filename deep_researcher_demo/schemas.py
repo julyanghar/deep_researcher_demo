@@ -25,6 +25,37 @@ class SupervisorDecision(BaseModel):
     reason: str = ""
 
 
+class OutlineSection(BaseModel):
+    """One section of a parallel-generation outline: a title plus the 1-based
+    ids of the sources this section should draw from (SUMMARY_PARALLEL /
+    REPORT_PARALLEL)."""
+
+    title: str = ""
+    source_ids: list[int] = Field(default_factory=list)
+
+
+class Outline(BaseModel):
+    """Outline for parallel section generation (summary or report)."""
+
+    sections: list[OutlineSection] = Field(default_factory=list)
+
+
+class ReviewItem(BaseModel):
+    """One slot in the reviewed final outline (REPORT_REVIEW): id>0 places the
+    existing section with that 1-based number; id==0 inserts a NEW section with
+    the given title at this position."""
+
+    id: int = 0
+    title: str = ""
+
+
+class ReportReview(BaseModel):
+    """Reviewer output for REPORT_REVIEW: the complete final outline, in order,
+    over existing (by id) and new (by title) sections."""
+
+    sections: list[ReviewItem] = Field(default_factory=list)
+
+
 class SearchResult(BaseModel):
     """Normalized search result from a web search provider."""
 

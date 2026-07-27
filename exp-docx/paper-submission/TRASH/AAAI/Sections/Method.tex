@@ -1,0 +1,51 @@
+\section{System Design}
+\label{sec:method}
+
+Our system serves the deep research pipeline on a single inference engine and attacks content recycling on both sides of a call. When a call re-reads content that an earlier call produced, we reuse that content's KV cache and recompute only the tokens that matter (Section~\ref{sec:kvreuse}). When a call generates, we speculate, choosing the drafter and the draft depth that fit how much it copies (Section~\ref{sec:decode}). Both mechanisms ask the same question---how will this call use its content?---and both read a signal that is available before the call finishes: the downstream attention over the reused tokens, and the call's copy rate.
+
+\subsection{Attention-Guided Selective Recomputation}
+\label{sec:kvreuse}
+
+A downstream call---a supervisor reaching a decision, or the writer composing the report---re-reads summaries that researchers have already generated. Recomputing their KV cache during prefill repeats work the pipeline already did. We instead load the cached KV. That KV was computed inside the producing call, at different positions and in a different context, so reusing it verbatim is inaccurate; blended into the new prompt blindly, it shifts the downstream output.
+
+The design question is \emph{which} reused tokens to recompute under a fixed budget. Prior work selects them by KV \emph{deviation}: recompute the tokens whose cached value differs most from a freshly computed one~\cite{cacheblend}. We show that deviation alone spends the budget in the wrong place.
+
+Consider one attention head at a downstream query position $q$, attending over the reused tokens. Its output is $o=\sum_j a_j v_j$, with attention weights $a_j=\mathrm{softmax}(q\cdot k_j)$ and values $v_j$. Reuse replaces $v_j$ by $\hat v_j=v_j+\Delta v_j$. To first order, holding the weights fixed, the output error is
+\begin{equation}
+\Delta o \;=\; \sum_j a_j\,\Delta v_j .
+\label{eq:drift}
+\end{equation}
+Recomputing a subset $S$ of tokens sets $\Delta v_j=0$ for $j\in S$. By the triangle inequality the residual error is bounded by $\sum_{j\notin S} a_j\,\|\Delta v_j\|$, which is separable across tokens; minimizing this bound under $|S|\le B$ recomputes the tokens with the largest $a_j\,\|\Delta v_j\|$. The criterion is a \emph{product}: a token must both deviate \emph{and} be attended to. A token whose value is badly wrong but that no downstream query reads ($a_j\approx 0$) does not change the output and is left reused, whereas deviation alone would waste the budget on it. Recomputing exactly the tokens that move the output is what preserves the downstream decision that blind reuse would otherwise perturb.
+
+We obtain both signals inside the prefill we already run. For $\|\Delta v_j\|$ we recompute the reused tokens at a single gate layer and compare to the cached value, which predicts the deviation at the remaining layers. For $a_j$ we read the attention that the end-of-prompt query---the position about to drive the call's generation---places on the reused tokens at that same layer. This query runs on the reused, still-approximate keys, so $a_j$ is a one-pass proxy for the true downstream attention; we accept it because it needs no extra forward pass and its error is second order in the key deviations we already treat as small. Algorithm~\ref{alg:kvreuse} summarizes the procedure; only the scoring in line~3 differs from deviation-only reuse.
+
+\begin{algorithm}[t]
+\caption{Attention-guided selective recomputation for one call}
+\label{alg:kvreuse}
+\begin{algorithmic}[1]
+\REQUIRE cached KV $\{\hat k_j,\hat v_j\}$ of the reused tokens; budget $B$
+\STATE recompute the gate layer; score each token's deviation $\|\Delta v_j\|$
+\STATE read the end-of-prompt query's attention $a_j$ at the gate layer
+\STATE $S \leftarrow$ the $B$ tokens with the largest $a_j\,\|\Delta v_j\|$
+\STATE recompute the KV of $S$ at all layers; keep the rest cached
+\STATE continue prefill with the blended KV
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Copy-Rate-Routed Speculative Decoding}
+\label{sec:decode}
+
+On the decode side we speculate: a cheap drafter proposes several next tokens, the target verifies them in a single forward pass, and correct guesses are accepted with no change to the output. The gain depends on the drafter fitting the call. A \emph{suffix} drafter proposes tokens copied from the call's own context~\cite{suffixdecoding}; it excels when the call copies its input and stalls when the call rewrites it. A trained \emph{draft head} (EAGLE-3~\cite{eagle3}) predicts tokens from the target's hidden state; it needs no copied text and covers the rewrite regime. Neither drafter is best for both, and our characterization shows the two regimes are common and sharply separated.
+
+We route each call by its copy rate. A lightweight predictor $f$ reads the target's hidden state at the start of the call and estimates the copy rate $\hat c$; a high $\hat c$ sends the call to the suffix drafter, a low $\hat c$ to the specialized head. We realize this in a single engine that hosts both drafters over one target model, and each request selects its drafter. Hosting both in one engine costs far less memory than running one server per drafter: the suffix drafter has no parameters and the head adds a few gigabytes, rather than duplicating the target.
+
+The draft \emph{depth}---how many tokens to propose---is a budget question. A drafted slot costs a fixed per-step overhead plus a per-slot cost, and it pays off only when its acceptance probability clears a break-even rate. We measure the per-slot cost at $0.62$\,ms and the resulting break-even acceptance at $2.4\%$. We set the depth per call from $\hat c$: a high-copy call, whose deep suffixes stay above break-even, drafts deep; a low-copy call drafts shallow or not at all, so a rewriting call---or a misprediction---never pays a large speculation tax. This saving is largest under concurrency, where wasted drafts contend for the compute of every other request.
+
+\subsection{Training the Learned Components}
+\label{sec:training}
+
+\paragraph{Copy-rate predictor.}
+We label every call in our trace with its measured copy rate and train $f$ to regress it from the target's hidden state at the call's first decoded positions. $f$ is a small head over a hidden state the target already produces, so it adds negligible latency.
+
+\paragraph{Specialized draft head.}
+Off-the-shelf EAGLE-3 heads are trained on generic chat data and fail on this workload: their acceptance is low, and the failure tracks the deep-research writing style rather than language. We therefore train the head on the agent's own trajectories---the prompts and outputs the target itself produced while running the pipeline, which are on-policy by construction. We report the trained head's acceptance in the evaluation.

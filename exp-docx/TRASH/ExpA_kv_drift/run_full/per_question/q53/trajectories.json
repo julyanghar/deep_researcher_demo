@@ -1,0 +1,124 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What was the percentage change in traffic fatalities for each of the three states (California, Florida, and Texas) between 2000 and 2004?\"\n  ],\n  \"reason\": \"The data for California and Florida is incomplete, and a direct comparison between the three states cannot be made without the full set of numbers for both years.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What was the percentage change in traffic fatalities for each of the three states (California, Florida, and Texas) between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.07890528440475464,
+      "14737": -2.5789053440093994
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California, Florida, and Texas in 2000 and 2004 according to NHTSA data?\",\n    \"What factors contributed to changes in traffic fatalities in California, Florida, and Texas between 2000 and 2004?\",\n    \"Are there any NHTSA reports or datasets that provide a direct comparison of traffic fatalities across these three states for the years 2000 and 2004?\"\n  ],\n  \"reason\": \"The current data is incomplete and lacks specific numbers for each state in both years. To determine which state saw the greatest increase, exact fatality figures for 2000 and 2004 for California, Florida, and Texas are required.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California, Florida, and Texas in 2000 and 2004 according to NHTSA data?",
+      "What factors contributed to changes in traffic fatalities in California, Florida, and Texas between 2000 and 2004?",
+      "Are there any NHTSA reports or datasets that provide a direct comparison of traffic fatalities across these three states for the years 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.04859789088368416,
+      "14737": -3.048597812652588
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?\"\n  ],\n  \"reason\": \"The data for California and Florida is incomplete, and a direct comparison between the three states cannot be made without the full set of numbers for both years.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.20142541825771332,
+      "14737": -1.7014254331588745
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?\"\n  ],\n  \"reason\": \"The research summaries provide traffic fatality data for Texas for both 2000 and 2004, but lack specific numbers for California and Florida during the same period. To determine which state saw the greatest increase, the exact fatality numbers for all three states in both years are required.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.12694044411182404,
+      "14737": -2.1269404888153076
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Texas for the years 2000 and 2004 according to NHTSA data?\"\n  ],\n  \"reason\": \"The current data includes traffic fatalities for Texas for both 2000 and 2004, but the numbers for California and Florida are either missing or incomplete. To determine which state saw the greatest increase, complete data for all three states is required.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Texas for the years 2000 and 2004 according to NHTSA data?"
+    ],
+    "status_dist": {
+      "9534": -0.47411230206489563,
+      "14737": -0.9741122722625732
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?\"\n  ],\n  \"reason\": \"The current data provides traffic fatalities for Texas for both 2000 and 2004, but lacks specific numbers for California and Florida for both years. To determine which state saw the greatest increase, we need the exact fatality numbers for all three states in both years.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.029761524870991707,
+      "14737": -3.529761552810669
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data provided indicates the number of traffic fatalities for California, Florida, and Texas in 2000 and 2004. Based on this, it is possible to calculate and compare the changes in fatalities between the two years for each state to determine which saw the greatest increase.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -1.5019584894180298,
+      "14737": -0.2519585192203522
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data provided indicates the number of traffic fatalities for Texas in 2000 and 2004 (3,753 in both years), and for Florida in 2004 (493 fatalities). However, the exact number for Florida in 2000 and the specific numbers for California in both years are not provided. Without this data, a definitive comparison between the three states cannot be made. Therefore, more research is needed to obtain the missing data for California and Florida in 2000.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -1.13689386844635,
+      "14737": -0.3868938684463501
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?\",\n    \"What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?\",\n    \"What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?\"\n  ],\n  \"reason\": \"The data for Texas is available, but the specific numbers for California and Florida in both 2000 and 2004 are missing. To determine which state saw the greatest increase, the exact fatality numbers for all three states in both years are required.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004 according to NHTSA data?",
+      "What were the exact numbers of traffic fatalities in Florida for the years 2000 and 2004 according to NHTSA data?",
+      "What was the percentage change in traffic fatalities for California, Florida, and Texas between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.10022254288196564,
+      "14737": -2.350222587585449
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the exact numbers of traffic fatalities in California for the years 2000 and 2004?\",\n    \"What were the exact numbers of traffic fatalities in Texas for the years 2000 and 2004?\",\n    \"What was the percentage change in traffic fatalities for each of the three states (California, Florida, and Texas) between 2000 and 2004?\"\n  ],\n  \"reason\": \"The data for California and Texas is incomplete, and a comparison of percentage change is needed to determine which state saw the greatest increase in traffic fatalities between 2000 and 2004.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the exact numbers of traffic fatalities in California for the years 2000 and 2004?",
+      "What were the exact numbers of traffic fatalities in Texas for the years 2000 and 2004?",
+      "What was the percentage change in traffic fatalities for each of the three states (California, Florida, and Texas) between 2000 and 2004?"
+    ],
+    "status_dist": {
+      "9534": -0.12694893777370453,
+      "14737": -2.126948833465576
+    }
+  }
+}

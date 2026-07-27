@@ -1,0 +1,1162 @@
+[
+  {
+    "sample_id": "q0",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q1",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.3333333333333333,
+      "precision": 0.3333333333333333,
+      "recall": 0.3333333333333333,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.024390243902439022,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -0.6666666666666667,
+    "local_f1_diff": 0.024390243902439022,
+    "allcorrect_diff": -1
+  },
+  {
+    "sample_id": "q10",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": false,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q11",
+    "answer_type": "Single Answer",
+    "on_topic": false,
+    "prefill_on_topic": true,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": true,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q12",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q13",
+    "answer_type": "Single Answer",
+    "on_topic": false,
+    "prefill_on_topic": false,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q14",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": false,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q15",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0418848167539267,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.5,
+      "precision": 0.375,
+      "recall": 0.75,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.05095541401273886,
+      "local_exact": false
+    },
+    "f1_diff": -0.5,
+    "local_f1_diff": -0.009070597258812166,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q16",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": false,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q17",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.4444444444444444,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.35087719298245607,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.09356725146198835,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q18",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0909090909090909,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0821917808219178,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.008717310087173094,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q19",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.3076923076923077,
+      "precision": 1.0,
+      "recall": 0.18181818181818182,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.016666666666666666,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.13333333333333333,
+      "precision": 0.25,
+      "recall": 0.09090909090909091,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.17435897435897438,
+    "local_f1_diff": 0.016666666666666666,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q2",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q20",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.15384615384615383,
+      "precision": 0.25,
+      "recall": 0.1111111111111111,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.02816901408450704,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.2,
+      "precision": 0.16666666666666666,
+      "recall": 0.25,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0303030303030303,
+      "local_exact": false
+    },
+    "f1_diff": -0.046153846153846184,
+    "local_f1_diff": -0.002134016218523261,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q21",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": true,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": true,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q22",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.028985507246376812,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.7272727272727273,
+      "precision": 1.0,
+      "recall": 0.5714285714285714,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -0.7272727272727273,
+    "local_f1_diff": 0.028985507246376812,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q23",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.1492537313432836,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.8000000000000002,
+      "precision": 0.8,
+      "recall": 0.8,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.19999999999999984,
+    "local_f1_diff": 0.1492537313432836,
+    "allcorrect_diff": 1
+  },
+  {
+    "sample_id": "q24",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.25,
+      "precision": 0.14285714285714285,
+      "recall": 1.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.5,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -0.25,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q25",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -1.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": -1
+  },
+  {
+    "sample_id": "q26",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.36363636363636365,
+      "precision": 0.2857142857142857,
+      "recall": 0.5,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.3333333333333333,
+      "precision": 0.25,
+      "recall": 0.5,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.03030303030303033,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q27",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.07547169811320754,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.8,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.19999999999999996,
+    "local_f1_diff": 0.07547169811320754,
+    "allcorrect_diff": 1
+  },
+  {
+    "sample_id": "q28",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q29",
+    "answer_type": "Single Answer",
+    "on_topic": false,
+    "prefill_on_topic": true,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": true,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -1.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": -1
+  },
+  {
+    "sample_id": "q3",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -1.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": -1
+  },
+  {
+    "sample_id": "q30",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q31",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": true,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": true,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q32",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q33",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.8,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.03125,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.76875,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q34",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "all_correct": true,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q35",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": false,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q36",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q37",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.25,
+      "precision": 0.2,
+      "recall": 0.3333333333333333,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.3333333333333333,
+      "precision": 0.3333333333333333,
+      "recall": 0.3333333333333333,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.01834862385321101,
+      "local_exact": false
+    },
+    "f1_diff": -0.08333333333333331,
+    "local_f1_diff": -0.01834862385321101,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q38",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.8571428571428571,
+      "precision": 0.75,
+      "recall": 1.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.8333333333333334,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.023809523809523725,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q39",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.4615384615384615,
+      "precision": 0.6,
+      "recall": 0.375,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.15384615384615385,
+      "precision": 0.2,
+      "recall": 0.125,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.30769230769230765,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q4",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": false,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.03571428571428571,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": -0.03571428571428571,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q5",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q6",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.6666666666666665,
+      "precision": 0.6,
+      "recall": 0.75,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.05263157894736842,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.5,
+      "precision": 0.5,
+      "recall": 0.5,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.09090909090909091,
+      "local_exact": false
+    },
+    "f1_diff": 0.16666666666666652,
+    "local_f1_diff": -0.038277511961722493,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q7",
+    "answer_type": "Single Answer",
+    "on_topic": true,
+    "prefill_on_topic": false,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q8",
+    "answer_type": "Set Answer",
+    "on_topic": true,
+    "prefill_on_topic": true,
+    "reuse_on_topic": true,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.5,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.5454545454545454,
+      "precision": 0.375,
+      "recall": 1.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": -0.045454545454545414,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  },
+  {
+    "sample_id": "q9",
+    "answer_type": "Set Answer",
+    "on_topic": false,
+    "prefill_on_topic": false,
+    "reuse_on_topic": false,
+    "reuse_caused_offtopic": false,
+    "prefill": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "reuse": {
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "all_correct": false,
+      "valid": true,
+      "local_f1": 0.0,
+      "local_exact": false
+    },
+    "f1_diff": 0.0,
+    "local_f1_diff": 0.0,
+    "allcorrect_diff": 0
+  }
+]

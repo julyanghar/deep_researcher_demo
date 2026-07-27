@@ -1,0 +1,173 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom** (Criminality increase: +0.98, Resilience decrease: -0.86)\\n2. **Germany** (Criminality increase: +0.45, Resilience decrease: -0.43)\\n3. **Italy** (Criminality increase: +0.56, Resilience decrease: -0.41)\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. The research is complete.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255244731903076,
+      "14737": -0.005244782194495201
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"Based on the research summaries, the following OECD countries with at least 20% foreign-born populations experienced an increase in their criminality score by at least +0.2 points and a decrease in their resilience score by more than 0.3 points between 2021 and 2023 according to the Organised Crime Index: Germany, Italy, and South Korea. The data is sufficient to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.141077041625977,
+      "14737": -0.01607704907655716
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: **United Kingdom**, **Germany**, **Italy**, and **South Korea**. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264196872711182,
+      "14737": -0.014196710661053658
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006732940673828,
+      "14737": -0.006732991896569729
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.50408935546875,
+      "14737": -0.004089208785444498
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023. Based on the data, the following countries meet the criteria: United Kingdom, Germany, and Italy. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255264759063721,
+      "14737": -0.005264822859317064
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and analyzed their criminality and resilience scores from the Organized Crime Index for 2021 and 2023. Among these countries, **Germany** and **Italy** experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.25525426864624,
+      "14737": -0.005254150368273258
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries met the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255242347717285,
+      "14737": -0.005242291837930679
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753185272216797,
+      "14737": -0.0031853197142481804
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023. Based on the data, the following countries meet the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023 according to the Organised Crime Index.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.00248384475708,
+      "14737": -0.002483856864273548
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"Based on the research summaries, the following OECD countries with at least 20% foreign-born populations saw an increase in their criminality score by at least +0.2 points and a decrease in their resilience score by more than 0.3 points between 2021 and 2023: Germany, Italy, and South Korea. No further research is needed as the required data is now available.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006730556488037,
+      "14737": -0.006730742286890745
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience scores for 2021 and 2023. Based on the data, the following countries meet the criteria: United Kingdom, Germany, Italy, and South Korea. These countries experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.1270272731781006,
+      "14737": -0.12702727317810059
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom**: Criminality score increased by +0.98, resilience score decreased by -0.86.\\n2. **Germany**: Criminality score increased by +0.45, resilience score decreased by -0.43.\\n3. **Italy**: Criminality score increased by +0.56, resilience score decreased by -0.41.\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.25524377822876,
+      "14737": -0.005243714898824692
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations that experienced a resilience score decrease of more than 0.3 points between 2021 and 2023 according to the Organised Crime Index. These countries are the United Kingdom, Germany, Italy, and South Korea. The original question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504087448120117,
+      "14737": -0.004087546374648809
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom** (Criminality increase: +0.98, Resilience decrease: -0.86)\\n2. **Germany** (Criminality increase: +0.45, Resilience decrease: -0.43)\\n3. **Italy** (Criminality increase: +0.56, Resilience decrease: -0.41)\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255244255065918,
+      "14737": -0.005244426429271698
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom**: Criminality score increased by +0.98, resilience score decreased by -0.86.\\n2. **Germany**: Criminality score increased by +0.45, resilience score decreased by -0.43.\\n3. **Italy**: Criminality score increased by +0.56, resilience score decreased by -0.41.\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255242824554443,
+      "14737": -0.005242885090410709
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom** (Criminality increase: +0.98, Resilience decrease: -0.86)\\n2. **Germany** (Criminality increase: +0.45, Resilience decrease: -0.43)\\n3. **Italy** (Criminality increase: +0.56, Resilience decrease: -0.41)\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. The research is complete.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255242824554443,
+      "14737": -0.005242766346782446
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the relevant OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023 according to the Organised Crime Index. Among these countries, **Germany**, **Italy**, and **the United Kingdom** experienced a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758624076843262,
+      "14737": -0.008624094538390636
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the OECD countries with at least 20% foreign-born populations and their criminality and resilience score changes between 2021 and 2023. Based on the data, the following countries meet the criteria: \\n\\n1. **United Kingdom**: Criminality score increased by +0.98, resilience score decreased by -0.86.\\n2. **Germany**: Criminality score increased by +0.45, resilience score decreased by -0.43.\\n3. **Italy**: Criminality score increased by +0.56, resilience score decreased by -0.41.\\n\\nThese countries experienced both a criminality score increase of at least +0.2 and a resilience score decrease of more than 0.3 between 2021 and 2023.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006724834442139,
+      "14737": -0.006724940147250891
+    }
+  }
+}

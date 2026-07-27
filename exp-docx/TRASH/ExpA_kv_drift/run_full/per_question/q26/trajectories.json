@@ -1,0 +1,254 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes detailed vote shares and turnout percentages for each relevant constituency.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.7511749267578125,
+      "14737": -0.0011750705307349563
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes detailed vote shares and turnout percentages for each relevant constituency.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.2507219314575195,
+      "14737": -0.0007217901293188334
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The following candidates met the criteria: Kerry McCarthy (Labour) in Bristol East with 53.16%, Thangam Debbonaire (Labour) in Bristol West with 62.26%, and Karin Smyth (Labour) in Bristol South with 50.54%. No Sheffield constituencies met the 60% turnout threshold.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -8.000341415405273,
+      "14737": -0.0003418338019400835
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The following candidates met the criteria: \\n\\n- **Sheffield Central**: Labour candidate **Valerie Vaz** received 66.5% of the vote (turnout: 61.9%).\\n- **Sheffield Hallam**: Labour candidate **Olivia Blake** received 65.9% of the vote (turnout: 62.1%).\\n- **Sheffield Heeley**: Labour candidate **Karl Turner** received 78.7% of the vote (turnout: 63.6%).\\n- **Sheffield Brightside and Hillsborough**: Labour candidate **Gill Furniss** received 79.2% of the vote (turnout: 64.5%).\\n- **Sheffield South East**: Labour candidate **Paul Blomfield** received 62.8% of the vote (turnout: 61.3%).\\n- **Bristol West**: Labour candidate **Thangam Debbonaire** received 62.26% of the vote (turnout: 76.5%).\\n\\nNo other candidates in these areas met the criteria of receiving over 50% of the vote in constituencies with a turnout of at least 60%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.750441074371338,
+      "14737": -0.00044109628652222455
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in constituencies with a turnout of at least 60% in the 2019 UK general election. The data is complete and accurate based on the provided sources.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.251944065093994,
+      "14737": -0.001943843555636704
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes vote shares and turnout percentages for each relevant constituency, and no further research is required to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501514911651611,
+      "14737": -0.0015149556566029787
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in constituencies with a turnout of at least 60% in the 2019 UK general election. In Sheffield, Labour candidates in Sheffield Central (66.5%), Sheffield Hallam (65.9%), Sheffield Heeley (78.7%), Sheffield Brightside and Hillsborough (79.2%), and Sheffield South East (62.8%) all received vote shares above 50% in constituencies with a turnout of at least 60%. In Bristol, Labour candidate Thangam Debbonaire in Bristol West (76.1%) received a vote share above 50% in a constituency with a turnout of 62.3%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000922679901123,
+      "14737": -0.0009226117981597781
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. They identify the candidates who received a vote share of above 50% in constituencies with a turnout of at least 60%. In Sheffield, no specific data is provided for all constituencies, but in Bristol, candidates in constituencies with a turnout of at least 60% include Thangam Debbonaire (Bristol West) with 62.26% of the vote. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.500561237335205,
+      "14737": -0.0005611990345641971
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. In Sheffield, no candidate received a vote share above 50% in any constituency with a turnout of at least 60%. In Bristol, the following candidates received a vote share above 50% in constituencies with a turnout of at least 60%: Kerry McCarthy (Labour) in Bristol East with 53.16% and Thangam Debbonaire (Labour) in Bristol West with 62.26%. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519426345825195,
+      "14737": -0.0019425348145887256
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. In Sheffield, the following constituencies had a turnout of at least 60% and candidates who received a vote share above 50%: Sheffield Central (Valerie Vaz, Labour, 66.5%), Sheffield Hallam (Olivia Blake, Labour, 65.9%), Sheffield Heeley (Karl Turner, Labour, 78.7%), Sheffield Brightside and Hillsborough (Gill Furniss, Labour, 79.2%), and Sheffield South East (Paul Blomfield, Labour, 62.8%). In Bristol, the only constituency with a turnout of at least 60% was Bristol West (Thangam Debbonaire, Labour, 76.1%). The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.751179218292236,
+      "14737": -0.001178999780677259
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes detailed vote shares and turnout percentages for each relevant constituency.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.7511796951293945,
+      "14737": -0.0011794761521741748
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. In Sheffield, the following constituencies had a turnout of at least 60% and candidates who received a vote share of above 50%: Sheffield Central (Valerie Vaz, Labour, 66.5%), Sheffield Hallam (Olivia Blake, Labour, 65.9%), Sheffield Heeley (Karl Turner, Labour, 78.7%), Sheffield Brightside and Hillsborough (Dan Jarvis, Labour, 79.2%), and Sheffield South East (Paul Blomfield, Labour, 62.8%). In Bristol, the only constituency with a turnout of at least 60% was Bristol West (Thangam Debbonaire, Labour, 76.1%). The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.7511796951293945,
+      "14737": -0.0011794761521741748
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol constituencies with a turnout of at least 60%. The candidates who received a vote share of above 50% in these constituencies are: (1) Thangam Debbonaire (Labour) in Bristol West with 62.26% of the vote, and (2) Karin Smyth (Labour) in Bristol South with 50.54% of the vote. No candidates in Sheffield constituencies with a turnout of at least 60% received a vote share above 50%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.0024871826171875,
+      "14737": -0.0024871863424777985
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes detailed vote shares and turnout percentages for each relevant constituency.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.0024871826171875,
+      "14737": -0.0024871863424777985
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. They identify the candidates who received a vote share of above 50% in constituencies with a turnout of at least 60%. In Sheffield, Labour candidates in constituencies such as Sheffield Central, Sheffield Hallam, Sheffield Heeley, and Sheffield Brightside and Hillsborough received vote shares above 50% with turnouts of 61.9% to 64.5%. In Bristol, Labour candidates in Bristol West (62.3% turnout) and Bristol East (70.8% turnout) received vote shares above 50%. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000918865203857,
+      "14737": -0.000918681500479579
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data includes detailed vote shares and turnout percentages for each relevant constituency.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.0024871826171875,
+      "14737": -0.002486948622390628
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed vote shares and turnout data for Sheffield and Bristol constituencies in the 2019 UK general election. The following candidates received a vote share of above 50% in constituencies with a turnout of at least 60%:\\n\\n**Sheffield:**\\n- No candidate in any Sheffield constituency received a vote share above 50%.\\n\\n**Bristol:**\\n- **Bristol West**: Thangam Debbonaire (Labour) received 62.26% of the vote with a turnout of 76.5%.\\n- **Bristol East**: Kerry McCarthy (Labour) received 53.16% of the vote with a turnout of 70.8%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501511573791504,
+      "14737": -0.0015115038258954883
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The detailed vote shares and turnout percentages for each constituency have been provided, fulfilling the original research question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519354820251465,
+      "14737": -0.001935396110638976
+    }
+  },
+  "swap_seg19": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. They identify the candidates who received a vote share of above 50% in constituencies with a turnout of at least 60%. In Sheffield, Labour candidates in constituencies such as Sheffield Central, Sheffield Hallam, Sheffield Heeley, and Sheffield Brightside and Hillsborough received vote shares above 50% with turnouts of 61.9% to 64.5%. In Bristol, Labour candidates in Bristol West (62.3% turnout) and Bristol East (70.8% turnout) received vote shares above 50%. The data is complete and directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000917434692383,
+      "14737": -0.0009176096064038575
+    }
+  },
+  "swap_seg20": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed vote shares and turnout data for each Sheffield and Bristol constituency in the 2019 UK general election. The following candidates received a vote share of above 50% in constituencies with a turnout of at least 60%:\\n\\n**Sheffield:**\\n- **Sheffield Central**: Labour candidate **Valerie Vaz** received 66.5% of the vote (turnout: 61.9%).\\n- **Sheffield Hallam**: Labour candidate **Olivia Blake** received 65.9% of the vote (turnout: 62.1%).\\n- **Sheffield Heeley**: Labour candidate **Karl Turner** received 78.7% of the vote (turnout: 63.6%).\\n- **Sheffield Brightside and Hillsborough**: Labour candidate **Gloria De Piero** received 79.2% of the vote (turnout: 64.5%).\\n- **Sheffield South East**: Labour candidate **Dan Jarvis** received 62.8% of the vote (turnout: 61.3%).\\n\\n**Bristol:**\\n- **Bristol West**: Labour candidate **Thangam Debbonaire** received 62.26% of the vote (turnout: 76.5%).\\n\\nAll of these constituencies had a turnout of at least 60%, and the winning candidates received more than 50% of the vote. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.251939296722412,
+      "14737": -0.0019393223337829113
+    }
+  },
+  "swap_seg21": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol constituencies with a turnout of at least 60%. The candidates who received a vote share of above 50% in these constituencies are: (1) Thangam Debbonaire (Labour) in Bristol West with 62.26% of the vote, (2) Karin Smyth (Labour) in Bristol South with 50.54% of the vote, (3) Kerry McCarthy (Labour) in Bristol East with 53.16% of the vote, and (4) Darren Jones (Labour) in Bristol North West with 48.96% of the vote. In Sheffield, no candidate received a vote share above 50% in constituencies with a turnout of at least 60%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.251938343048096,
+      "14737": -0.0019384894985705614
+    }
+  },
+  "swap_seg22": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide the exact vote shares and voter turnout for each Sheffield and Bristol constituency in the 2019 UK general election. The candidates who received a vote share of above 50% in constituencies with a turnout of at least 60% are: \\n\\n- **Sheffield Central**: Paul Blomfield (Labour) with 66.5% of the vote (turnout: 61.9%).\\n- **Sheffield Hallam**: Olivia Blake (Labour) with 65.9% of the vote (turnout: 62.1%).\\n- **Sheffield Heeley**: Julie Dore (Labour) with 78.7% of the vote (turnout: 63.6%).\\n- **Sheffield Brightside and Hillsborough**: Alice Thompson (Labour) with 79.2% of the vote (turnout: 64.5%).\\n- **Sheffield South East**: Dan Jarvis (Labour) with 62.8% of the vote (turnout: 61.3%).\\n- **Bristol West**: Thangam Debbonaire (Labour) with 62.26% of the vote (turnout: 76.5%).\\n\\nAll of these constituencies had a turnout of at least 60%, and the winning candidates received more than 50% of the vote. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.751177787780762,
+      "14737": -0.001177928177639842
+    }
+  },
+  "swap_seg23": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol. They identify the candidates who received a vote share of above 50% in constituencies with a turnout of at least 60%. In Sheffield, this includes constituencies such as Sheffield Central, Sheffield Hallam, Sheffield Heeley, Sheffield Brightside and Hillsborough, and Sheffield South East. In Bristol, the only constituency with a turnout of at least 60% is Bristol West, where Labour candidate Thangam Debbonaire received 62.26% of the vote. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000917434692383,
+      "14737": -0.0009173714206553996
+    }
+  },
+  "swap_seg24": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol constituencies with a turnout of at least 60%. The candidates who received a vote share of above 50% in these constituencies are:\\n\\n**Sheffield:**\\n- **Sheffield Central**: Labour candidate **Valerie Vaz** received 66.5% of the vote (turnout: 61.9%).\\n- **Sheffield Hallam**: Labour candidate **Olivia Blake** received 65.9% of the vote (turnout: 62.1%).\\n- **Sheffield Heeley**: Labour candidate **Karma Punch** received 78.7% of the vote (turnout: 63.6%).\\n- **Sheffield Brightside and Hillsborough**: Labour candidate **Gloria De Piero** received 79.2% of the vote (turnout: 64.5%).\\n- **Sheffield South East**: Labour candidate **Dan Jarvis** received 62.8% of the vote (turnout: 61.3%).\\n\\n**Bristol:**\\n- **Bristol East**: Labour candidate **Kerry McCarthy** received 53.16% of the vote (turnout: 70.8%).\\n- **Bristol North West**: Labour candidate **Darren Jones** received 48.96% of the vote (turnout: 73.5%).\\n- **Bristol South**: Labour candidate **Karin Smyth** received 50.54% of the vote (turnout: 65.9%).\\n- **Bristol West**: Labour candidate **Thangam Debbonaire** received 62.26% of the vote (turnout: 76.5%).\\n\\nThe question has been fully addressed with the provided data.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.5015082359313965,
+      "14737": -0.001508409040980041
+    }
+  },
+  "swap_seg25": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed information on the 2019 UK general election in Sheffield and Bristol constituencies with a turnout of at least 60%. The candidates who received a vote share of above 50% in these constituencies are: Olivia Blake (Labour) in Sheffield Hallam, Paul Blomfield (Labour) in Sheffield Central, Karin Smyth (Labour) in Bristol South, and Thangam Debbonaire (Labour) in Bristol West. The data is complete and directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000916481018066,
+      "14737": -0.0009166568052023649
+    }
+  },
+  "swap_seg26": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide detailed vote shares and turnout data for Sheffield and Bristol constituencies in the 2019 UK general election. The following candidates received a vote share of above 50% in constituencies with a turnout of at least 60%: \\n\\n- **Bristol East**: Labour candidate Kerry McCarthy (53.16%) with a turnout of 70.8%.\\n- **Bristol West**: Labour candidate Thangam Debbonaire (62.26%) with a turnout of 76.5%.\\n\\nNo candidates in Sheffield constituencies achieved a vote share above 50% in the 2019 election. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.751179218292236,
+      "14737": -0.0011793570592999458
+    }
+  },
+  "swap_seg27": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the candidates in Sheffield and Bristol constituencies who received a vote share of above 50% in the 2019 UK general election, specifically in constituencies with a turnout of at least 60%. The data is complete and directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.500558853149414,
+      "14737": -0.0005590544897131622
+    }
+  },
+  "swap_seg28": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide the necessary information to answer the original question. In the 2019 UK general election, in Sheffield and Bristol constituencies with a turnout of at least 60%, the following candidates received a vote share of above 50%: (1) In Sheffield Central, Labour's Valerie Vaz received 66.5% of the vote with a 61.9% turnout. (2) In Sheffield Hallam, Labour's Olivia Blake received 65.9% of the vote with a 62.1% turnout. (3) In Sheffield Heeley, Labour's Kevan Jones received 78.7% of the vote with a 63.6% turnout. (4) In Sheffield Brightside and Hillsborough, Labour's Julie Dore received 79.2% of the vote with a 64.5% turnout. (5) In Sheffield South East, Labour's Alice Thompson received 62.8% of the vote with a 61.3% turnout. (6) In Bristol West, Labour's Thangam Debbonaire received 76.1% of the vote with a 62.3% turnout. No other candidates in these areas achieved a vote share above 50% in constituencies with a turnout of at least 60%.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.751178741455078,
+      "14737": -0.0011788808042183518
+    }
+  }
+}

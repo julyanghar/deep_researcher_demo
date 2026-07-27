@@ -1,0 +1,10 @@
+\section{Content Recycling in Deep Research}
+\label{sec:characterization}
+
+We instrument a production-shaped deep research pipeline and record, for every LLM call, its full input, its full output, and its decode timing; our trace spans 800 tasks and 15{,}296 generation calls. The pipeline moves information as text: a researcher's summary is written once, then handed to the supervisor and to the writer. Following that content through the trace, we find it is not consumed once but served many times, and the waste lands on both stages of inference---prefill and decode.
+
+\paragraph{Recycling on the prefill side.}
+The same content is read again and again. The supervisor re-reads the accumulated summaries each round to decide the next step, and the writer reads all of them to compose the report. Every such call prefills those summaries from scratch, recomputing a KV cache that the producing call had already computed. The writer's prompt is essentially the concatenation of all summaries---tens of thousands of tokens, almost none of them new---yet its KV is built anew on every request. This is repeated encoding of content the pipeline has already encoded.
+
+\paragraph{Recycling on the decode side.}
+The same content is generated again. Calls copy their input into their output rather than composing from scratch: across calls the copy rate ranges from 8\% to 91\% and is bimodal---some calls transcribe their input nearly verbatim, others rewrite and condense it. Every copied token is decoded anew, one target forward pass at a time, although it already exists in the input. The two sides are the same waste seen twice: content is generated once, then read and regenerated many times.

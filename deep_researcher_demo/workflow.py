@@ -1,6 +1,7 @@
 """Workflow loop for the simplified deep researcher."""
 
 import asyncio
+import os
 
 from deep_researcher_demo.agents import (
     SUPERVISOR_REASONING,
@@ -171,11 +172,16 @@ class DeepResearchWorkflow:
                 {"summary_count": len(summaries)},
             )
         )
-        final_report = await self.final_writer.write(
-            original_question=original_question,
-            summaries=summaries,
-            summary_sources=summary_sources,
-        )
+        if os.getenv("SKIP_FINAL_REPORT", "0") == "1":
+            # 只采 summary 轨迹时跳过最大单笔生成(万 token 级 report)。
+            # 写桩而非空串:harvest_gen 的断点续标记是"report.md 非空"。
+            final_report = f"[SKIP_FINAL_REPORT] summaries={len(summaries)}"
+        else:
+            final_report = await self.final_writer.write(
+                original_question=original_question,
+                summaries=summaries,
+                summary_sources=summary_sources,
+            )
         self.reporter.emit(
             ProgressEvent(
                 "completed",

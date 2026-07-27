@@ -1,0 +1,96 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data provided includes the total dairy imports in dollars for each year from 2016 to 2022, and the percentage increases have been calculated. The years with a double-digit percentage increase compared to the previous year are 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%). This directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.500554084777832,
+      "14737": -0.000554288737475872
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided data includes the total dairy imports in dollars for Canada from 2016 to 2022, and the percentage increases have already been calculated. The years with a double-digit percentage increase from the prior year are 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%). No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264189720153809,
+      "14737": -0.01418977603316307
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data from Agriculture and Agri-Food Canada shows the total dairy imports in dollars for Canada from 2016 to 2022. The percentage increases were calculated, and the years with double-digit increases were identified as 2019, 2021, and 2022. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.250715732574463,
+      "14737": -0.000715714821126312
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided data from Agriculture and Agri-Food Canada shows the total dairy imports in dollars for Canada from 2016 to 2022. The percentage increases were calculated, and the years with double-digit increases were identified as 2019, 2021, and 2022. No further research is needed as the question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.5015082359313965,
+      "14737": -0.001508170971646905
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data provided shows the total dairy imports in dollars to Canada from 2016 to 2022, and the percentage increases between years have been calculated. Based on this data, the years with a double-digit percentage increase in total dairy imports in dollars compared to the previous year are 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%). This directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264176845550537,
+      "14737": -0.014177083037793636
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data from Agriculture and Agri-Food Canada shows the total dairy imports in dollars for each year from 2016 to 2022. Calculating the percentage increases between consecutive years reveals that 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%) had double-digit percentage increases compared to the prior year. This directly answers the question without requiring further research.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758630752563477,
+      "14737": -0.008630949072539806
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data provided in the research summaries includes the total value of dairy imports to Canada from 2016 to 2022, and the percentage increases between years have already been calculated. The years with double-digit percentage increases are 2019, 2021, and 2022. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.750432968139648,
+      "14737": -0.0004328744253143668
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data from Agriculture and Agri-Food Canada shows the years with a double-digit percentage increase in total dairy imports in dollars to Canada from 2016 to 2022 are 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%). The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501504898071289,
+      "14737": -0.0015049570938572288
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data from the research summaries provides the total dairy imports in dollars for each year from 2016 to 2022, and the percentage increases between consecutive years have been calculated. Based on this, the years with a double-digit percentage increase in total dairy imports in dollars compared to the previous year are 2019 (12.1%), 2021 (13.0%), and 2022 (25.8%). No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732577323913574,
+      "14737": -0.023257676512002945
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What is the specific methodology used by Agriculture and Agri-Food Canada to calculate the percentage increase in total dairy imports in dollars year-over-year?\",\n    \"Where can the annual percentage increase in total dairy imports in dollars to Canada be found in official reports from Agriculture and Agri-Food Canada?\",\n    \"Are there additional reports or datasets from Agriculture and Agri-Food Canada that provide year-over-year percentage changes in total dairy imports in dollars for the years 2016 to 2022?\"\n  ],\n  \"reason\": \"The provided search results do not directly answer the question about which years had a double-digit percentage increase in total dairy imports in dollars to Canada, as per Agriculture and Agri-Food Canada. Further research is needed to locate the specific data or methodology from the source.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What is the specific methodology used by Agriculture and Agri-Food Canada to calculate the percentage increase in total dairy imports in dollars year-over-year?",
+      "Where can the annual percentage increase in total dairy imports in dollars to Canada be found in official reports from Agriculture and Agri-Food Canada?",
+      "Are there additional reports or datasets from Agriculture and Agri-Food Canada that provide year-over-year percentage changes in total dairy imports in dollars for the years 2016 to 2022?"
+    ],
+    "status_dist": {
+      "9534": -0.4741474986076355,
+      "14737": -0.9741474986076355
+    }
+  }
+}

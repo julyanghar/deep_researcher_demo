@@ -1,0 +1,245 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both years affected more than 20 states. 2017 was impacted by Hurricane Harvey, and 2021 had multiple flood events across the country. The data is consistent and sufficient to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.7511773109436035,
+      "14737": -0.001177332829684019
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research confirms that 2017 was the only year between 2017 and 2021 with over 100 total flood-related fatalities (107 confirmed) and impacts across multiple states, primarily Texas and Louisiana due to Hurricane Harvey. No other year in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.626344680786133,
+      "14737": -0.0013447299133986235
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, and 2021 saw 116 flood-related fatalities. Both years meet the criteria of over 100 total deaths and impacts across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.634811878204346,
+      "14737": -0.009811745956540108
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both years saw fatalities spread across more than 20 states. In 2017, Hurricane Harvey caused catastrophic flooding in Texas and Louisiana, with 107 confirmed flood-related fatalities. In 2021, multiple flood events across the U.S., including in Tennessee, the Northeast, and the Southwest, resulted in 116 total flood-related fatalities. No other years in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504117488861084,
+      "14737": -0.004117701668292284
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 was the only year between 2017 and 2021 with over 100 total flood-related fatalities (107 confirmed) and impacts across multiple states, primarily Texas and Louisiana due to Hurricane Harvey. No other year in the specified range met both criteria of over 100 total flood-related fatalities and impacts across over 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.634786605834961,
+      "14737": -0.009786837734282017
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2021 was the only year between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and these fatalities were spread across multiple states. No other year in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.00674295425415,
+      "14737": -0.006742938421666622
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and these fatalities were spread across multiple states. Specifically, 2017 saw 107 flood-related fatalities, primarily due to Hurricane Harvey, and 2021 had 116 flood-related fatalities. Both years meet the criteria of over 100 total deaths and fatalities in over 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.5015130043029785,
+      "14737": -0.001512932125478983
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were years with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed deaths across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total deaths and fatalities spread across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501513481140137,
+      "14737": -0.0015132891712710261
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 was the only year between 2017 and 2021 with over 100 total flood-related fatalities (107 confirmed) and impacts across multiple states, primarily Texas and Louisiana. No other year in the specified range met both criteria of over 100 total deaths and fatalities in over 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519354820251465,
+      "14737": -0.001935277134180069
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and these fatalities were spread across more than 20 states. In 2017, Hurricane Harvey caused 107 confirmed flood-related fatalities across Texas, Louisiana, and other states. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. No other years in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.751176357269287,
+      "14737": -0.001176380319520831
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both years saw fatalities spread across more than 20 states. In 2017, Hurricane Harvey caused 107 flood-related fatalities across Texas, Louisiana, and other states. In 2021, multiple flood events, including in Tennessee, the Northeast, and the Southwest, resulted in 116 total flood-related fatalities. No other years in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.002486705780029,
+      "14737": -0.00248659192584455
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, primarily Texas and Louisiana. In 2021, the U.S. experienced 116 flood-related fatalities, with significant events in Tennessee, the Northeast, and the Southwest. Both years met the criteria of over 100 total flood-related fatalities and impacts across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753196716308594,
+      "14737": -0.003196846228092909
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both years affected more than 20 states. 2017 was impacted by Hurricane Harvey, and 2021 saw multiple flood events across the U.S., including in the Northeast, Tennessee, and the Southwest. No other years in the specified range met the criteria.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504095554351807,
+      "14737": -0.0040955008007586
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both affected more than 20 states. In 2017, Hurricane Harvey caused 107 flood-related fatalities across Texas, Louisiana, and other states. In 2021, flood-related fatalities totaled 116, with events in Tennessee, the Northeast, and other regions. No other years in the specified range met the criteria of over 100 total flood-related fatalities across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.7531962394714355,
+      "14737": -0.0031963707879185677
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total deaths and fatalities spread across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.251938819885254,
+      "14737": -0.0019388464279472828
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 had flood-related fatalities in over 20 U.S. states with over 100 total deaths. In 2017, Hurricane Harvey caused 107 confirmed flood-related fatalities across multiple states, primarily in Texas and Louisiana. In 2021, the U.S. experienced 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria specified in the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.1410698890686035,
+      "14737": -0.016070010140538216
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both affected more than 20 states. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, and 2021 saw 116 flood-related fatalities across several states. The data from the National Weather Service and NOAA supports this conclusion.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519378662109375,
+      "14737": -0.0019376566633582115
+    }
+  },
+  "swap_seg19": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, and 2021 saw 116 flood-related fatalities across several states. These years meet the criteria of over 100 total deaths and fatalities spread across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.7511773109436035,
+      "14737": -0.001177213853225112
+    }
+  },
+  "swap_seg20": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 had flood-related fatalities in over 20 U.S. states, with over 100 total deaths. In 2017, Hurricane Harvey caused 107 confirmed flood-related fatalities across multiple states, primarily Texas and Louisiana. In 2021, the U.S. experienced 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753187656402588,
+      "14737": -0.0031878151930868626
+    }
+  },
+  "swap_seg21": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total flood-related fatalities and impacts across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.5015106201171875,
+      "14737": -0.001510432455688715
+    }
+  },
+  "swap_seg22": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total deaths and fatalities spread across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501511096954346,
+      "14737": -0.0015111466636881232
+    }
+  },
+  "swap_seg23": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S., and both years affected more than 20 states. Hurricane Harvey in 2017 caused 107 fatalities across Texas and Louisiana, and 2021 saw 116 flood-related deaths across multiple states. No other years in the range met the criteria.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504090309143066,
+      "14737": -0.004090277012437582
+    }
+  },
+  "swap_seg24": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 was the only year between 2017 and 2021 with over 100 total flood-related fatalities (107) and impacts across multiple states, primarily Texas and Louisiana due to Hurricane Harvey. No other year in the specified range met both criteria of over 100 total flood-related fatalities and impacts across over 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255248069763184,
+      "14737": -0.005248221103101969
+    }
+  },
+  "swap_seg25": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related deaths, and 2021 saw 116 flood-related fatalities. Both years had fatalities spread across multiple states, meeting the criteria of over 20 states affected.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.000916004180908,
+      "14737": -0.0009160612826235592
+    }
+  },
+  "swap_seg26": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 are the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed flood-related fatalities across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total flood-related fatalities and impacts across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.0486481189727783,
+      "14737": -0.04864807799458504
+    }
+  },
+  "swap_seg27": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities. In 2017, Hurricane Harvey caused 107 confirmed flood-related fatalities across multiple states, primarily Texas and Louisiana. In 2021, there were 116 flood-related fatalities across multiple states, including Tennessee, the Northeast, and the Southwest. These years meet the criteria of over 100 total flood-related fatalities and impacts across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255248069763184,
+      "14737": -0.005248221103101969
+    }
+  },
+  "swap_seg28": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that 2017 and 2021 were the only years between 2017 and 2021 with over 100 total flood-related fatalities in the U.S. Hurricane Harvey in 2017 caused 107 confirmed deaths across multiple states, and 2021 saw 116 flood-related fatalities across several states. These years meet the criteria of over 100 total deaths and fatalities spread across more than 20 states.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504091739654541,
+      "14737": -0.004091939423233271
+    }
+  }
+}

@@ -17,6 +17,15 @@ Message = dict[str, str]
 _CALL_LOG_PATH = os.getenv("LLM_CALL_LOG", "")
 _CALL_LOG_LOCK = threading.Lock()
 
+# Per-request proposer routing (MCPROUTE router experiment). When PROPOSER_ROUTING
+# is on, tag=="RESEARCH_SUMMARY_TEXT" calls carry vllm_xargs={"proposer": <SUMMARY_PROPOSER>}
+# and all other calls <DEFAULT_PROPOSER>; the router-patched vLLM reads
+# sampling_params.extra_args["proposer"] to pick suffix vs eagle per request.
+# Off by default -> payload unchanged (off-path safe, pure-suffix runs unaffected).
+_PROPOSER_ROUTING = os.getenv("PROPOSER_ROUTING", "").strip().lower() in {"1", "true", "yes"}
+_SUMMARY_PROPOSER = os.getenv("SUMMARY_PROPOSER", "eagle")
+_DEFAULT_PROPOSER = os.getenv("DEFAULT_PROPOSER", "suffix")
+
 # Drift-measurement harvest (Exp A). When DRIFT_HARVEST=<path> is set, the
 # relevant chat() calls append a record (prompt messages + decoded content +
 # generated token_ids) to that JSONL. The offline harness reconstructs, per
@@ -167,6 +176,14 @@ class OpenAICompatibleClient:
             # Harvest wants the generated token ids (even for calls not stored for
             # reuse) so the offline harness can verify byte-exactness.
             payload["return_token_ids"] = True
+
+        if _PROPOSER_ROUTING:
+            # summary 调用(RESEARCH_SUMMARY_TEXT)走 SUMMARY_PROPOSER(eagle 域训 head),
+            # 其余调用走 DEFAULT_PROPOSER(suffix)。router-patched vLLM 读取此字段按请求选 proposer。
+            _call_tag = tag or _infer_call_tag(messages)
+            payload.setdefault("vllm_xargs", {})["proposer"] = (
+                _SUMMARY_PROPOSER if _call_tag == "RESEARCH_SUMMARY_TEXT" else _DEFAULT_PROPOSER
+            )
 
         headers = {"Authorization": f"Bearer {self.api_key}"}
         start_wall = time.time()

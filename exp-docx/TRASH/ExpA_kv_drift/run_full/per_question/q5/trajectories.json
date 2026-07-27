@@ -1,0 +1,366 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.029755739495158195,
+      "14737": -3.5297558307647705
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.02975863218307495,
+      "14737": -3.5297586917877197
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.01104880403727293,
+      "14737": -4.511048793792725
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.061975009739398956,
+      "14737": -2.8119750022888184
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.3133205473423004,
+      "14737": -1.313320517539978
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.12693803012371063,
+      "14737": -2.1269381046295166
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.02975492924451828,
+      "14737": -3.529754877090454
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.0380486436188221,
+      "14737": -3.28804874420166
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.16024573147296906,
+      "14737": -1.9102457761764526
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.06197725236415863,
+      "14737": -2.8119771480560303
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the specific percentages or changes in the number of secondary school students between 2016, 2017, and 2018?\",\n    \"Are the annual reports for 2016 and 2017 available online, and do they include the total number of secondary school students?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, or 2018. To determine the year with the largest percent change decrease, the exact numbers for each year are required.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the specific percentages or changes in the number of secondary school students between 2016, 2017, and 2018?",
+      "Are the annual reports for 2016 and 2017 available online, and do they include the total number of secondary school students?"
+    ],
+    "status_dist": {
+      "9534": -0.029753657057881355,
+      "14737": -3.5297536849975586
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.12694106996059418,
+      "14737": -2.126940965652466
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.07889536768198013,
+      "14737": -2.578895330429077
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.07891519367694855,
+      "14737": -2.5789151191711426
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.008615703321993351,
+      "14737": -4.758615493774414
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.029754118993878365,
+      "14737": -3.529754161834717
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.6932022571563721,
+      "14737": -0.6932022571563721
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.2519609034061432,
+      "14737": -1.5019608736038208
+    }
+  },
+  "swap_seg19": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.04859323427081108,
+      "14737": -3.048593282699585
+    }
+  },
+  "swap_seg20": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.03804795444011688,
+      "14737": -3.288048028945923
+    }
+  },
+  "swap_seg21": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.10021661221981049,
+      "14737": -2.3502166271209717
+    }
+  },
+  "swap_seg22": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 TDSB Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 TDSB Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.0297559704631567,
+      "14737": -3.5297560691833496
+    }
+  },
+  "swap_seg23": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 TDSB Director's Annual Reports?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 TDSB Director's Annual Reports?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.10022610425949097,
+      "14737": -2.3502261638641357
+    }
+  },
+  "swap_seg24": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.04859800264239311,
+      "14737": -3.048598051071167
+    }
+  },
+  "swap_seg25": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.0380464643239975,
+      "14737": -3.288046360015869
+    }
+  },
+  "swap_seg26": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What was the total number of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the specific percentages or changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.04859595745801926,
+      "14737": -3.048595905303955
+    }
+  },
+  "swap_seg27": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.023249173536896706,
+      "14737": -3.7732491493225098
+    }
+  },
+  "swap_seg28": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?\",\n    \"What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?\",\n    \"Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?\"\n  ],\n  \"reason\": \"The search results do not provide the total number of secondary school students for 2016, 2017, and 2018, which is necessary to calculate the percent change and determine the year with the largest decrease.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the total numbers of secondary school students in the 2016, 2017, and 2018 Director's Annual Reports published by the TDSB?",
+      "What were the percent changes in the number of secondary school students between 2016 and 2017, and between 2017 and 2018?",
+      "Which year (2016 to 2017 or 2017 to 2018) had the largest percent change decrease in secondary school student numbers?"
+    ],
+    "status_dist": {
+      "9534": -0.01416580006480217,
+      "14737": -4.264165878295898
+    }
+  }
+}

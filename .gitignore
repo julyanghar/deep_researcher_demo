@@ -11,3 +11,13 @@ build/
 outputs/
 eval/results/
 eval/TRASH/
+
+# 大型产物/数据(2026-07-27):训练产物、实验原始输出、可重下载的基准数据
+train/
+phase2-12k-3ep/
+eval/benchmarks/results/
+eval/DeepResearchGym/key_point/
+eval/DeepResearchGym/queries/
+eval/DeepResearchBench/data/
+# 论文是独立仓库(julyanghar/AAAI2027-Efficient-DRAgent),各自提交,不做嵌套 gitlink
+exp-docx/paper-submission/AAAI2027-Efficient-DRAgent/

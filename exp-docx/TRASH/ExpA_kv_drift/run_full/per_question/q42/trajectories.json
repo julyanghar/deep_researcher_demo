@@ -1,0 +1,92 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has provided a clear and detailed answer to the original question, identifying the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) in terms of non-fossil fuel energy generation and specifying the types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is needed to address the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -10.250036239624023,
+      "14737": -3.6000557884108275e-05
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) with the highest percentage of non-fossil fuel energy generation and the specific types of non-fossil fuel energy they use (e.g., solar, wind, nuclear, and green hydrogen). The information is comprehensive and directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -9.00012493133545,
+      "14737": -0.00012468514614738524
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has provided a clear and comprehensive answer to the original question, identifying the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) in terms of non-fossil fuel energy generation and specifying the types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -10.250036239624023,
+      "14737": -3.6000557884108275e-05
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) with the highest percentage of non-fossil fuel energy generation and the specific types of non-fossil fuel energy they use (e.g., solar, wind, nuclear, and green hydrogen). The information is comprehensive and directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -9.750059127807617,
+      "14737": -5.900685573578812e-05
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) with the highest percentage of non-fossil fuel energy generation, along with the specific types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). The data is consistent across multiple sources and provides a clear, detailed answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.75043249130249,
+      "14737": -0.0004326361231505871
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries provide a clear answer to the original question, identifying the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) in terms of non-fossil fuel energy generation and the specific types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is needed to address the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511075019836426,
+      "14737": -0.011075212620198727
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has provided a clear and detailed answer to the original question, identifying the top three Middle Eastern oil-producing countries in non-fossil fuel energy generation (UAE, Saudi Arabia, and Qatar) and the specific types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is required to address the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.500555515289307,
+      "14737": -0.0005555993411689997
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has provided a clear and comprehensive answer to the original question, identifying the top three Middle Eastern oil-producing countries in non-fossil fuel energy generation (UAE, Saudi Arabia, and Qatar) and the specific types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.7531890869140625,
+      "14737": -0.003189241047948599
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has provided a clear and comprehensive answer to the original question, identifying the top three Middle Eastern oil-producing countries in non-fossil fuel energy generation (UAE, Saudi Arabia, and Qatar) and the specific types of non-fossil fuel energy they use (solar, wind, nuclear, and green hydrogen). No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -8.500205993652344,
+      "14737": -0.00020585325546562672
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the top three Middle Eastern oil-producing countries (UAE, Saudi Arabia, and Qatar) with the highest percentage of non-fossil fuel energy generation and the specific types of non-fossil fuel energy they use. The original question has been fully addressed with detailed and specific data.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519330978393555,
+      "14737": -0.001933254417963326
+    }
+  }
+}

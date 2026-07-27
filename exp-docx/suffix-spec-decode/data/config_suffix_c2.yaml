@@ -1,0 +1,14 @@
+model: /data/yilin/huggingface/Qwen3-32B
+served-model-name: Qwen3-32B
+host: 0.0.0.0
+port: 30000
+tensor-parallel-size: 4
+gpu-memory-utilization: 0.85
+# Qwen3-32B 标称 40960 上下文(原生模式,无 blend 限制;如需更长再开 rope scaling)
+max-model-len: 40960
+enable-log-requests: true
+disable-custom-all-reduce: true
+# dense thinking 模式输出 <think> 会破坏下游 JSON 解析,关掉
+default-chat-template-kwargs: '{"enable_thinking": false}'
+# 原生模式:vLLM 自带 prefix caching 默认开,不设 kv-transfer-config
+speculative-config: '{"method": "suffix", "suffix_decoding_min_token_prob": 0.3}'

@@ -9,7 +9,9 @@ from deep_researcher_demo.llm import ChatClient, Message
 from deep_researcher_demo.progress import NullProgressReporter, ProgressEvent, ProgressReporter, format_list
 from deep_researcher_demo.schemas import (
     InitialResearchQuestions,
+    Outline,
     QueryPlan,
+    ReportReview,
     SearchResult,
     SupervisorDecision,
 )
@@ -37,6 +39,12 @@ SUMMARY_DETAILED = os.getenv("SUMMARY_DETAILED", "").strip().lower() in {"1", "t
 # supervisor into a recurrent reasoning trace (reuse error can compound across
 # rounds). Default off -> behavior identical to the summaries-only baseline.
 SUPERVISOR_REASONING = os.getenv("SUPERVISOR_REASONING", "").strip().lower() in {"1", "true", "yes"}
+
+
+def _env_flag(name: str) -> bool:
+    """Read a boolean env flag at call time (so a runner setting it in-process
+    takes effect), matching the SUMMARY_DETAILED / SUPERVISOR_REASONING style."""
+    return os.getenv(name, "").strip().lower() in {"1", "true", "yes"}
 
 
 def join_reusable_segments(parts: list[str], separator: str) -> str:
@@ -134,6 +142,159 @@ class Agent:
                 raise JSONParseError(
                     f"Could not parse model output as {schema.__name__}: {first_error}; repair failed: {second_error}"
                 ) from second_error
+
+
+async def outline_and_sections(
+    agent: "Agent",
+    *,
+    question: str,
+    source_pool: list[str],
+    sources_tag: str,
+    outline_system: str,
+    section_system: str,
+    outline_tag: str,
+    section_tag: str,
+    section_max_tokens: int,
+    max_sections: int = 8,
+) -> list[tuple[str, str]]:
+    """Steps 1-2 of outline_then_parallel: plan the outline, generate every
+    section in parallel, and return [(title, raw_body), ...]. The outline-failed
+    fallback (single generation over all sources) is returned as [("", body)] —
+    an empty title is the unambiguous fallback marker since outline titles are
+    filtered to be non-empty.
+    """
+    def _numbered(items: list[str]) -> str:
+        return "\n\n".join(f"[{i}] {s}" for i, s in enumerate(items, 1))
+
+    async def _section(title: str, source_ids: list[int], all_titles: list[str]) -> str:
+        chosen = [source_pool[i - 1] for i in source_ids if 1 <= i <= len(source_pool)]
+        if not chosen:  # empty / out-of-range ids -> give the section everything
+            chosen = source_pool
+        if title:
+            # Sibling-aware focus: show the full outline + name this section, and
+            # append the "only this section, no preamble/overlap" directive so the
+            # section stays in its lane (fights the section-split output bloat).
+            sys_content = section_system + _SECTION_FOCUS
+            outline_list = "\n".join(f"- {t}" for t in all_titles)
+            focus = (
+                f"\n\n<outline>\n{outline_list}\n</outline>\n\n"
+                f"<section_to_write>\n{title}\n</section_to_write>"
+            )
+        else:  # fallback single generation over everything: no outline/focus
+            sys_content = section_system
+            focus = ""
+        messages = [
+            {"role": "system", "content": sys_content},
+            {"role": "user", "content": (
+                f"<question>\n{question}\n</question>{focus}\n\n"
+                f"<{sources_tag}>\n{_numbered(chosen)}\n</{sources_tag}>"
+            )},
+        ]
+        return await agent.llm.chat(
+            messages, model=agent.model, temperature=0.0,
+            max_tokens=section_max_tokens, tag=section_tag,
+        )
+
+    # 1) Outline (one serial call).
+    outline_messages = [
+        {"role": "system", "content": outline_system},
+        {"role": "user", "content": (
+            f"<question>\n{question}\n</question>\n\n"
+            f"<{sources_tag}>\n{_numbered(source_pool)}\n</{sources_tag}>"
+        )},
+    ]
+    try:
+        outline, _ = await agent.call_json(
+            outline_messages, Outline, max_tokens=QUERY_PLAN_MAX_TOKENS, tag=outline_tag,
+        )
+        sections = [s for s in outline.sections if (s.title or "").strip()][:max_sections]
+    except Exception:  # noqa: BLE001 - fall back to single generation
+        sections = []
+
+    # 2) Fallback: no usable outline -> single generation over all sources.
+    if not sections:
+        body = await _section("", [], [])
+        return [("", body)]
+
+    # 3) Sections in parallel.
+    all_titles = [s.title for s in sections]
+    bodies = await asyncio.gather(
+        *(_section(s.title, s.source_ids, all_titles) for s in sections)
+    )
+    return list(zip(all_titles, bodies))
+
+
+async def outline_then_parallel(
+    agent: "Agent",
+    *,
+    question: str,
+    source_pool: list[str],
+    sources_tag: str,
+    outline_system: str,
+    section_system: str,
+    outline_tag: str,
+    section_tag: str,
+    section_max_tokens: int,
+    heading_prefix: str = "## ",
+    max_sections: int = 8,
+) -> str:
+    """Generate text by (1) planning an outline (sections + the 1-based ids of
+    the sources each uses), (2) generating every section in PARALLEL from ONLY
+    its assigned sources, then (3) concatenating them under their titles.
+
+    `source_pool[i-1]` is the already-formatted text of source i. Shared by
+    SUMMARY_PARALLEL (sources = search results) and REPORT_PARALLEL (sources =
+    findings). Falls back to a single generation over all sources when the
+    outline is empty/unparseable, so it never crashes or returns empty.
+    """
+    sections = await outline_and_sections(
+        agent,
+        question=question,
+        source_pool=source_pool,
+        sources_tag=sources_tag,
+        outline_system=outline_system,
+        section_system=section_system,
+        outline_tag=outline_tag,
+        section_tag=section_tag,
+        section_max_tokens=section_max_tokens,
+        max_sections=max_sections,
+    )
+    if len(sections) == 1 and not sections[0][0]:  # outline-failed fallback
+        return sections[0][1].strip() or "No relevant information was found."
+    parts: list[str] = []
+    for title, body in sections:
+        body = (body or "").strip()
+        if not body:
+            continue
+        parts.append(f"{heading_prefix}{title}\n\n{body}" if heading_prefix else body)
+    return "\n\n".join(parts) or "No relevant information was found."
+
+
+# Outline planner system prompt for SUMMARY_PARALLEL (report has its own on
+# FinalWriter). Kept module-level so summarize_results can pass it directly.
+_SUMMARY_OUTLINE_SYSTEM = (
+    "Plan a short outline for compressing the search results into a digest for the sub-query. "
+    "Split the answer into 2-5 short, non-overlapping sections. For each section give a concise "
+    "title and the ids of the search results it should use (from the <search_results> block). "
+    'Return only JSON with this shape: {"sections": [{"title": "...", "source_ids": [1, 2]}]}'
+)
+
+# Appended (by outline_then_parallel) to every section's system prompt: keeps each
+# parallel section in its own lane so the split output does not balloon (measured
+# ~1.59x summary output bloat came from sections repeating context / overlapping).
+_SECTION_FOCUS = (
+    " You are writing ONLY the section named in <section_to_write>, which is one of the sections "
+    "listed in <outline>. Cover ONLY this section's topic; do NOT repeat content that belongs to "
+    "the other sections, do NOT restate the question, and write no separate intro/preamble or "
+    "conclusion. Be concise and non-repetitive."
+)
+
+# Section-generation system prompt for SUMMARY_PARALLEL (terser than the single-call
+# `summary_instruction`, which tells the model to answer the whole sub-query).
+_SUMMARY_SECTION_SYSTEM = (
+    "Extract ONLY the facts for this section's aspect from the provided search results. "
+    "Be terse and factual: no preamble, no restating the question. Write plain text only."
+)
 
 
 class Supervisor(Agent):
@@ -359,6 +520,28 @@ class Researcher:
                 "at most 2-3 short quotes per source, and keep the whole digest no "
                 "longer than a normal concise digest (do not exceed about 600 words)."
             )
+        # SUMMARY_PARALLEL: DEPRECATED (2026-07-20 用户拍板:分节只用于 report,
+        # summary 不再分节;保留代码但任何实验不得设此 env)。原语义:outline ->
+        # assign sources -> parallel sections. Lossy, gated off by default and
+        # disabled in KV-reuse mode (parallel split breaks the stored-segment hash).
+        if _env_flag("SUMMARY_PARALLEL") and not self.kv_reuse_separator and results:
+            source_pool = [
+                f"Query: {r.query}\nTitle: {r.title}\nURL: {r.url}\n"
+                f"Snippet: {r.raw_content or r.snippet}"
+                for r in results
+            ]
+            return await outline_then_parallel(
+                self.summarizer,
+                question=question,
+                source_pool=source_pool,
+                sources_tag="search_results",
+                outline_system=_SUMMARY_OUTLINE_SYSTEM,
+                section_system=_SUMMARY_SECTION_SYSTEM,
+                outline_tag="RESEARCH_SUMMARY_OUTLINE_JSON",
+                section_tag="RESEARCH_SUMMARY_TEXT",
+                section_max_tokens=RESEARCH_SUMMARY_MAX_TOKENS,
+                heading_prefix="### ",
+            )
         messages = [
             {
                 "role": "system",
@@ -538,6 +721,48 @@ class FinalWriter(Agent):
         "Use the same language as the user's original question."
     )
 
+    # REPORT_PARALLEL prompts: one to plan the outline, one to write a single
+    # section body (no heading / no references; those are added by the stitcher).
+    _OUTLINE_SYSTEM = (
+        "Plan an outline for a research report that answers the question using ONLY the findings. "
+        "Split it into clear, non-overlapping sections. For each section give a title and the ids "
+        "of the findings it should draw from (from the <findings> block). "
+        'Return only JSON with this shape: {"sections": [{"title": "...", "source_ids": [1, 3]}]}'
+    )
+    _SECTION_SYSTEM = (
+        "You are writing ONE section of a research report. Using ONLY the provided findings, write "
+        "the body of the section named in <section_to_write> in Markdown. Be informative and "
+        "analytical but concise — no filler, no repetition. "
+        "Do NOT repeat the section title as a heading and do NOT add a references list. Cite sources "
+        "inline: right after each factual claim put the supporting URL(s) from the findings' "
+        "`sources:` lines in square brackets, e.g. [https://example.com]. Do not invent URLs. "
+        "Use the same language as the question."
+    )
+
+    # REPORT_REVIEW prompts: one reviewer pass over the full drafted sections
+    # (decides the final order and which sections are missing), one to write the
+    # body of a single added section. The reviewer output IS the final outline —
+    # there is no second outline call.
+    _REVIEW_SYSTEM = (
+        "You are reviewing a sectioned draft of a research report. You get the question and the "
+        "draft's numbered sections. Produce the COMPLETE final outline: reorder the existing "
+        "sections into a logical flow, and insert new sections (e.g. an introduction, a conclusion, "
+        "or an important uncovered aspect) only where they genuinely improve the report. "
+        'Return only JSON: {"sections": [{"id": 2}, {"id": 0, "title": "..."}, ...]} listing every '
+        "slot of the final report in order — {\"id\": n} places existing section n, "
+        "{\"id\": 0, \"title\": \"...\"} inserts a new section there. Include EVERY existing "
+        "section exactly once; add at most 3 new sections. Use the same language as the question "
+        "for new titles."
+    )
+    _ADDITION_SYSTEM = (
+        "You are writing ONE additional section for a research report. Using the question and the "
+        "existing sections provided, write the body of the section named in <section_to_write> in "
+        "Markdown. It must ADD what the existing sections lack (introduce, conclude, or cover the "
+        "named gap); do NOT repeat their content. Do NOT repeat the section title as a heading and "
+        "do NOT add a references list. Cite sources inline only with URLs that already appear in "
+        "the existing sections. Use the same language as the question."
+    )
+
     def _write_user(self, original_question: str, findings: str) -> str:
         if self.kv_reuse_separator:
             # See Supervisor._decide_user: constant prefix before the first
@@ -575,6 +800,11 @@ class FinalWriter(Agent):
 
     async def write(self, *, original_question: str, summaries: list[str],
                     summary_sources: list[list[str]] | None = None) -> str:
+        # REPORT_PARALLEL: outline -> assign source summaries -> parallel sections.
+        # Lossy (output changes); off by default; disabled in KV-reuse mode. Takes
+        # precedence over REPORT_MODE (produces its own sectioned + cited markdown).
+        if _env_flag("REPORT_PARALLEL") and not self.kv_reuse_separator:
+            return await self._write_parallel(original_question, summaries, summary_sources)
         # 实时读 env(而非 import 期常量),runner 进程内设置也能生效
         if os.getenv("REPORT_MODE", REPORT_MODE) == "detailed_cited":
             return await self._write_detailed_cited(original_question, summaries, summary_sources)
@@ -625,6 +855,137 @@ class FinalWriter(Agent):
             max_tokens=FINAL_REPORT_MAX_TOKENS,
             tag="FINAL_REPORT_MARKDOWN",
         )
+
+    async def _write_parallel(
+        self, original_question: str, summaries: list[str],
+        summary_sources: list[list[str]] | None,
+    ) -> str:
+        """REPORT_PARALLEL: outline the report, write sections in parallel from
+        their assigned findings, then append a deterministic References list."""
+        srcs = summary_sources or [[] for _ in summaries]
+        source_pool: list[str] = []
+        for summ, urls in zip(summaries, srcs):
+            uniq = list(dict.fromkeys(u for u in (urls or []) if u))
+            src_line = "sources: " + (", ".join(uniq) if uniq else "(none)")
+            source_pool.append(f"{src_line}\n{summ}")
+        if not source_pool:
+            source_pool = [""]
+        section_max_tokens = max(1000, FINAL_REPORT_MAX_TOKENS // 2)
+        # REPORT_REVIEW 默认开(2026-07-20 终审拍板);显式 REPORT_REVIEW=0 才关。
+        if os.getenv("REPORT_REVIEW", "1").strip().lower() in {"1", "true", "yes"}:
+            body = await self._write_reviewed(original_question, source_pool, section_max_tokens)
+        else:
+            body = await outline_then_parallel(
+                self,
+                question=original_question,
+                source_pool=source_pool,
+                sources_tag="findings",
+                outline_system=self._OUTLINE_SYSTEM,
+                section_system=self._SECTION_SYSTEM,
+                outline_tag="FINAL_REPORT_OUTLINE_JSON",
+                section_tag="FINAL_REPORT_MARKDOWN",
+                section_max_tokens=section_max_tokens,
+                heading_prefix="## ",
+            )
+        all_urls = list(dict.fromkeys(u for urls in srcs for u in (urls or []) if u))
+        if all_urls:
+            refs = "\n".join(f"- {u}" for u in all_urls)
+            body = f"{body}\n\n## References\n\n{refs}"
+        return body
+
+    async def _write_reviewed(
+        self, original_question: str, source_pool: list[str], section_max_tokens: int,
+    ) -> str:
+        """REPORT_REVIEW: outline -> sections -> one reviewer pass over the full
+        section texts (final order + missing sections) -> added sections in
+        parallel -> deterministic assembly. Every degradation path (reviewer
+        JSON fails, bad ids, an addition call fails) falls back toward the
+        plain outline_then_parallel result — existing content is never lost."""
+        raw = await outline_and_sections(
+            self,
+            question=original_question,
+            source_pool=source_pool,
+            sources_tag="findings",
+            outline_system=self._OUTLINE_SYSTEM,
+            section_system=self._SECTION_SYSTEM,
+            outline_tag="FINAL_REPORT_OUTLINE_JSON",
+            section_tag="FINAL_REPORT_MARKDOWN",
+            section_max_tokens=section_max_tokens,
+        )
+        if len(raw) == 1 and not raw[0][0]:  # outline-failed fallback: nothing to review
+            return raw[0][1].strip() or "No relevant information was found."
+        secs = [(t, (b or "").strip()) for t, b in raw]
+        secs = [(t, b) for t, b in secs if b]
+        if len(secs) < 2:  # a single section: no order to fix, skip the review pass
+            return "\n\n".join(f"## {t}\n\n{b}" for t, b in secs) or "No relevant information was found."
+
+        numbered = "\n\n".join(f"[{i}] ## {t}\n\n{b}" for i, (t, b) in enumerate(secs, 1))
+        review_messages = [
+            {"role": "system", "content": self._REVIEW_SYSTEM},
+            {"role": "user", "content": (
+                f"<question>\n{original_question}\n</question>\n\n"
+                f"<sections>\n{numbered}\n</sections>"
+            )},
+        ]
+        try:
+            review, _ = await self.call_json(
+                review_messages, ReportReview, tag="FINAL_REPORT_REVIEW_JSON",
+            )
+            items = review.sections
+        except Exception:  # noqa: BLE001 - reviewer is an enhancement, never fatal
+            items = []
+
+        # Sanitize into final slots: dedupe ids, drop out-of-range, cap and
+        # title-dedupe additions; existing sections the reviewer forgot are
+        # appended at the end in their original relative order (zero loss).
+        slots: list[tuple[str, object]] = []  # ("old", 1-based idx) | ("new", title)
+        seen: set[int] = set()
+        used_titles = {t.strip().lower() for t, _ in secs}
+        new_count = 0
+        for item in items:
+            if item.id and 1 <= item.id <= len(secs) and item.id not in seen:
+                seen.add(item.id)
+                slots.append(("old", item.id))
+            elif not item.id:
+                title = (item.title or "").strip()
+                if title and title.lower() not in used_titles and new_count < 3:
+                    used_titles.add(title.lower())
+                    slots.append(("new", title))
+                    new_count += 1
+        for i in range(1, len(secs) + 1):
+            if i not in seen:
+                slots.append(("old", i))
+
+        async def _addition(title: str) -> str:
+            messages = [
+                {"role": "system", "content": self._ADDITION_SYSTEM},
+                {"role": "user", "content": (
+                    f"<question>\n{original_question}\n</question>\n\n"
+                    f"<report_sections>\n{numbered}\n</report_sections>\n\n"
+                    f"<section_to_write>\n{title}\n</section_to_write>"
+                )},
+            ]
+            try:
+                return await self.llm.chat(
+                    messages, model=self.model, temperature=0.0,
+                    max_tokens=section_max_tokens, tag="FINAL_REPORT_ADDITION_MARKDOWN",
+                )
+            except Exception:  # noqa: BLE001 - a failed addition is skipped, never fatal
+                return ""
+
+        new_titles = [t for kind, t in slots if kind == "new"]
+        added_bodies = await asyncio.gather(*(_addition(t) for t in new_titles))
+        parts: list[str] = []
+        add_i = 0
+        for kind, val in slots:
+            if kind == "old":
+                title, body = secs[val - 1]
+            else:
+                title, body = val, (added_bodies[add_i] or "").strip()
+                add_i += 1
+            if body:
+                parts.append(f"## {title}\n\n{body}")
+        return "\n\n".join(parts) or "No relevant information was found."
 
 
 def format_search_results(results: list[SearchResult]) -> str:

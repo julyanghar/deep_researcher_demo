@@ -1,0 +1,249 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.023437021300196648,
+      "14737": -3.773437023162842
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.07914243638515472,
+      "14737": -2.5791423320770264
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.062100715935230255,
+      "14737": -2.812100648880005
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.5769727230072021,
+      "14737": -0.8269727230072021
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.008625867776572704,
+      "14737": -4.7586259841918945
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.1270517259836197,
+      "14737": -2.127051830291748
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.16052426397800446,
+      "14737": -1.9105242490768433
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.062183842062950134,
+      "14737": -2.8121838569641113
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.4743915796279907,
+      "14737": -0.9743915796279907
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.4742807149887085,
+      "14737": -0.9742807149887085
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.07908086478710175,
+      "14737": -2.579080820083618
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.038151808083057404,
+      "14737": -3.288151741027832
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.0793277844786644,
+      "14737": -2.5793278217315674
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.023411985486745834,
+      "14737": -3.773411989212036
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.04874232038855553,
+      "14737": -3.0487422943115234
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.10040143877267838,
+      "14737": -2.3504014015197754
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.06212065741419792,
+      "14737": -2.8121206760406494
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.03821158781647682,
+      "14737": -3.2882115840911865
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?\",\n    \"What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?\",\n    \"Which of these countries experienced the greatest increase in life expectancy during this period?\"\n  ],\n  \"reason\": \"The current research summaries do not provide a list of countries that the WHO identified in 2017 as having 100% of their hospitals following national dementia standards. Therefore, it is not possible to determine which of these countries had the greatest increase in life expectancy between 1950 and 2023.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which countries did the WHO list in 2017 as having 100% of their hospitals following national dementia standards?",
+      "What is the life expectancy trend for each of these countries between 1950 and 2023 according to OurWorldInData.org?",
+      "Which of these countries experienced the greatest increase in life expectancy during this period?"
+    ],
+    "status_dist": {
+      "9534": -0.10042224824428558,
+      "14737": -2.3504221439361572
+    }
+  }
+}

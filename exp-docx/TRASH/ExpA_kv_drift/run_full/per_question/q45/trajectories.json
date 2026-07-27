@@ -1,0 +1,92 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified all FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained approval since the 1900s and contain a carbonyl group. These include Zidovudine (AZT), Didanosine (ddI), Zalcitabine (ddC), Stavudine (d4T), Lamivudine (3TC), Abacavir (ABC), Emtricitabine (FTC), Tenofovir disoproxil fumarate (TDF), and Adefovir (ADV). The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -7.250711441040039,
+      "14737": -0.0007115454645827413
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The question has been fully addressed. The nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained FDA approval since the 1900s and contain a carbonyl group are: Zidovudine, Lamivudine, Abacavir, Emtricitabine, Tenofovir disoproxil fumarate, and Tenofovir alafenamide. These drugs are well-documented in the provided research summaries and meet the criteria specified in the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.9299440383911133,
+      "14737": -0.054944027215242386
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The original question has been fully addressed by listing all nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained FDA approval since the 1900s and contain a carbonyl group. No further research is required.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264181137084961,
+      "14737": -0.014180961064994335
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The original question has been fully addressed. The list of nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained FDA approval since the 1900s and contain a carbonyl group has been provided with their generic names.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018167495727539,
+      "14737": -0.01816752180457115
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The question has been fully addressed. The FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained their approval since the 1900s and contain a carbonyl group are: Zidovudine, Lamivudine, Abacavir, Emtricitabine, Tenofovir disoproxil fumarate, and Tenofovir alafenamide.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519330978393555,
+      "14737": -0.001933254417963326
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified all FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained approval since the 1900s and contain a carbonyl group. These include Zidovudine, Lamivudine, Abacavir, Emtricitabine, Tenofovir disoproxil fumarate, and Tenofovir alafenamide. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501506805419922,
+      "14737": -0.0015068616485223174
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified all FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained approval since the 1900s and contain a carbonyl group. These include Zidovudine (AZT), Lamivudine (3TC), Abacavir (ABC), Emtricitabine (FTC), Tenofovir disoproxil fumarate (TDF), and Adefovir (ADV). No further research is needed to answer the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255242347717285,
+      "14737": -0.005242173559963703
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified all FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) that have maintained approval since the 1900s and contain a carbonyl group. These include Zidovudine, Didanosine, Zalcitabine, Stavudine, Lamivudine, Abacavir, Emtricitabine, Tenofovir disoproxil fumarate, and Adefovir. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -8.250262260437012,
+      "14737": -0.00026246439665555954
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that the following FDA-approved nucleoside reverse transcriptase inhibitors (NRTIs) have maintained their approval since the 1980s to 1990s and contain a carbonyl group in their chemical structures: Zidovudine (AZT), Lamivudine (3TC), Abacavir (ABC), Emtricitabine (FTC), Tenofovir disoproxil fumarate (TDF), and Tenofovir alafenamide (TAF). These drugs are all generic names and meet the criteria specified in the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018165111541748,
+      "14737": -0.01816529594361782
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries confirm that the following NRTIs have maintained FDA approval since the 1900s and contain a carbonyl group in their chemical structures: Zidovudine (AZT), Didanosine (ddI), Zalcitabine (ddC), Stavudine (d4T), Lamivudine (3TC), Abacavir (ABC), Emtricitabine (FTC), Tenofovir disoproxil fumarate (TDF), and Adefovir (ADV). These are all provided in generic form as requested.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753180980682373,
+      "14737": -0.0031808041967451572
+    }
+  }
+}

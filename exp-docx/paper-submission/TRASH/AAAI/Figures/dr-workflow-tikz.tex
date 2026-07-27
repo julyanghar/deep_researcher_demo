@@ -1,0 +1,38 @@
+% Native TikZ version of the DR-agent workflow figure.
+% Requires in main.tex preamble:
+%   \usepackage{tikz}
+%   \usetikzlibrary{arrows.meta,positioning}
+% Then in the body:  \input{Figures/dr-workflow-tikz}
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  box/.style={rounded corners=2pt, draw, semithick, align=center,
+              inner xsep=5pt, inner ysep=4pt, minimum height=10mm, text width=22mm},
+  io/.style={rounded corners=2pt, draw, semithick, fill=black!6, align=center,
+             inner sep=4pt, minimum height=8mm},
+  sup/.style={box, fill=blue!10, draw=blue!55},
+  res/.style={box, fill=green!12, draw=green!50!black},
+  wri/.style={box, fill=orange!14, draw=orange!65!black},
+  fl/.style={-{Stealth[length=2mm]}, semithick},
+]
+  \node[io] (q) {Query};
+  \node[sup, right=6mm of q]  (sup) {\textbf{Supervisor}\\ decompose,\\ dispatch, reflect};
+  \node[res, right=11mm of sup] (r) {\textbf{Researchers ($\times N$)}\\ search, read,\\ write summary};
+  \node[wri, right=11mm of r]  (w) {\textbf{Writer}\\ read summaries,\\ compose report};
+  \node[io, right=6mm of w]   (rep) {Report};
+
+  \draw[fl] (q) -- (sup);
+  \draw[fl] (sup) -- node[above,font=\scriptsize]{dispatch} (r);
+  \draw[fl] (r) -- node[above,font=\scriptsize]{summaries} (w);
+  \draw[fl] (w) -- (rep);
+  \draw[fl, densely dashed, purple]
+        (r.north) to[out=90,in=90,looseness=0.85]
+        node[above,font=\scriptsize,text=black]{reflect, launch next round} (sup.north);
+\end{tikzpicture}
+\caption{The deep research agent workflow. A supervisor decomposes the query
+and dispatches sub-tasks to parallel researchers; each researcher searches,
+reads, and writes a summary; the supervisor reflects and may launch further
+rounds; a writer finally composes the report.}
+\label{fig:workflow}
+\end{figure}

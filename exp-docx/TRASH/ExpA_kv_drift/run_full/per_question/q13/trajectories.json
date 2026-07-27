@@ -1,0 +1,92 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the castle in question is Edinburgh Castle, which is located in an area that experienced high rainfall during the 2021 flooding event. The main gatehouse entrance of Edinburgh Castle is confirmed to face west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264168739318848,
+      "14737": -0.014168502762913704
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The original question has been fully addressed. The area in England that recorded the highest daily rainfall during the 2010 flooding event is Boscastle, Cornwall. The castle in question is Boscastle Castle, and its main gatehouse entrance predominantly faces west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.529794216156006,
+      "14737": -0.029794156551361084
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the 2010 Icelandic volcanic eruption caused air-travel disruption, and the same year saw severe flooding in England. The area with the highest daily rainfall during this event is Boscastle, which has a castle. The main gatehouse entrance of Boscastle Castle predominantly faces west. The question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732694149017334,
+      "14737": -0.02326943911612034
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the area in question is Edinburgh, and the main gatehouse entrance of Edinburgh Castle faces west. This directly answers the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.25524377822876,
+      "14737": -0.005243596155196428
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The area in question is Boscastle, Cornwall, which experienced the highest daily rainfall during the 2004 flood. The castle in the area is Boscastle Castle, and its main gatehouse entrance is known to face west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.126978874206543,
+      "14737": -0.12697875499725342
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The 2010 Icelandic volcanic eruption (Eyjafjallajökull) caused air-travel disruption. In the same year, severe flooding occurred in England, notably in Boscastle, Cornwall, which recorded the highest daily rainfall. Boscastle Castle is located in the area, and while it is protected by a drawbridge, the main gatehouse entrance of Boscastle Castle predominantly faces west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.0486152172088623,
+      "14737": -0.04861515015363693
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the castle in question is Edinburgh Castle, and its main gatehouse entrance faces west. The volcanic eruption in Iceland occurred in 2010, and the severe flooding in England during that year is confirmed. The highest daily rainfall during the event was recorded in the area of Edinburgh, which has a castle. The orientation of the main gatehouse entrance is known and has been provided.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732765674591064,
+      "14737": -0.023276543244719505
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the main gatehouse entrance of Edinburgh Castle, located in the area that recorded the highest daily rainfall during the 2010 flooding in England, predominantly faces west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.0486247539520264,
+      "14737": -0.04862480238080025
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the castle in question is Edinburgh Castle, and its main gatehouse entrance predominantly faces west. This directly answers the original question without requiring further investigation.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255239486694336,
+      "14737": -0.005239445716142654
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the castle in question is Boscastle Castle in Cornwall, which recorded the highest daily rainfall during the 2004 flood. The main gatehouse entrance of Boscastle Castle predominantly faces west.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519354820251465,
+      "14737": -0.0019355150870978832
+    }
+  }
+}

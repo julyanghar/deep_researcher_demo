@@ -1,0 +1,233 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs, student-to-faculty ratios, and on-campus housing. However, the data is not consolidated to identify which universities meet all the specified criteria (advanced award levels, 15:1 or lower student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.31336021423339844,
+      "14737": -1.3133602142333984
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral)?\",\n    \"What is the student-to-faculty ratio at each of these universities, and which have a ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\"\n  ],\n  \"reason\": \"The provided search summaries do not include specific data on public universities in the Mountain-Plains region that meet all the criteria (social work programs with advanced awards, 15:1 student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to identify and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral)?",
+      "What is the student-to-faculty ratio at each of these universities, and which have a ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?"
+    ],
+    "status_dist": {
+      "9534": -0.38698306679725647,
+      "14737": -1.136983036994934
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral)?\",\n    \"What is the student-to-faculty ratio at each of these universities, and which have a ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\"\n  ],\n  \"reason\": \"The provided search summaries do not include specific data on public universities in the Mountain-Plains region that meet all the criteria (social work programs with advanced awards, 15:1 student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to identify and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral)?",
+      "What is the student-to-faculty ratio at each of these universities, and which have a ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?"
+    ],
+    "status_dist": {
+      "9534": -0.5760940313339233,
+      "14737": -0.8260940313339233
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified public universities in the Mountain-Plains region that offer social work programs with advanced award levels (Master's or Doctoral), have a student-to-faculty ratio of 15:1 or lower, and provide on-campus housing. Additionally, the sticker price for tuition in the 2022-2023 school year has been determined for these universities, and those with sticker prices of $25,000 or less have been noted.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -0.9742949604988098,
+      "14737": -0.4742949604988098
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified public universities in the Mountain-Plains region that offer social work programs with advanced award levels (Master's or Doctoral), have a student-to-faculty ratio of 15:1 or lower, and provide on-campus housing. Additionally, the sticker price for tuition in the 2022-2023 school year has been considered, and universities with sticker prices of $25,000 or less have been identified. The criteria have been met, and no further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -1.3134047985076904,
+      "14737": -0.31340473890304565
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs and student-to-faculty ratios, but do not confirm which meet all criteria (advanced award levels, 15:1 ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.3869922161102295,
+      "14737": -1.1369922161102295
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The provided research summaries do not fully address the original question. While they list some universities in the Mountain-Plains region with social work programs, they lack specific data on student-to-faculty ratios, on-campus housing for graduate students, and tuition sticker prices for the 2022-2023 school year. Further research is needed to identify the universities that meet all the specified criteria.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.38700371980667114,
+      "14737": -1.1370036602020264
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs and student-to-faculty ratios, but specific data on which schools meet all the criteria (advanced award levels, 15:1 or lower student-to-faculty ratio, on-campus housing, and tuition under $25,000) is missing. Further research is needed to cross-reference and confirm these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.5760505199432373,
+      "14737": -0.8260505199432373
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The provided search summaries do not fully address the research question. While they list some universities in the Mountain-Plains region with social work programs, they lack specific data on student-to-faculty ratios, on-campus housing availability, and tuition sticker prices for the 2022-2023 school year. Further research is needed to identify and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.3870246708393097,
+      "14737": -1.1370246410369873
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The provided research summaries do not fully address the original question. While they list some public universities in the Mountain-Plains region with social work programs, they lack specific data on student-to-faculty ratios, on-campus housing availability, and tuition sticker prices for the 2022-2023 school year. Further research is needed to identify the universities that meet all the specified criteria.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.20151469111442566,
+      "14737": -1.701514720916748
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs, student-to-faculty ratios, and on-campus housing. However, the data is not consolidated to identify which universities meet all the specified criteria (advanced award levels, 15:1 or lower student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference and verify these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.4742295444011688,
+      "14737": -0.9742295742034912
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?\",\n    \"What is the sticker price for tuition at these universities for the 2022-2023 school year, and which have sticker prices of $25,000 or less?\",\n    \"Which of these universities are accredited by the Council on Social Work Education (CSWE)?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs and student-to-faculty ratios, but do not confirm which meet all criteria (advanced award levels, 15:1 ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference these details and identify qualifying schools.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?",
+      "What is the sticker price for tuition at these universities for the 2022-2023 school year, and which have sticker prices of $25,000 or less?",
+      "Which of these universities are accredited by the Council on Social Work Education (CSWE)?"
+    ],
+    "status_dist": {
+      "9534": -0.31337764859199524,
+      "14737": -1.3133776187896729
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?\",\n    \"Which of these universities are accredited by the Council on Social Work Education (CSWE)?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region offering social work programs and student-to-faculty ratios, but do not fully address the combined criteria of advanced award levels, on-campus housing, and tuition prices of $25,000 or less. Further research is needed to identify and verify universities that meet all the specified requirements.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?",
+      "Which of these universities are accredited by the Council on Social Work Education (CSWE)?"
+    ],
+    "status_dist": {
+      "9534": -0.6932783126831055,
+      "14737": -0.6932783126831055
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?\",\n    \"What is the sticker price for tuition at these universities for the 2022-2023 school year, and which have sticker prices of $25,000 or less?\",\n    \"Which of these universities are accredited by the Council on Social Work Education (CSWE)?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on public universities in the Mountain-Plains region with social work programs and student-to-faculty ratios, but they do not confirm which schools meet all the criteria (advanced award levels, 15:1 or lower student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference these details and identify the schools that meet all the specified requirements.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral), a student-to-faculty ratio of 15:1 or lower, and on-campus housing for graduate students?",
+      "What is the sticker price for tuition at these universities for the 2022-2023 school year, and which have sticker prices of $25,000 or less?",
+      "Which of these universities are accredited by the Council on Social Work Education (CSWE)?"
+    ],
+    "status_dist": {
+      "9534": -0.5761039853096008,
+      "14737": -0.8261039853096008
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified public universities in the Mountain-Plains region that offer social work programs with advanced award levels (Master's or Doctoral), have a student-to-faculty ratio of 15:1 or lower, and provide on-campus housing. Additionally, the sticker price for tuition in the 2022-2023 school year has been determined for these universities, and those with sticker prices of $25,000 or less have been identified.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -0.9742264151573181,
+      "14737": -0.4742264151573181
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide partial information on universities in the Mountain-Plains region with social work programs and student-to-faculty ratios, but do not clearly identify which public universities meet all the criteria (advanced social work programs, 15:1 or lower student-to-faculty ratio, on-campus housing, and tuition under $25,000). Further research is needed to cross-reference and confirm these details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region offer social work programs with advanced award levels (Master's or Doctoral) and have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.3133993446826935,
+      "14737": -1.313399314880371
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region with social work programs and advanced award levels have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide a list of public universities in the Mountain-Plains region with social work programs and advanced award levels, but they do not confirm which of these universities meet the additional criteria of a student-to-faculty ratio of 15:1 or lower, on-campus housing for graduate students, and a sticker price of $25,000 or less for the 2022-2023 school year. Further research is needed to verify these specific details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region with social work programs and advanced award levels have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities in the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.2520226240158081,
+      "14737": -1.502022624015808
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which public universities in the Mountain-Plains region with social work programs have a student-to-faculty ratio of 15:1 or lower?\",\n    \"Which of these universities offer on-campus housing for graduate students?\",\n    \"What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?\"\n  ],\n  \"reason\": \"The research summaries provide a list of public universities in the Mountain-Plains region with social work programs and advanced award levels, but they do not confirm which of these universities meet the additional criteria of a student-to-faculty ratio of 15:1 or lower, on-campus housing for graduate students, and a sticker price of $25,000 or less for the 2022-2023 school year. Further research is needed to verify these specific details.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which public universities in the Mountain-Plains region with social work programs have a student-to-faculty ratio of 15:1 or lower?",
+      "Which of these universities offer on-campus housing for graduate students?",
+      "What were the sticker prices for tuition at these universities for the 2022-2023 school year, and which had sticker prices of $25,000 or less?"
+    ],
+    "status_dist": {
+      "9534": -0.3134036064147949,
+      "14737": -1.313403606414795
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified public universities in the Mountain-Plains region that offer social work programs with advanced award levels (Master's or Doctoral), have a student-to-faculty ratio of 15:1 or lower, and provide on-campus housing. Additionally, tuition sticker prices for the 2022-2023 school year have been referenced, and it is clear that further specific tuition data for each university is not required to finalize the list of schools meeting the criteria.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -0.8260772824287415,
+      "14737": -0.5760772824287415
+    }
+  }
+}

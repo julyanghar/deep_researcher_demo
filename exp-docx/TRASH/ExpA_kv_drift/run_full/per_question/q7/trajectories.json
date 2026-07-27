@@ -1,0 +1,124 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner in the 2013 North American League Championship Series Summer Finals, and which one was picked most often?\"\n  ],\n  \"reason\": \"The research summaries provide conflicting information about the teams and players involved in the 2013 NA LCS Summer Finals, and none of them directly answer the question about the most frequently picked champion by the losing team's top laner. Clarification is needed to resolve the discrepancies and obtain the required data.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the losing team's top laner in the 2013 North American League Championship Series Summer Finals, and which one was picked most often?"
+    ],
+    "status_dist": {
+      "9534": -0.0015135272406041622,
+      "14737": -6.501513481140137
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries contain conflicting information about the teams and players involved in the 2013 North American League Championship Series Summer Finals. Further clarification is needed to identify the correct losing team and its top laner before determining the most frequently picked champion.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.47413843870162964,
+      "14737": -0.9741384387016296
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 NA LCS Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 NA LCS Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner during the 2013 NA LCS Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries conflict on the teams and players involved in the 2013 NA LCS Summer Finals, and none provide clear data on the champion with the highest pick count by the losing team's top laner. Further research is needed to resolve these inconsistencies and obtain the required information.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 NA LCS Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 NA LCS Summer Finals?",
+      "What were the champion selections made by the losing team's top laner during the 2013 NA LCS Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.014190716668963432,
+      "14737": -4.264190673828125
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the top laner of the losing team in the 2013 North American League Championship Series Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries contain conflicting information about the teams and players involved in the 2013 NA LCS Summer Finals. Further clarification is needed to identify the correct losing team and its top laner before determining the most frequently picked champion.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the top laner of the losing team in the 2013 North American League Championship Series Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.4741366505622864,
+      "14737": -0.9741366505622864
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries contain conflicting information about the teams and players involved in the 2013 NA LCS Summer Finals, and none directly answer the question about the most frequently picked champion by the losing team's top laner. Further research is needed to clarify the correct team, player, and champion data.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.0005623904871754348,
+      "14737": -7.5005621910095215
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries contain conflicting information about the teams and players involved in the 2013 NA LCS Summer Finals, and none provide specific details about the champion with the highest pick count by the losing team's top laner. Further research is needed to clarify the correct team, player, and champion data.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.0067280190996825695,
+      "14737": -5.006728172302246
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which team was the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?\",\n    \"What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?\"\n  ],\n  \"reason\": \"The provided research summaries contain conflicting information about the teams and players involved in the 2013 NA LCS Summer Finals, and none directly answer the question about the most frequently picked champion by the losing team's top laner. Clarification is needed to identify the correct team, player, and champion data.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which team was the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "Who was the top laner for the losing team in the 2013 North American League Championship Series Summer Finals?",
+      "What were the champion selections made by the losing team's top laner during the 2013 North American League Championship Series Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.006726834923028946,
+      "14737": -5.0067267417907715
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the losing team in the 2013 NA LCS Summer Finals was Team Vulcun, and their top laner was Kappa. It is confirmed that Kappa's most frequently picked champion during the 2013 NA LCS Summer was Cho'Gath. Therefore, the question has been fully answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018154621124268,
+      "14737": -0.01815476082265377
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"What were the specific champion picks by the losing team's top laner during the 2013 NA LCS Summer Finals?\",\n    \"Which champion had the highest pick count for the losing team's top laner in the 2013 NA LCS Summer Finals?\",\n    \"What was the role and champion selection pattern of the losing team's top laner in the 2013 NA LCS Summer Finals?\"\n  ],\n  \"reason\": \"The research summaries provide conflicting information about the losing team and its top laner in the 2013 NA LCS Summer Finals. Further clarification is needed to determine the correct top laner and their champion picks in the finals.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "What were the specific champion picks by the losing team's top laner during the 2013 NA LCS Summer Finals?",
+      "Which champion had the highest pick count for the losing team's top laner in the 2013 NA LCS Summer Finals?",
+      "What was the role and champion selection pattern of the losing team's top laner in the 2013 NA LCS Summer Finals?"
+    ],
+    "status_dist": {
+      "9534": -0.04861469566822052,
+      "14737": -3.048614740371704
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that the losing team in the 2013 NA LCS Summer Finals was Team SoloMid, and their top laner was TheOddOne. It has also been established that Garen was the champion he picked most often during the 2013 NA LCS Summer Split. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.002477645874023,
+      "14737": -0.002477435627952218
+    }
+  }
+}

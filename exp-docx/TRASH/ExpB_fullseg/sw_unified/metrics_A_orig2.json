@@ -1,0 +1,17 @@
+{
+  "num_total_ratings": 40,
+  "num_empty_model_response": 0,
+  "num_invalid_auto_rater_response": 0,
+  "num_empty_auto_rater_response": 0,
+  "num_valid_ratings": 40,
+  "num_answer_correctness_evaluated": 40,
+  "pct_w_ci_all_answers_correct": "17.50 +/- 11.78 (7/40)",
+  "pct_w_ci_fully_incorrect_items": "55.00 +/- 15.42 (22/40)",
+  "pct_w_ci_correct_with_excessive_answers": "2.50 +/- 4.84 (1/40)",
+  "pct_empty_model_response": 0.0,
+  "pct_invalid_auto_rater_response": 0.0,
+  "pct_empty_auto_rater_response": 0.0,
+  "precision": "31.85%",
+  "recall": "32.08%",
+  "f1_score": "30.53%"
+}

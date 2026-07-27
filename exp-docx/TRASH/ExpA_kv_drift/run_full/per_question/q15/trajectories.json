@@ -1,0 +1,100 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -0.9741090536117554,
+      "14737": -0.47410905361175537
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511072635650635,
+      "14737": -0.011072501540184021
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732770442962646,
+      "14737": -0.023277126252651215
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511075496673584,
+      "14737": -0.011075684800744057
+    }
+  },
+  "swap_seg3": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat. No further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511070728302002,
+      "14737": -0.011070851236581802
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified conditions: Bulgaria, Greece, and Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.812035322189331,
+      "14737": -0.06203540042042732
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The final answer has been determined based on the provided research summaries. The EU member states that meet all the specified conditions are Bulgaria, Greece, and Romania.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.0486109256744385,
+      "14737": -0.048610836267471313
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which EU member states had over 100,000 immigrants in 2022 and are not constitutional monarchies?\",\n    \"What is the exact percentage of the population at risk of poverty or social exclusion in Spain, Germany, Italy, and France according to Eurostat for 2022?\",\n    \"Which EU member states have a voting age of 18 or above for European Elections and also have over 20.0% of their population at risk of poverty or social exclusion?\"\n  ],\n  \"reason\": \"The current summaries provide partial and conflicting information about which EU member states meet all the specified criteria. Further clarification is needed to confirm the exact countries that satisfy all five conditions.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which EU member states had over 100,000 immigrants in 2022 and are not constitutional monarchies?",
+      "What is the exact percentage of the population at risk of poverty or social exclusion in Spain, Germany, Italy, and France according to Eurostat for 2022?",
+      "Which EU member states have a voting age of 18 or above for European Elections and also have over 20.0% of their population at risk of poverty or social exclusion?"
+    ],
+    "status_dist": {
+      "9534": -0.6932798624038696,
+      "14737": -0.6932798624038696
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the EU member states that meet all the specified criteria: Bulgaria, Greece, Romania. These countries are republics, had over 100,000 immigrants in 2022, have a voting age of 18 or above for European Elections, and had over 20.0% of their population at risk of poverty or social exclusion in 2022.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.126979351043701,
+      "14737": -0.1269792914390564
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"continue\",\n  \"followup_questions\": [\n    \"Which EU member states without a monarchy had over 100,000 immigrants in 2022?\",\n    \"Which EU member states without a monarchy had a voting age of 18 or above for European Elections in 2024?\",\n    \"Which EU member states without a monarchy had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat?\"\n  ],\n  \"reason\": \"The current summaries do not provide a clear intersection of all the specified criteria (EU membership, no monarchy, immigration numbers, voting age, and poverty risk). Further research is needed to identify the exact countries that meet all conditions.\"\n}\n```",
+    "status": "continue",
+    "followups": [
+      "Which EU member states without a monarchy had over 100,000 immigrants in 2022?",
+      "Which EU member states without a monarchy had a voting age of 18 or above for European Elections in 2024?",
+      "Which EU member states without a monarchy had over 20.0% of their population at risk of poverty or social exclusion in 2022 according to Eurostat?"
+    ],
+    "status_dist": {
+      "9534": -0.011053991504013538,
+      "14737": -4.511054039001465
+    }
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.811994791030884,
+      "14737": -0.061994731426239014
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are supported by the provided summaries and directly answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.773275136947632,
+      "14737": -0.023275146260857582
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Rage and Skill Buffs. These categories are supported by the provided summaries and directly answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.5297834873199463,
+      "14737": -0.02978351153433323
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Rage and Skill Buffs. These categories are supported by multiple sources and are consistent across the summaries.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.5297975540161133,
+      "14737": -0.02979751117527485
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and align with the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.26417350769043,
+      "14737": -0.014173557050526142
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.2880678176879883,
+      "14737": -0.03806792199611664
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.5789296627044678,
+      "14737": -0.07892973721027374
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories were confirmed through multiple summaries and are consistent across the provided data.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.7531819343566895,
+      "14737": -0.00318211130797863
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Marshall and Scavenger buffs (alliance and region-based), 2) buffs from killing monsters (e.g., field upgrades), and 3) buffs from player interactions (e.g., team-based synergies and tournament effects). These categories align with the original question and provide a complete answer.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.2880780696868896,
+      "14737": -0.03807802125811577
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across the summaries and align with the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758627414703369,
+      "14737": -0.008627521805465221
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Rage and Skill Buffs. These categories are consistently mentioned across multiple summaries and are supported by details on how they function and are obtained.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.350253105163574,
+      "14737": -0.10025306046009064
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Marshall and Scavenger buffs (alliance and region-based), 2) PvP buffs (combat performance enhancements), and 3) buffs from killing monsters (field upgrades and health reduction effects). These categories are supported by the provided summaries and directly answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.812021017074585,
+      "14737": -0.06202094629406929
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.3502650260925293,
+      "14737": -0.10026513785123825
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -1.9102716445922852,
+      "14737": -0.16027162969112396
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.3502440452575684,
+      "14737": -0.10024400055408478
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.048609495162964,
+      "14737": -0.04860958456993103
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.0486111640930176,
+      "14737": -0.04861105978488922
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Marshall Buffs (leadership and alliance-based advantages), 2) Scavenger Buffs (resource gathering and exploration efficiency), and 3) PvP Buffs (combat performance enhancements for player versus player scenarios). These categories are consistent across the relevant summaries and directly answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.3502538204193115,
+      "14737": -0.10025392472743988
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the three categories of powerful buffs in the Doomsday game mode of the MMORPG as: 1) Gathering Speed Buffs, 2) Attack and Defense Buffs, and 3) Skill and Rage Buffs. These categories are consistently mentioned across multiple summaries and provide a clear answer to the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -1.9102857112884521,
+      "14737": -0.16028574109077454
+    }
+  }
+}

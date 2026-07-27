@@ -1,0 +1,173 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the provided search results as being directly linked to balance and coordination issues. The question has been sufficiently answered.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511056423187256,
+      "14737": -0.011056349612772465
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. It also mentions that sudden weakness in the arm could be a sign of a stroke, which is a neurological condition. These are the only causes directly associated with balance and coordination issues on the NHS website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511077880859375,
+      "14737": -0.01107780635356903
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the provided search results as being directly linked to balance and coordination issues.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.130958080291748,
+      "14737": -0.005958176217973232
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website does not explicitly link any of the listed causes of shoulder pain to symptoms like poor balance and coordination. While neurological conditions such as stroke or cervical spondylosis are mentioned as potential causes of sudden weakness or pins and needles, there is no direct connection made between shoulder pain and chronic balance or coordination issues. Therefore, no further research is required to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511081218719482,
+      "14737": -0.01108134351670742
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as described on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006724834442139,
+      "14737": -0.006725058425217867
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the provided search results as being directly linked to balance and coordination issues. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006723403930664,
+      "14737": -0.006723282393068075
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has confirmed that the NHS website does not explicitly link most shoulder pain causes to symptoms like poor balance and coordination. However, it does mention that sudden weakness in the arm could be a sign of a stroke, which is a neurological condition that can affect balance and coordination. No other neurological causes of shoulder pain are directly associated with balance and coordination issues on the NHS website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006727695465088,
+      "14737": -0.00672754505649209
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website does not explicitly link any specific cause of shoulder pain to symptoms like poor balance and coordination. While neurological symptoms such as sudden weakness or pins and needles are mentioned as red flags, there is no direct connection made between shoulder pain and chronic balance or coordination issues. Based on the available information, no further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264178276062012,
+      "14737": -0.014178493060171604
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the provided search results as being directly linked to balance and coordination issues. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006722450256348,
+      "14737": -0.006722216960042715
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as described on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006723880767822,
+      "14737": -0.006723874714225531
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the provided search results as being directly linked to balance and coordination issues. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.7531843185424805,
+      "14737": -0.003184487810358405
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. It also advises seeking urgent medical attention if such symptoms occur. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511058330535889,
+      "14737": -0.011058471165597439
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website explicitly links cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. It also provides guidance on when to seek urgent care for such symptoms. The question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504083633422852,
+      "14737": -0.004083866253495216
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as described on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.0067219734191895,
+      "14737": -0.006722098216414452
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as described on the NHS website, is the only neurological cause of shoulder pain explicitly linked to symptoms like poor balance and coordination. No other neurological causes of shoulder pain are mentioned in the context of these symptoms on the NHS website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.002481460571289,
+      "14737": -0.002481597475707531
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as outlined on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. Additionally, sudden arm weakness, which could indicate a stroke, is highlighted as a potential neurological concern. These findings directly address the original question and no further research is needed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758621692657471,
+      "14737": -0.00862149428576231
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as outlined on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758622646331787,
+      "14737": -0.008622557856142521
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified that cervical spondylosis, as outlined on the NHS website, is a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. No further research is needed to answer the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006722927093506,
+      "14737": -0.006722808815538883
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The NHS website identifies cervical spondylosis as a neurological cause of shoulder pain that can lead to symptoms like poor balance and coordination. It also highlights that sudden weakness in the arm could be a sign of a stroke, which is a neurological condition. These are the only explicitly mentioned neurological causes of shoulder pain associated with balance and coordination issues on the NHS website.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504082202911377,
+      "14737": -0.004081966355443001
+    }
+  }
+}

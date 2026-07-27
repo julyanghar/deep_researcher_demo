@@ -30,13 +30,13 @@ RESULTS_DIR = Path(os.getenv("DRBENCH_RESULTS_DIR", str(DEMO_ROOT / "eval/result
 
 
 # --------------------- generate + 每题 harvest(子进程)---------------------
-async def generate_harvest(tag, n, only_lang, concurrency, model, base_url):
+async def generate_harvest(tag, n, only_lang, concurrency, model, base_url, offset=0):
     """子进程跑 demo CLI:每题留 harvest.jsonl + llm_calls.jsonl + report.md,再汇总成 raw_data/<tag>.jsonl。"""
     out_dir = RESULTS_DIR / tag
     rows = [json.loads(l) for l in open(QUERY_FILE) if l.strip()]
     if only_lang:
         rows = [r for r in rows if r.get("language") == only_lang]
-    rows = rows[:n]
+    rows = rows[:n][offset:]   # --offset: 跳过前 offset 题(如 offset=40 → q41..)
     items = [(r["prompt"], str(r["id"])) for r in rows]
     await HG.run_batch(items, out_dir, model, base_url, concurrency)
     # 汇总成 DRBench scorer 要的 raw_data/<tag>.jsonl(id/prompt/article)
@@ -170,6 +170,7 @@ def main():
     ap.add_argument("--tag", default="demo")
     ap.add_argument("--mode", choices=["generate", "score", "all"], default="all")
     ap.add_argument("--n", type=int, default=100)
+    ap.add_argument("--offset", type=int, default=0, help="跳过前 offset 题(与 --n 搭配取区间)")
     ap.add_argument("--only-lang", choices=["zh", "en"], default=None)
     ap.add_argument("--concurrency", type=int, default=2)
     ap.add_argument("--workers", type=int, default=4)
@@ -182,7 +183,8 @@ def main():
     if args.mode in ("generate", "all"):
         if args.harvest:
             asyncio.run(generate_harvest(args.tag, args.n, args.only_lang,
-                                         args.concurrency, args.model, args.base_url))
+                                         args.concurrency, args.model, args.base_url,
+                                         offset=args.offset))
         else:
             asyncio.run(generate(args.tag, args.n, args.only_lang, args.concurrency))
     if args.mode in ("score", "all"):

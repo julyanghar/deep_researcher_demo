@@ -1,0 +1,17 @@
+# B 臂:LMCache blend(attn-guided)+ APC + router 投机(suffix+eagle3 双 proposer)
+# 底稿 = /home/yilin/LMCache/server/vllm/config.yaml(blend+APC 注释与硬前提见原文件)
+# 差异只有两处:enforce-eager(router 强制)+ speculative-config(method=router)
+model: /data/yilin/huggingface/Qwen3-32B
+served-model-name: Qwen3-32B
+host: 0.0.0.0
+port: 30000
+tensor-parallel-size: 4
+gpu-memory-utilization: 0.85
+max-model-len: 40960
+enable-log-requests: true
+disable-custom-all-reduce: true
+default-chat-template-kwargs: '{"enable_thinking": false}'
+kv-transfer-config: '{"kv_connector":"LMCacheConnectorV1","kv_role":"kv_both"}'
+# router 锁 eager(mcproute patch 不支持 cudagraph/async scheduling)
+enforce-eager: true
+speculative-config: '{"method":"router","model":"/home/yilin/deep_researcher_demo/phase2-12k-3ep","num_speculative_tokens":3}'

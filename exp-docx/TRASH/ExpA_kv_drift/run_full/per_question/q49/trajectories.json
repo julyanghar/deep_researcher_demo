@@ -1,0 +1,254 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that both male and female teenagers aged 12-17 experienced a decline in past-month alcohol use from 2018 to 2019, with the decline being more significant for males. Specifically, the data shows that the decrease in alcohol use was larger for males compared to females during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264171600341797,
+      "14737": -0.014171676710247993
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that both male and female teenagers aged 12-17 experienced a decline in past-month alcohol use from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732744216918945,
+      "14737": -0.02327433042228222
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that both male and female teenagers aged 12-17 experienced a decline in past-month alcohol use from 2018 to 2019. Specifically, the data shows that the decline was more significant for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period, and the question can be answered based on the provided information.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.26418399810791,
+      "14737": -0.014184135012328625
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.2552490234375,
+      "14737": -0.005248932633548975
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males (from 8.8% to 9.4%) compared to females (from 9.6% to 9.4%). Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504085063934326,
+      "14737": -0.004085171967744827
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Therefore, no gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.2552385330200195,
+      "14737": -0.005238734185695648
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Therefore, no gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.501505374908447,
+      "14737": -0.0015053142560645938
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Specifically, the decline in the odds of alcohol use disorder was 4.11% annually for males (OR = 0.96) compared to 2.02% for females (OR = 0.98). Therefore, neither gender experienced an increase in alcohol use; instead, both saw a decrease, with males showing a larger decline.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.7531843185424805,
+      "14737": -0.0031843690667301416
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Specifically, the odds of alcohol use disorder declined by 4.11% annually for males (OR = 0.96) compared to 2.02% for females (OR = 0.98). This suggests that the decline in alcohol use was larger for males, meaning there was no increase for either gender. Therefore, the question can be answered based on the provided data.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758622169494629,
+      "14737": -0.008622322231531143
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The data indicates that past-month alcohol use among teenagers aged 12-17 declined from 9.6% for females and 8.8% for males in 2018 to 9.4% overall in 2019. This suggests a slight decrease for both genders, with no increase reported. Therefore, neither gender experienced a larger percentage increase in alcohol use from 2018 to 2019.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511056423187256,
+      "14737": -0.011056585237383842
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided data indicates that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511058807373047,
+      "14737": -0.011058943346142769
+    }
+  },
+  "swap_seg12": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided data indicates that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006722927093506,
+      "14737": -0.006722927093505859
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided data indicates that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504085540771484,
+      "14737": -0.004085409455001354
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Specifically, the odds of alcohol use disorder declined by 4.11% annually for males (OR = 0.96) compared to 2.02% for females (OR = 0.98). Therefore, neither gender experienced an increase in alcohol use; instead, both saw a decline, with males showing a larger decrease.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255244255065918,
+      "14737": -0.005244426429271698
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that alcohol use among teenagers aged 12-17 declined from 2018 to 2019 for both genders, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255241394042969,
+      "14737": -0.00524122454226017
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.2519354820251465,
+      "14737": -0.0019356340635567904
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018160343170166,
+      "14737": -0.018160497769713402
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided research summaries indicate that past-month alcohol use among teenagers aged 12-17 decreased from 2018 to 2019 for both genders, with a more significant decline for males than females. Therefore, no gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753183841705322,
+      "14737": -0.0031836561392992735
+    }
+  },
+  "swap_seg19": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The provided summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.002481460571289,
+      "14737": -0.0024812407791614532
+    }
+  },
+  "swap_seg20": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Specifically, the odds of alcohol use disorder (AUD) declined by 4.11% annually for males (OR = 0.96) compared to 2.02% for females (OR = 0.98). This suggests that the decline in alcohol use was larger for males, meaning there was no increase in alcohol use for either gender during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006725311279297,
+      "14737": -0.00672517716884613
+    }
+  },
+  "swap_seg21": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018162727355957,
+      "14737": -0.018162604421377182
+    }
+  },
+  "swap_seg22": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Specifically, the odds of alcohol use disorder (AUD) declined by 4.11% annually for males (OR = 0.96) compared to 2.02% for females (OR = 0.98). Therefore, there was no increase in alcohol use for either gender during this period, and the question about a larger percentage increase is not supported by the data.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.5110626220703125,
+      "14737": -0.011062716133892536
+    }
+  },
+  "swap_seg23": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that both male and female teenagers aged 12-17 experienced a decline in past-month alcohol use from 2018 to 2019, with the decline being more significant for males than for females. Therefore, no gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758625030517578,
+      "14737": -0.008625158108770847
+    }
+  },
+  "swap_seg24": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Specifically, the odds of alcohol use disorder (AUD) among males declined by 4.11% annually (OR = 0.96), while the decline for females was 2.02% annually (OR = 0.98). This suggests that the decrease in alcohol use was larger for males compared to females during this period, meaning there was no increase in alcohol use for either gender. Therefore, the question has been fully addressed.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511061191558838,
+      "14737": -0.011061418801546097
+    }
+  },
+  "swap_seg25": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that both male and female teenagers aged 12-17 experienced a decline in past-month alcohol use from 2018 to 2019, with the decline being more significant for males. Therefore, no gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264176368713379,
+      "14737": -0.014176142401993275
+    }
+  },
+  "swap_seg26": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than for females. Therefore, neither gender experienced an increase in alcohol use during this period.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511057376861572,
+      "14737": -0.01105729304254055
+    }
+  },
+  "swap_seg27": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The 2019 NSDUH Annual National Report showed a decline in past-month alcohol use for both male and female teenagers compared to 2018. The percentage of past-month alcohol use among teenagers aged 12 to 17 declined from 17.6% in 2002 to 9.4% in 2019. The data indicates a general downward trend in alcohol use among this age group, with no evidence of an increase for either gender between 2018 and 2019.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753190994262695,
+      "14737": -0.0031909046228975058
+    }
+  },
+  "swap_seg28": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research summaries indicate that past-month alcohol use among teenagers aged 12-17 declined for both genders from 2018 to 2019, with a more significant decrease for males than females. Specifically, the data shows that the decline in alcohol use was larger for males compared to females during this period. Therefore, no further research is needed to answer the question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -2.578913688659668,
+      "14737": -0.07891365140676498
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "truth": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has successfully identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not being landlocked. The countries that meet all these conditions are India, Indonesia, Pakistan, Bangladesh, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.7586259841918945,
+      "14737": -0.008626221679151058
+    }
+  },
+  "swap_seg0": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"Based on the research summaries, the following Asian countries meet all the criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and are not landlocked: India, Indonesia, Pakistan, Bangladesh, Philippines, Vietnam, and Iran.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.018225193023682,
+      "14737": -0.018225114792585373
+    }
+  },
+  "swap_seg1": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the following Asian countries that meet all the criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked: India, Indonesia, Pakistan, Bangladesh, Philippines, Vietnam, and Iran.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.264208793640137,
+      "14737": -0.014208698645234108
+    }
+  },
+  "swap_seg2": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the following Asian countries that meet all the criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked: India, Indonesia, Pakistan, Bangladesh, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.387591361999512,
+      "14737": -0.012591506354510784
+    }
+  },
+  "swap_seg4": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are Bangladesh, India, Indonesia, Iran, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -6.251941680908203,
+      "14737": -0.0019417019793763757
+    }
+  },
+  "swap_seg5": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are India, Indonesia, Pakistan, Bangladesh, and Vietnam.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.753194808959961,
+      "14737": -0.0031948259565979242
+    }
+  },
+  "swap_seg6": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not being landlocked. These countries are Bangladesh, India, Indonesia, Iran, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006740093231201,
+      "14737": -0.006739859934896231
+    }
+  },
+  "swap_seg7": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not landlocked. These countries are Bangladesh, India, Indonesia, Iran, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255253791809082,
+      "14737": -0.0052535575814545155
+    }
+  },
+  "swap_seg8": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the following non-landlocked Asian countries that meet all the criteria: population over 50 million, 2022 GDP per capita under $10,000, and 2023 median age under 35: Bangladesh, India, Indonesia, Myanmar, and Pakistan. These countries satisfy all the conditions specified in the original question.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.2641730308532715,
+      "14737": -0.014173086732625961
+    }
+  },
+  "swap_seg9": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not landlocked. These countries are Bangladesh, India, Indonesia, Iran, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.006728649139404,
+      "14737": -0.0067284926772117615
+    }
+  },
+  "swap_seg10": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not landlocked. These countries are Bangladesh, India, Indonesia, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.255251884460449,
+      "14737": -0.005251897498965263
+    }
+  },
+  "swap_seg11": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10,000, 2023 median age under 35, and not landlocked. These countries are India, Indonesia, Pakistan, and Bangladesh.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -3.7732863426208496,
+      "14737": -0.023286327719688416
+    }
+  },
+  "swap_seg13": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"Based on the research summaries, the following non-landlocked Asian countries meet all the criteria: population over 50 million, 2022 GDP per capita under $10,000, and 2023 median age under 35: Bangladesh, India, Indonesia, Pakistan, and the Philippines. These countries are not landlocked, have populations exceeding 50 million, and their GDP per capita and median age align with the specified thresholds.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758629322052002,
+      "14737": -0.008629531599581242
+    }
+  },
+  "swap_seg14": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are India, Indonesia, Pakistan, and Bangladesh.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.0067338943481445,
+      "14737": -0.006734057795256376
+    }
+  },
+  "swap_seg15": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are India, Indonesia, Pakistan, and Bangladesh.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -5.504095554351807,
+      "14737": -0.004095738288015127
+    }
+  },
+  "swap_seg16": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are India, Indonesia, Pakistan, and Bangladesh.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758634567260742,
+      "14737": -0.008634612895548344
+    }
+  },
+  "swap_seg17": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the Asian countries that meet all the specified criteria: population over 50 million, 2022 GDP per capita under $10K, 2023 median age under 35, and not landlocked. These countries are Bangladesh, India, Indonesia, and Pakistan.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.758632659912109,
+      "14737": -0.008632485754787922
+    }
+  },
+  "swap_seg18": {
+    "text": "```json\n{\n  \"status\": \"complete\",\n  \"followup_questions\": [],\n  \"reason\": \"The research has identified the non-landlocked Asian countries with a population over 50 million, a 2022 GDP per capita under $10,000, and a 2023 median age under 35. These countries are: Bangladesh, India, Indonesia, Iran, Myanmar, Pakistan, and the Philippines.\"\n}\n```",
+    "status": "complete",
+    "followups": [],
+    "status_dist": {
+      "9534": -4.511059284210205,
+      "14737": -0.011059178970754147
+    }
+  }
+}

@@ -9,7 +9,7 @@ from typing import Any
 
 from deep_researcher_demo.llm import ChatClient
 
-AUTORATER_MAX_TOKENS = 1500
+AUTORATER_MAX_TOKENS = 8000   # gemini-3 是思考模型:1500 会被内部推理吃光导致 JSON 截断(2026-07-25)
 
 
 DEEPSEARCH_QA_PROMPT = textwrap.dedent(
@@ -103,7 +103,7 @@ async def rate_report(
     answer_type: str,
     answer: str,
     response: str,
-    max_retries: int = 3,
+    max_retries: int = 1,
 ) -> dict[str, Any]:
     """Call the autorater LLM and return the prompt plus raw response."""
     rating_prompt = build_grader_prompt(

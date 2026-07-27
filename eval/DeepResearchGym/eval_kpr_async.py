@@ -54,14 +54,29 @@ async def evaluate_single_key_point(semaphore, key_point, answer, model):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ]
-        response = await client.beta.chat.completions.parse(
-                    model=model,
-                    messages=chat_pattern,
-                    response_format=KeyPointRecall,
-                    temperature=0
-        )
-        result = json.loads(response.choices[0].message.content)
-        return key_point["point_number"], (result['label'], result['justification'])
+        # 429 退避重试(2026-07-26),同 eval_quality_async
+        last = None
+        for attempt in range(2):   # 日配额按请求计:重试会放大消耗,只留 1 次(2026-07-26)
+            try:
+                response = await client.beta.chat.completions.parse(
+                            model=model,
+                            messages=chat_pattern,
+                            response_format=KeyPointRecall,
+                            temperature=0
+                )
+                result = json.loads(response.choices[0].message.content)
+                return key_point["point_number"], (result['label'], result['justification'])
+            except Exception as e:                      # noqa: BLE001
+                last = e
+                if "429" not in str(e) and "rate" not in str(e).lower():
+                    raise
+                # 睡眠期间释放信号量,否则一次 429 会堵住整条流水线(2026-07-26)
+                semaphore.release()
+                try:
+                    await asyncio.sleep(8)
+                finally:
+                    await semaphore.acquire()
+        raise last
 
 async def evaluate_answer(semaphore, answer, key_points, model):
     tasks = [evaluate_single_key_point(semaphore, key_point, answer, model) for key_point in key_points]
@@ -105,16 +120,34 @@ async def evaluate_folder_async(subfolder_name, model, path_to_reports, key_poin
 
     print(f"Skipped queries: {len(all_results)}")
 
-    semaphore = asyncio.Semaphore(100)
+    semaphore = asyncio.Semaphore(int(__import__("os").getenv("DRGYM_SEM", "100")))
 
     query_ids = [p.stem for p in folder_path.glob("*.q") if p.stem not in all_results]
     query_ids = query_ids
-    tasks = [evaluate_query(semaphore, qid, folder_path, key_point_dir, model) for qid in query_ids]
-    results = await tqdm_asyncio.gather(*tasks)
+    def _save():
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(all_results, f, indent=2, ensure_ascii=False)
 
-    for query_id, result in results:
+    # 增量落盘 + 配额耗尽早停(2026-07-25),同 eval_quality_async
+    tasks = [asyncio.ensure_future(evaluate_query(semaphore, qid, folder_path, key_point_dir, model))
+             for qid in query_ids]
+    done_n, fail_streak = 0, 0
+    for fut in tqdm_asyncio.as_completed(tasks):
+        query_id, result = await fut
         if result is not None:
             all_results[query_id] = result
+            fail_streak = 0
+        else:
+            fail_streak += 1
+        done_n += 1
+        if done_n % 10 == 0:
+            _save()
+        if fail_streak >= 30:
+            print(f"[kpr] 连续 {fail_streak} 次失败(疑似配额耗尽),提前停止并保存 {len(all_results)} 条", flush=True)
+            for t in tasks:
+                t.cancel()
+            break
+    _save()
 
     return all_results
 

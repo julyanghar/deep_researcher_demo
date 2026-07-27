@@ -16,7 +16,9 @@ from pathlib import Path
 DEMO_ROOT = Path(__file__).resolve().parents[2]
 
 HARVEST_TAGS = ("INITIAL_RESEARCH_QUESTIONS_JSON,QUERY_PLAN_JSON,RESEARCH_SUMMARY_TEXT,"
-                "SUPERVISOR_DECISION_JSON,FINAL_REPORT_MARKDOWN")  # 全链 5 项
+                "SUPERVISOR_DECISION_JSON,FINAL_REPORT_MARKDOWN,"
+                # REPORT_PARALLEL/REVIEW 路径的三类调用(2026-07-23 补,copy-rate trace 需要全链)
+                "FINAL_REPORT_OUTLINE_JSON,FINAL_REPORT_REVIEW_JSON,FINAL_REPORT_ADDITION_MARKDOWN")
 
 
 def _child_env(sample_id: str, qdir: Path, model: str, base_url: str) -> dict:
