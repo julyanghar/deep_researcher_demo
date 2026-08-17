@@ -1,5 +1,7 @@
 # 从零讲清:`--trim-loss-positions` 为什么在 USP 序列并行下会坏
 
+> **⚡ 状态更新(2026-08-01)**:本文描述的三处硬伤已在分支 `trim-usp-dev` 修复(SP-native trim:backbone 走 full 路径同款切片、行集合加 `s-j < usp_chunk_size` 上限、分母改 `usp_chunk_size`、死步垫行零掩码)。4-rank 等价性实验 8/8 PASS(u2r2+ring4 × 4 种对抗 mask),负控制确认旧代码当场崩(cat 维度 16≠15)。实验与证据:`~/modify-code-runs/eagle3-trim-usp/`。修复过程中实验探针还揪出一个 off-by-one(chunk_len 曾从 loss_mask 长度推导,而 offline 流水线的 loss_mask 比 hidden 多一格补零位——正确源头是 hidden 长度,和 full 路径同源)。本文正文保留"坏的状态"的解剖,作为理解 USP 分片语义的教材。
+
 > **缘起**:PR #705 给 SpecServe 的 eagle3 训练加了 `--trim-loss-positions`(A 级 loss 位置裁剪,省显存)。核心 maintainer 回复:"长上下文 eagle3 训练现在要用序列并行(sequence parallel),请验证这个方法和序列并行兼不兼容"。一查——**不但不兼容,而且没设防、会静默走进坏路**。这篇把"坏在哪、为什么坏"从零讲清。
 >
 > **读法**:§1 TL;DR 一句话结论;§2 概念梯子(USP 到底怎么切序列)是理解前提,别跳;§3 手把手小例子是本文核心,三处硬伤都在这一个例子上看得见;§4 追问区;§5 术语表;§6 进阶(ring/Ulysses 注意力内部,跳过不影响理解)。
@@ -79,7 +81,42 @@ usp_chunk_size = seq_length - ttt_length   # = chunk_size,即"自己那段"
 
 ### 2.4 关键:重叠尾是"草稿纸",不是"自己的地盘"
 
-为什么每张卡要多拿 `ttt_length` 个位置?因为 TTT 展开第 j 步,位置 p 的老师(teacher)在位置 `p+j`。一张卡"自己那段"最后几个位置,它们的老师落在**下一段**里。为了不用每步都跨卡去取,发料员干脆多塞 `ttt_length` 个"下一段开头的位置"进来当草稿纸——这就是重叠尾。
+#### 2.4.1 为什么非要重叠尾:TTT 每走一步,视线就往右挪一格
+
+先看单卡上 TTT 一步之内到底"引用"了哪些位置(单步显微镜)。第 j 步结束时,循环把三样东西各**左移一格**(`padding(left=False)`,把右边挤进来一个 0):`input_ids`、`position_mask`、`loss_mask`;老师那边则由滑窗 `[j : j+段长]` 完成同样的效果。两者叠加,得到一条铁律:
+
+> **第 j 步,行 p 用到的所有材料——输入 token、老师、掩码——全都指向位置 `p + j`。**
+
+j 从 0 涨到 `ttt_length`,行 p 的"视线"就从 p 一路右移到 `p + ttt_length`。
+
+现在切段。卡 0"自己那段"是 g0..g5,看它最右边的行 **g5**(玩具里 g5 恰好是监督位):
+
+| TTT 步 j | 行 g5 需要的材料在哪 | 在卡 0 自己那段(g0..g5)里吗? |
+|---|---|---|
+| 0 | g5 | 在 ✓ |
+| 1 | **g6** | **不在——是卡 1 的地盘** |
+| 2 | **g7** | **不在——也是卡 1 的** |
+
+不止 g5:自己那段**最后 `ttt_length` 行**(玩具里 g4、g5)全都有这个问题——步数走深了,视线就越界到下一段。这时只有两种设计:
+
+- **方案 A:每步跨卡去取。** 第 1..k 步,每步都向右邻卡发一次通信,要它把边界外那一列的 input_ids/老师/掩码传过来。每个 TTT 步一轮通信,代码复杂、延迟叠加。
+- **方案 B:发料时一次性多发。** 反正要的就是"下一段开头 `ttt_length` 个位置"的数据,发料员切段时**顺手多复制这一小截**进来,之后 k 步的左移全在本地缓冲区里进行,一次通信都不用。
+
+USP 选了 B。代价小到可以忽略:多存多算的比例是 `ttt_length / chunk_size`——真实场景 k≈7、chunk=16k,约 **0.04%** 的重复,换掉每步一轮跨卡通信,稳赚。这截多发的数据就是**重叠尾**。
+
+> 命名提醒(工业代码的名字别当真):源码里那个每步被左移的变量叫 `global_input_ids`([`model.py:388`](../../../SpecForge/specforge/algorithms/eagle3/model.py#L388)),名字带 "global",**实际存的是本 rank 的 local_len 段**——叫 "global" 只是相对于 `step_view` 裁剪版而言"没裁过"。
+
+#### 2.4.2 为什么"每张卡都"需要:右边界效应人人有份
+
+因为切段是**均匀切**的,每张卡自己那段都有一条右边界,右边界附近最后 `ttt_length` 行的视线**都**会越到邻居家——这不是哪张卡的特例,是"有右边界就有"的普遍效应。卡 0 的尾巴是卡 1 的头,卡 1 的尾巴是卡 2 的头……链条一路传下去。
+
+唯一的"例外"是**最后一张卡**:它右边没有下一段了,重叠尾越界(玩具里卡 1 要 g12、g13,可整条序列只到 g11)→ 发料员补零 padding([`preprocessing.py:455-460`](../../../SpecForge/specforge/data/preprocessing.py#L455-L460))。这无害,因为序列末尾本来就没有老师可言:发料员把全局最后一个位置的 loss_mask 强制置 0([`preprocessing.py:475-476`](../../../SpecForge/specforge/data/preprocessing.py#L475-L476)),而且每步左移从右边挤进来的本来就是 0——末尾行在深步数下自然失去监督,单卡全长路径同样如此。所以准确说法是:**每张卡都拿一截重叠尾,前面的卡拿到的是"邻居的头",最后一张卡拿到的是"无害的零"。**
+
+> **源码钉子**:每步左移三件套 [`model.py:505-509`](../../../SpecForge/specforge/algorithms/eagle3/model.py#L505-L509);老师滑窗 [`eagle3_adapters.py:132-134`](../../../SpecForge/specforge/core/eagle3_adapters.py#L132-L134);"留原样供 TTT 移位"的注释 [`model.py:387-388`](../../../SpecForge/specforge/algorithms/eagle3/model.py#L387-L388)。
+
+#### 2.4.3 草稿纸用完要擦掉
+
+重叠尾的**全部使命**就是上面这个:让 k 步左移不越界。它**不是**这张卡该负责出 loss 的位置——那是下一张卡的活。
 
 **用完草稿纸就得擦掉**:对齐工 `step_view` 做完移位后,把这段**裁回 `usp_chunk_size`、丢掉重叠尾**([`eagle3_adapters.py:135-144`](../../../SpecForge/specforge/core/eagle3_adapters.py#L135-L144)):
 
