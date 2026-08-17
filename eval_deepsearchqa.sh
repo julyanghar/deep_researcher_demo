@@ -164,7 +164,7 @@ if [[ "$RESUME" == "1" && "$OVERWRITE" == "1" ]]; then
 fi
 
 cmd=(
-  python3 -m eval.run_deepsearchqa
+  python3 -m eval.deepresearchqa.run_deepsearchqa
   --mode "$MODE"
   --output-dir "$OUTPUT_DIR"
   --start "$START"
