@@ -14,9 +14,7 @@ PY="${PY:-/home/yilin/anaconda3/envs/gpt-deep/bin/python}"
 set -a; source .env 2>/dev/null; set +a       # JUDGE_API_KEY/JUDGE_BASE_URL → DashScope embedding
 : "${TAVILY_API_KEY:?需先 export TAVILY_API_KEY(Tavily 搜索 key)}"
 # 备用 key(主 key 额度超了 export TAVILY_API_KEY=<其一> 重跑同命令断点续):
-#   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
-#   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
-#   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
+#   见 .env 中 TAVILY_API_KEY_BACKUP*(不进 git)
 export RESEARCH_MODE=online                    # → record + cache_relevance(块级 embedding 检索)
 export SEARCH_PROVIDER=tavily                  # 搜索引擎=Tavily(同时返回 url+正文)
 export SEARCH_BENCHMARK=drbench                 # 缓存按 <root>/drbench/q<id>/ 分类
