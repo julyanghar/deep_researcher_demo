@@ -1,9 +1,0 @@
-{"sample_id": "q57", "seg_index": 0, "round": 2, "summary_idx": 0, "tok_start": 79, "tok_end": 147, "n_tok": 68, "action_kl": 0.01204428295798228, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 1, "round": 2, "summary_idx": 1, "tok_start": 148, "tok_end": 177, "n_tok": 29, "action_kl": 0.10860408908987008, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 2, "round": 2, "summary_idx": 3, "tok_start": 178, "tok_end": 285, "n_tok": 107, "action_kl": 0.007966282582146985, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 3, "round": 2, "summary_idx": 2, "tok_start": 286, "tok_end": 315, "n_tok": 29, "action_kl": 0.011280674760857638, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 4, "round": 2, "summary_idx": 5, "tok_start": 316, "tok_end": 349, "n_tok": 33, "action_kl": 0.01029043857333083, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 5, "round": 2, "summary_idx": 4, "tok_start": 350, "tok_end": 378, "n_tok": 28, "action_kl": 0.0014834381434576781, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 6, "round": 2, "summary_idx": 6, "tok_start": 379, "tok_end": 443, "n_tok": 64, "action_kl": 0.004997342954180712, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 7, "round": 2, "summary_idx": 7, "tok_start": 444, "tok_end": 522, "n_tok": 78, "action_kl": 5.840880915180681e-17, "flip": false, "truth_status": "complete", "swap_status": "complete"}
-{"sample_id": "q57", "seg_index": 8, "round": 2, "summary_idx": 8, "tok_start": 523, "tok_end": 606, "n_tok": 83, "action_kl": 0.00011681745513533856, "flip": false, "truth_status": "complete", "swap_status": "complete"}
