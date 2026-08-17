@@ -1,0 +1,16 @@
+angelslim: 载入 summary 20 / report 10
+
+[summary 分析类] angelslim  成功 20/20  用时 154s
+   draft=23499 accepted=2520 steps=7833
+   接受率 accepted/draft = 10.7%   mean acceptance length = 1.32 tok/前向
+   逐位接受率 pos0=25.4% pos1=4.9% pos2=1.8%
+
+[report 照抄类] angelslim  成功 10/10  用时 395s
+   draft=48081 accepted=8383 steps=16027
+   接受率 accepted/draft = 17.4%   mean acceptance length = 1.52 tok/前向
+   逐位接受率 pos0=34.3% pos1=12.2% pos2=5.8%
+
+============================================================
+对照 suffix: summary 32% / report 57%
+angelslim:      summary 10.7% (AL 1.32) / report 17.4% (AL 1.52)
+→ summary 差 -21.3% , report 差 -39.6%

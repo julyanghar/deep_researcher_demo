@@ -1,0 +1,16 @@
+redhat: 载入 summary 20 / report 10
+
+[summary 分析类] redhat  成功 20/20  用时 149s
+   draft=22428 accepted=2983 steps=7476
+   接受率 accepted/draft = 13.3%   mean acceptance length = 1.40 tok/前向
+   逐位接受率 pos0=25.7% pos1=9.3% pos2=4.9%
+
+[report 照抄类] redhat  成功 10/10  用时 392s
+   draft=45570 accepted=9238 steps=15190
+   接受率 accepted/draft = 20.3%   mean acceptance length = 1.61 tok/前向
+   逐位接受率 pos0=33.7% pos1=17.2% pos2=9.9%
+
+============================================================
+对照 suffix: summary 32% / report 57%
+redhat:      summary 13.3% (AL 1.40) / report 20.3% (AL 1.61)
+→ summary 差 -18.7% , report 差 -36.7%

@@ -1,0 +1,18 @@
+=== eagle3 /metrics 现有 spec_decode_* 指标 ===
+
+载入 summary 40 条, report 20 条
+
+============================================================
+
+[summary 分析类]  成功 40/40  用时 306s
+   draft=0  accepted=0  接受率 accepted/draft = 0.0%
+   (num_spec_tokens=3 → 每步均接受 ≈ 0.00 tok, 每次前向出 tok ≈ 1.00)
+
+[report 照抄类]  成功 20/20  用时 710s
+   draft=0  accepted=0  接受率 accepted/draft = 0.0%
+   (num_spec_tokens=3 → 每步均接受 ≈ 0.00 tok, 每次前向出 tok ≈ 1.00)
+
+============================================================
+对照 suffix(20题记录): summary 32% / report 57%
+eagle3:                 summary 0.0% / report 0.0%
+→ summary 差: -32.0%   report 差: -57.0%

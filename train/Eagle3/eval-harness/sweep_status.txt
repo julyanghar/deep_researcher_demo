@@ -1,0 +1,19 @@
+== EAGLE SWEEP start Thu Jul  9 07:35:46 PM CDT 2026 ==
+-- launch k1 (k=1 extra='' timing=) Thu Jul  9 07:35:58 PM CDT 2026
+[k1] ASSERT k=1 OK
+[k1] DONE Thu Jul  9 07:55:35 PM CDT 2026    decode tok/s = 32.7   (client-wall tok/s = 31.3)
+-- launch k2 (k=2 extra='' timing=) Thu Jul  9 07:55:47 PM CDT 2026
+[k2] ASSERT k=2 OK
+[k2] DONE Thu Jul  9 08:14:05 PM CDT 2026    decode tok/s = 35.6   (client-wall tok/s = 34.0)
+-- launch k5 (k=5 extra='' timing=) Thu Jul  9 08:14:17 PM CDT 2026
+[k5] ASSERT k=5 OK
+[k5] DONE Thu Jul  9 08:32:23 PM CDT 2026    decode tok/s = 36.2   (client-wall tok/s = 34.5)
+-- launch k3eager (k=3 extra='--enforce-eager' timing=) Thu Jul  9 08:32:35 PM CDT 2026
+[k3eager] ASSERT k=3 OK
+[k3eager] ASSERT eager OK
+[k3eager] DONE Thu Jul  9 08:51:01 PM CDT 2026    decode tok/s = 35.1   (client-wall tok/s = 33.5)
+-- launch k3timing (k=3 extra='' timing=1) Thu Jul  9 08:51:13 PM CDT 2026
+[k3timing] ASSERT k=3 OK
+[k3timing] DONE Thu Jul  9 09:10:39 PM CDT 2026    decode tok/s = 34.0   (client-wall tok/s = 32.5)
+[k3timing] timing行=476
+SWEEP_DONE Thu Jul  9 09:10:51 PM CDT 2026

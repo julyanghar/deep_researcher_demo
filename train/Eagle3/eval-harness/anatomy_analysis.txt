@@ -1,0 +1,24 @@
+=== 每步成本 & AL(全臂)===
+臂               k |  sum ms/步    AL  tok/s |  rep ms/步    AL  tok/s
+k1              1 |      32.6  1.29   39.6 |      41.7  1.37   32.7
+k2              2 |      33.2  1.36   41.1 |      42.5  1.51   35.6
+eagle3_redhat   3 |      34.0  1.41   41.5 |      43.3  1.58   36.5
+k5              5 |      35.7  1.42   39.6 |      45.3  1.64   36.2
+k3eager         3 |      35.5  1.42   39.8 |      45.2  1.58   35.1
+k3timing        3 |      37.4  1.41   37.6 |      46.5  1.58   34.0
+
+=== 斜率-截距拟合:每步成本 vs k(cudagraph 臂 k=1,2,3,5)===
+[summary] 每步 = 31.7ms + 0.80ms×k   残差 ['0.1', '-0.1', '-0.1', '0.1']
+        → 每个草稿位置边际费 0.80ms;固定费(截距−vanilla基线) 见下
+[report] 每步 = 40.7ms + 0.90ms×k   残差 ['0.1', '-0.1', '-0.1', '0.1']
+        → 每个草稿位置边际费 0.90ms;固定费(截距−vanilla基线) 见下
+
+vanilla 基线: summary 23.5ms / report 24.1ms(前测)
+
+=== eager 对照(k=3)===
+[summary] cudagraph 34.0ms vs eager 35.5ms → Δ +1.6ms
+[report] cudagraph 43.3ms vs eager 45.2ms → Δ +1.9ms
+
+=== EAGLE_TIMING 分段账本(k3timing,各worker最后一行=收敛均值)===
+n=23800  combine=0.67 prep=0.69 fwd1=1.07 loop(k-1次)=2.09  → propose 总 4.52ms
+(loop/2 = 每次后续 drafter 前向 ≈ 1.04ms;fwd1 含首个 drafter 前向+采样)

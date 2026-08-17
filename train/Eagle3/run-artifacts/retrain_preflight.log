@@ -1,0 +1,279 @@
+W0713 17:13:43.656000 4028876 site-packages/torch/distributed/run.py:851] 
+W0713 17:13:43.656000 4028876 site-packages/torch/distributed/run.py:851] *****************************************
+W0713 17:13:43.656000 4028876 site-packages/torch/distributed/run.py:851] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0713 17:13:43.656000 4028876 site-packages/torch/distributed/run.py:851] *****************************************
+Set TORCH_CUDA_ARCH_LIST to 8.9
+/home/yilin/SpecForge/specforge/modeling/draft/llama3_eagle.py:33: UserWarning: flash_attn is not found, falling back to flex_attention. Please install flash_attn if you want to use the flash attention backend.
+  warnings.warn(
+Set TORCH_CUDA_ARCH_LIST to 8.9
+/home/yilin/SpecForge/specforge/modeling/draft/llama3_eagle.py:33: UserWarning: flash_attn is not found, falling back to flex_attention. Please install flash_attn if you want to use the flash attention backend.
+  warnings.warn(
+[transformers] The `check_model_inputs` decorator is deprecated in favor of `merge_with_config_defaults`.
+Set TORCH_CUDA_ARCH_LIST to 8.9
+/home/yilin/SpecForge/specforge/modeling/draft/llama3_eagle.py:33: UserWarning: flash_attn is not found, falling back to flex_attention. Please install flash_attn if you want to use the flash attention backend.
+  warnings.warn(
+Set TORCH_CUDA_ARCH_LIST to 8.9
+/home/yilin/SpecForge/specforge/modeling/draft/llama3_eagle.py:33: UserWarning: flash_attn is not found, falling back to flex_attention. Please install flash_attn if you want to use the flash attention backend.
+  warnings.warn(
+[transformers] The `check_model_inputs` decorator is deprecated in favor of `merge_with_config_defaults`.
+[transformers] The `check_model_inputs` decorator is deprecated in favor of `merge_with_config_defaults`.
+[transformers] The `check_model_inputs` decorator is deprecated in favor of `merge_with_config_defaults`.
+
+ -----------【args】-----------
+target_model_path            /data/yilin/huggingface/Qwen3-32B
+trust_remote_code           ·················· False
+draft_model_config          ··················· None
+embedding_key                model.embed_tokens.weight
+lm_head_key                 ········· lm_head.weight
+is_vlm                      ·················· False
+trim_loss_positions         ··················· True
+trim_prompt_rows            ··················· True
+shard_target_output         ··················· True
+target_model_backend        ················· sglang
+train_data_path              /home/yilin/modify-code-runs/eagle3-trim/train_main12k_3a1078d2.jsonl
+train_hidden_states_path    ··················· None
+eval_hidden_states_path     ··················· None
+eval_data_path              ··················· None
+chat_template               ········· qwen3-instruct
+is_preformatted             ·················· False
+train_only_last_turn        ·················· False
+build_dataset_num_proc      ······················ 8
+dataloader_num_workers      ······················ 4
+num_epochs                  ······················ 3
+max_num_steps               ······················ 2
+batch_size                  ······················ 1
+learning_rate               ·················· 2e-05
+max_length                  ·················· 12288
+warmup_ratio                ··················· 0.05
+total_steps                 ··················· None
+max_grad_norm               ···················· 0.5
+ttt_length                  ······················ 3
+resume                      ·················· False
+ckpt_dir                     /data/yilin/huggingface/Qwen3-32B-eagle3-angelslim
+eval_interval               ··················· 5000
+save_interval               ···················· 120
+log_interval                ····················· 50
+seed                        ······················ 0
+draft_accumulation_steps    ····················· 16
+lk_loss_type                ··················· None
+kl_scale                    ···················· 1.0
+kl_decay                    ···················· 3.0
+tp_size                     ······················ 4
+sp_ulysses_size             ······················ 1
+sp_ring_size                ······················ 1
+compact_teacher             ·················· False
+compact_teacher_chunk_size  ··················· None
+attention_backend           ········· flex_attention
+cache_key                   ··················· None
+cache_dir                    /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2
+output_dir                   /home/yilin/modify-code-runs/eagle3-trim/preflight_out
+verbose                     ·················· False
+dist_timeout                ····················· 20
+model_download_dir          ··················· None
+min_pixels                  ·················· 50176
+max_pixels                  ················· 802816
+profile                     ·················· False
+profile_start_step          ····················· 30
+profile_num_steps           ······················ 4
+profile_record_shapes       ·················· False
+sglang_attention_backend    ············· flashinfer
+sglang_mem_fraction_static  ··················· 0.44
+sglang_context_length       ··················· None
+sglang_enable_nccl_nvls     ·················· False
+sglang_enable_symm_mem      ·················· False
+sglang_enable_torch_compile ·················· False
+sglang_enable_dp_attention  ·················· False
+sglang_enable_dp_lm_head    ·················· False
+sglang_ep_size              ······················ 1
+report_to                   ··················· none
+wandb_project               ··················· None
+wandb_name                  ··················· None
+wandb_key                   ··················· None
+wandb_offline               ·················· False
+wandb_dir                   ··················· None
+swanlab_project             ··················· None
+swanlab_name                ··················· None
+swanlab_key                 ··················· None
+mlflow_tracking_uri         ··················· None
+mlflow_experiment_name      ··················· None
+mlflow_run_name             ··················· None
+dp_size                     ······················ 1
+target_batch_size           ······················ 4
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W713 17:13:54.218445973 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+Draft model config saved to: /home/yilin/SpecForge/configs/qwen3-32b-eagle3-auto.json
+Set draft model tie_word_embeddings to FalseSet draft model tie_word_embeddings to FalseSet draft model tie_word_embeddings to FalseSet draft model tie_word_embeddings to False
+
+
+
+Set draft model tie_word_embeddings to False
+Set draft model tie_word_embeddings to False
+Set draft model tie_word_embeddings to False
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Set draft model tie_word_embeddings to False[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/15 [00:00<?, ?it/s]Loading weights:   0%|          | 0/15 [00:00<?, ?it/s]Loading weights:   0%|          | 0/15 [00:00<?, ?it/s]Loading weights:   0%|          | 0/15 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 2/15 [00:00<00:00, 13.53it/s]Loading weights:  13%|█▎        | 2/15 [00:00<00:01, 10.08it/s]Loading weights:  13%|█▎        | 2/15 [00:00<00:01, 10.18it/s]Loading weights:  13%|█▎        | 2/15 [00:00<00:01, 10.47it/s]Loading weights:  47%|████▋     | 7/15 [00:00<00:00, 23.86it/s]Loading weights:  27%|██▋       | 4/15 [00:00<00:01,  9.41it/s]Loading weights:  27%|██▋       | 4/15 [00:00<00:01,  9.86it/s]Loading weights:  27%|██▋       | 4/15 [00:00<00:01,  9.95it/s]Loading weights: 100%|██████████| 15/15 [00:00<00:00, 32.15it/s]
+Loading weights:  67%|██████▋   | 10/15 [00:00<00:00, 20.20it/s]Loading weights: 100%|██████████| 15/15 [00:00<00:00, 29.35it/s]
+Loading weights:  53%|█████▎    | 8/15 [00:00<00:00, 18.23it/s]Loading weights: 100%|██████████| 15/15 [00:00<00:00, 29.22it/s]
+Loading weights:  53%|█████▎    | 8/15 [00:00<00:00, 18.27it/s]Loading weights: 100%|██████████| 15/15 [00:00<00:00, 29.42it/s]
+[DEBUG] tp_size=4, dp_size=1, attn_cp_size=1, moe_dp_size=1[DEBUG] tp_size=4, dp_size=1, attn_cp_size=1, moe_dp_size=1
+
+[DEBUG] tp_size=4, dp_size=1, attn_cp_size=1, moe_dp_size=1
+[DEBUG] tp_size=4, dp_size=1, attn_cp_size=1, moe_dp_size=1
+CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+Multi-thread loading shards:   0% Completed | 0/17 [00:00<?, ?it/s]Multi-thread loading shards:   6% Completed | 1/17 [00:00<00:04,  3.53it/s]Multi-thread loading shards:  12% Completed | 2/17 [00:00<00:05,  2.94it/s]Multi-thread loading shards:  18% Completed | 3/17 [00:01<00:04,  2.91it/s]Multi-thread loading shards:  24% Completed | 4/17 [00:01<00:04,  2.90it/s]Multi-thread loading shards:  29% Completed | 5/17 [00:01<00:04,  2.91it/s]Multi-thread loading shards:  35% Completed | 6/17 [00:02<00:03,  2.84it/s]Multi-thread loading shards:  41% Completed | 7/17 [00:02<00:03,  2.79it/s]Multi-thread loading shards:  47% Completed | 8/17 [00:02<00:03,  2.76it/s]Multi-thread loading shards:  53% Completed | 9/17 [00:03<00:02,  2.74it/s]Multi-thread loading shards:  59% Completed | 10/17 [00:03<00:02,  2.70it/s]Multi-thread loading shards:  65% Completed | 11/17 [00:03<00:02,  2.76it/s]Multi-thread loading shards:  71% Completed | 12/17 [00:04<00:01,  2.81it/s]Multi-thread loading shards:  76% Completed | 13/17 [00:04<00:01,  2.80it/s]Multi-thread loading shards:  82% Completed | 14/17 [00:04<00:01,  2.80it/s]Multi-thread loading shards:  88% Completed | 15/17 [00:05<00:00,  2.84it/s]Multi-thread loading shards:  94% Completed | 16/17 [00:05<00:00,  2.87it/s]Multi-thread loading shards: 100% Completed | 17/17 [00:05<00:00,  3.14it/s]Multi-thread loading shards: 100% Completed | 17/17 [00:05<00:00,  2.88it/s]
+wrapped logits_processor with LogitsProcessorForEAGLE3
+wrapped logits_processor with LogitsProcessorForEAGLE3
+wrapped logits_processor with LogitsProcessorForEAGLE3
+wrapped logits_processor with LogitsProcessorForEAGLE3
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 828 examples [00:00, 8259.43 examples/s]Generating train split: 2000 examples [00:00, 5296.31 examples/s]Generating train split: 3000 examples [00:00, 6197.39 examples/s]Generating train split: 4000 examples [00:00, 6634.24 examples/s]Generating train split: 5000 examples [00:00, 6704.81 examples/s]Generating train split: 5886 examples [00:00, 7252.79 examples/s]Generating train split: 6887 examples [00:01, 6463.98 examples/s]Generating train split: 7681 examples [00:01, 6131.35 examples/s]Generating train split: 7681 examples [00:01, 6041.30 examples/s]
+dataset is cached at /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/processed_dataset/6906d743b003c67bb1c00ce9783c0e3b.pkl
+Map (num_proc=8):   0%|          | 0/7681 [00:00<?, ? examples/s]/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+/home/yilin/SpecForge/specforge/data/parse.py:180: UserWarning: The first message is from system, we will use the system prompt from the data and ignore the system prompt from the template
+  warnings.warn(
+Map (num_proc=8):  13%|█▎        | 961/7681 [01:10<08:14, 13.59 examples/s]Map (num_proc=8):  25%|██▌       | 1921/7681 [01:13<03:04, 31.22 examples/s]Map (num_proc=8):  38%|███▊      | 2881/7681 [01:14<01:25, 55.92 examples/s]Map (num_proc=8):  50%|█████     | 3841/7681 [01:16<00:44, 86.11 examples/s]Map (num_proc=8):  63%|██████▎   | 4801/7681 [01:18<00:23, 124.06 examples/s]Map (num_proc=8):  75%|███████▌  | 5761/7681 [01:19<00:11, 167.24 examples/s]Map (num_proc=8):  88%|████████▊ | 6721/7681 [01:21<00:04, 228.37 examples/s]Map (num_proc=8): 100%|██████████| 7681/7681 [01:22<00:00, 275.08 examples/s]Map (num_proc=8): 100%|██████████| 7681/7681 [01:23<00:00, 92.31 examples/s] 
+Counting tokens for vocab mapping:   0%|          | 0/7681 [00:00<?, ?it/s]Counting tokens for vocab mapping:   1%|          | 78/7681 [00:00<00:09, 778.34it/s]Counting tokens for vocab mapping:   3%|▎         | 227/7681 [00:00<00:06, 1193.92it/s]Counting tokens for vocab mapping:   5%|▍         | 375/7681 [00:00<00:05, 1324.18it/s]Counting tokens for vocab mapping:   7%|▋         | 521/7681 [00:00<00:05, 1375.31it/s]Counting tokens for vocab mapping:   9%|▊         | 672/7681 [00:00<00:04, 1422.91it/s]Counting tokens for vocab mapping:  11%|█         | 820/7681 [00:00<00:04, 1441.92it/s]Counting tokens for vocab mapping:  13%|█▎        | 967/7681 [00:00<00:04, 1448.70it/s]Counting tokens for vocab mapping:  14%|█▍        | 1112/7681 [00:00<00:04, 1448.42it/s]Counting tokens for vocab mapping:  16%|█▋        | 1260/7681 [00:00<00:04, 1457.43it/s]Counting tokens for vocab mapping:  18%|█▊        | 1408/7681 [00:01<00:04, 1462.64it/s]Counting tokens for vocab mapping:  20%|██        | 1556/7681 [00:01<00:04, 1466.90it/s]Counting tokens for vocab mapping:  22%|██▏       | 1703/7681 [00:01<00:04, 1459.77it/s]Counting tokens for vocab mapping:  24%|██▍       | 1853/7681 [00:01<00:03, 1468.84it/s]Counting tokens for vocab mapping:  26%|██▌       | 2003/7681 [00:01<00:03, 1476.10it/s]Counting tokens for vocab mapping:  28%|██▊       | 2151/7681 [00:01<00:03, 1394.44it/s]Counting tokens for vocab mapping:  30%|██▉       | 2292/7681 [00:01<00:04, 1342.19it/s]Counting tokens for vocab mapping:  32%|███▏      | 2438/7681 [00:01<00:03, 1374.00it/s]Counting tokens for vocab mapping:  34%|███▎      | 2588/7681 [00:01<00:03, 1409.09it/s]Counting tokens for vocab mapping:  36%|███▌      | 2735/7681 [00:01<00:03, 1426.62it/s]Counting tokens for vocab mapping:  37%|███▋      | 2879/7681 [00:02<00:03, 1426.61it/s]Counting tokens for vocab mapping:  39%|███▉      | 3026/7681 [00:02<00:03, 1439.15it/s]Counting tokens for vocab mapping:  41%|████▏     | 3173/7681 [00:02<00:03, 1445.84it/s]Counting tokens for vocab mapping:  43%|████▎     | 3321/7681 [00:02<00:02, 1455.87it/s]Counting tokens for vocab mapping:  45%|████▌     | 3470/7681 [00:02<00:02, 1465.93it/s]Counting tokens for vocab mapping:  47%|████▋     | 3620/7681 [00:02<00:02, 1473.60it/s]Counting tokens for vocab mapping:  49%|████▉     | 3769/7681 [00:02<00:02, 1476.61it/s]Counting tokens for vocab mapping:  51%|█████     | 3917/7681 [00:02<00:02, 1475.63it/s]Counting tokens for vocab mapping:  53%|█████▎    | 4065/7681 [00:02<00:02, 1466.94it/s]Counting tokens for vocab mapping:  55%|█████▍    | 4212/7681 [00:02<00:02, 1465.63it/s]Counting tokens for vocab mapping:  57%|█████▋    | 4360/7681 [00:03<00:02, 1469.88it/s]Counting tokens for vocab mapping:  59%|█████▊    | 4508/7681 [00:03<00:02, 1472.87it/s]Counting tokens for vocab mapping:  61%|██████    | 4656/7681 [00:03<00:02, 1388.95it/s]Counting tokens for vocab mapping:  62%|██████▏   | 4796/7681 [00:03<00:02, 1345.72it/s]Counting tokens for vocab mapping:  64%|██████▍   | 4943/7681 [00:03<00:01, 1379.08it/s]Counting tokens for vocab mapping:  66%|██████▋   | 5089/7681 [00:03<00:01, 1402.28it/s]Counting tokens for vocab mapping:  68%|██████▊   | 5236/7681 [00:03<00:01, 1420.09it/s]Counting tokens for vocab mapping:  70%|███████   | 5386/7681 [00:03<00:01, 1442.01it/s]Counting tokens for vocab mapping:  73%|███████▎  | 5577/7681 [00:03<00:01, 1580.19it/s]Counting tokens for vocab mapping:  76%|███████▌  | 5845/7681 [00:03<00:00, 1905.04it/s]Counting tokens for vocab mapping:  80%|███████▉  | 6112/7681 [00:04<00:00, 2132.19it/s]Counting tokens for vocab mapping:  83%|████████▎ | 6362/7681 [00:04<00:00, 2241.77it/s]Counting tokens for vocab mapping:  86%|████████▌ | 6623/7681 [00:04<00:00, 2350.75it/s]Counting tokens for vocab mapping:  90%|████████▉ | 6895/7681 [00:04<00:00, 2459.87it/s]Counting tokens for vocab mapping:  93%|█████████▎| 7160/7681 [00:04<00:00, 2515.40it/s]Counting tokens for vocab mapping:  97%|█████████▋| 7413/7681 [00:04<00:00, 2518.16it/s]Counting tokens for vocab mapping: 100%|██████████| 7681/7681 [00:04<00:00, 1641.03it/s]
+Added missing tokens to reach draft vocab size: 32000
+Total tokens after addition: 42209
+top 32000 token frequency ratio: 99.67%
+Saved vocab mapping to: /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/vocab_mapping/e8507b83c74c226f14a6e70ed5306d4e.pt
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+dataset is cached at /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/processed_dataset/6906d743b003c67bb1c00ce9783c0e3b.pkldataset is cached at /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/processed_dataset/6906d743b003c67bb1c00ce9783c0e3b.pkl
+
+dataset is cached at /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/processed_dataset/6906d743b003c67bb1c00ce9783c0e3b.pkl
+Loading vocab mapping from the cached file at: /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/vocab_mapping/e8507b83c74c226f14a6e70ed5306d4e.pt
+Loading vocab mapping from the cached file at: /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/vocab_mapping/e8507b83c74c226f14a6e70ed5306d4e.pt
+Loading vocab mapping from the cached file at: /home/yilin/modify-code-runs/eagle3-trim/cache_retrain12k_3a1078d2/vocab_mapping/e8507b83c74c226f14a6e70ed5306d4e.pt
+Training Epoch 0:   0%|          | 0/1920 [00:00<?, ?it/s]MCTRIM_SC4 step=0 n_sup=432 ref_full=0.2215352505 ref_trim=0.2215379030 ker_full=0.2215352207 ker_trim=0.2215379030
+MCTRIM_SC step=0 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=6.250e-02
+MCTRIM_loss step=0 trim=on loss=0.2215379030 acc=0.131944 ar=0.122814 n_sup=432 L=11155
+MCTRIM_SCB step=1 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=1 n_sup=432 ref_full=0.3062532544 ref_trim=0.3062412441 ker_full=0.3062532544 ker_trim=0.3062412441
+MCTRIM_SC step=1 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.3062412441 acc=0.069444 ar=0.064914 n_sup=432 L=11155
+MCTRIM_SCB step=2 hid_maxdiff=3.000e+00
+MCTRIM_SC4 step=2 n_sup=432 ref_full=0.3394686580 ref_trim=0.3395023048 ker_full=0.3394686282 ker_trim=0.3395023048
+MCTRIM_SC step=2 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.3395023048 acc=0.069444 ar=0.065603 n_sup=432 L=11155
+MCTRIM_SC4 step=0 n_sup=539 ref_full=0.2764222622 ref_trim=0.2763504684 ker_full=0.2764222920 ker_trim=0.2763504684
+MCTRIM_SC step=0 tp=3.576e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=6.250e-02
+MCTRIM_loss step=0 trim=on loss=0.2763504684 acc=0.133581 ar=0.117640 n_sup=539 L=11155
+MCTRIM_SC4 step=0 n_sup=548 ref_full=0.0405187793 ref_trim=0.0405313149 ker_full=0.0405187756 ker_trim=0.0405313149
+MCTRIM_SC step=0 tp=6.557e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=0 trim=on loss=0.0405313149 acc=0.142336 ar=0.363237 n_sup=548 L=11155
+MCTRIM_SCB step=1 hid_maxdiff=3.000e+00
+MCTRIM_SC4 step=1 n_sup=539 ref_full=0.3746945858 ref_trim=0.3747144043 ker_full=0.3746946156 ker_trim=0.3747143745
+MCTRIM_SC step=1 tp=3.576e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.3747143745 acc=0.064935 ar=0.051915 n_sup=539 L=11155
+MCTRIM_SCB step=2 hid_maxdiff=4.000e+00
+MCTRIM_SC4 step=2 n_sup=539 ref_full=0.4163346887 ref_trim=0.4163110852 ker_full=0.4163346887 ker_trim=0.4163110852
+MCTRIM_SC step=2 tp=3.576e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.875e-01
+MCTRIM_loss step=2 trim=on loss=0.4163110852 acc=0.061224 ar=0.053160 n_sup=539 L=11155
+MCTRIM_SCB step=1 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=1 n_sup=548 ref_full=0.1083269045 ref_trim=0.1082689688 ker_full=0.1083268970 ker_trim=0.1082689688
+MCTRIM_SC step=1 tp=6.557e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.1082689688 acc=0.074818 ar=0.046038 n_sup=548 L=11155
+MCTRIM_SCB step=2 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=2 n_sup=548 ref_full=0.1126973107 ref_trim=0.1126639247 ker_full=0.1126973107 ker_trim=0.1126639247
+MCTRIM_SC step=2 tp=6.557e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.1126639247 acc=0.051095 ar=0.019385 n_sup=548 L=11155
+MCTRIM_SC4 step=0 n_sup=438 ref_full=0.0498373657 ref_trim=0.0498578735 ker_full=0.0498373657 ker_trim=0.0498578697
+MCTRIM_SC step=0 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=0 trim=on loss=0.0498578697 acc=0.187215 ar=0.373535 n_sup=438 L=11155
+MCTRIM_SCB step=1 hid_maxdiff=1.500e+00
+MCTRIM_SC4 step=1 n_sup=438 ref_full=0.0782436505 ref_trim=0.0782433003 ker_full=0.0782436505 ker_trim=0.0782433003
+MCTRIM_SC step=1 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=6.641e-02
+MCTRIM_loss step=1 trim=on loss=0.0782433003 acc=0.114155 ar=0.132877 n_sup=438 L=11155
+MCTRIM_SCB step=2 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=2 n_sup=438 ref_full=0.0942204669 ref_trim=0.0942236632 ker_full=0.0942204669 ker_trim=0.0942236558
+MCTRIM_SC step=2 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.0942236558 acc=0.105023 ar=0.068000 n_sup=438 L=11155
+Training Epoch 0:   0%|          | 0/1920 [06:33<?, ?it/s, loss=0.20, acc=0.10, acceptance_rate=0.08, time=393.38s]Training Epoch 0:   0%|          | 1/1920 [06:33<209:41:45, 393.38s/it, loss=0.20, acc=0.10, acceptance_rate=0.08, time=393.38s]MCTRIM_SC4 step=0 n_sup=568 ref_full=0.1032772288 ref_trim=0.1032060757 ker_full=0.1032772437 ker_trim=0.1032060757
+MCTRIM_SC step=0 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=0 trim=on loss=0.1032060757 acc=0.144366 ar=0.242473 n_sup=568 L=11735
+MCTRIM_SC4 step=0 n_sup=528 ref_full=0.0631648153 ref_trim=0.0631785691 ker_full=0.0631648228 ker_trim=0.0631785840
+MCTRIM_SC4 step=0 n_sup=600 ref_full=0.0635656640 ref_trim=0.0635656640 ker_full=0.0635656714 ker_trim=0.0635656714
+MCTRIM_SC step=0 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_SC step=0 tp=4.768e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=0.000e+00
+MCTRIM_loss step=0 trim=on loss=0.0631785840 acc=0.166667 ar=0.308906 n_sup=528 L=11735
+MCTRIM_loss step=0 trim=on loss=0.0635656714 acc=0.155000 ar=0.293280 n_sup=600 L=11735
+MCTRIM_SC4 step=0 n_sup=642 ref_full=0.2955949008 ref_trim=0.2956171930 ker_full=0.2955949306 ker_trim=0.2956171930
+MCTRIM_SC step=0 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=9.375e-02
+MCTRIM_loss step=0 trim=on loss=0.2956171930 acc=0.138629 ar=0.132808 n_sup=642 L=11735
+MCTRIM_SCB step=1 hid_maxdiff=1.500e+00
+MCTRIM_SCB step=1 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=1 n_sup=568 ref_full=0.1744887680 ref_trim=0.1744763702 ker_full=0.1744887680 ker_trim=0.1744763702
+MCTRIM_SC step=1 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.1744763702 acc=0.063380 ar=0.065843 n_sup=568 L=11735
+MCTRIM_SC4 step=1 n_sup=528 ref_full=0.1025312170 ref_trim=0.1025034040 ker_full=0.1025312096 ker_trim=0.1025034189
+MCTRIM_SC step=1 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.1025034189 acc=0.107955 ar=0.092420 n_sup=528 L=11735
+MCTRIM_SCB step=2 hid_maxdiff=2.500e+00
+MCTRIM_SCB step=2 hid_maxdiff=2.500e+00
+MCTRIM_SC4 step=2 n_sup=528 ref_full=0.1139407232 ref_trim=0.1139210463 ker_full=0.1139407381 ker_trim=0.1139210537
+MCTRIM_SC step=2 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.1139210537 acc=0.083333 ar=0.056334 n_sup=528 L=11735
+MCTRIM_SC4 step=2 n_sup=568 ref_full=0.2069606781 ref_trim=0.2068823278 ker_full=0.2069606930 ker_trim=0.2068823278
+MCTRIM_SC step=2 tp=4.172e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.2068823278 acc=0.029930 ar=0.024078 n_sup=568 L=11735
+MCTRIM_SCB step=1 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=1 n_sup=600 ref_full=0.1370452940 ref_trim=0.1370691210 ker_full=0.1370453089 ker_trim=0.1370691210
+MCTRIM_SC step=1 tp=4.768e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.1370691210 acc=0.076667 ar=0.056879 n_sup=600 L=11735
+MCTRIM_SCB step=1 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=1 n_sup=642 ref_full=0.4244975150 ref_trim=0.4244855046 ker_full=0.4244975448 ker_trim=0.4244854450
+MCTRIM_SC step=1 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=1 trim=on loss=0.4244854450 acc=0.059190 ar=0.062369 n_sup=642 L=11735
+MCTRIM_SCB step=2 hid_maxdiff=2.000e+00
+MCTRIM_SC4 step=2 n_sup=600 ref_full=0.1379714608 ref_trim=0.1379622668 ker_full=0.1379714608 ker_trim=0.1379622668
+MCTRIM_SC step=2 tp=4.768e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.250e-01
+MCTRIM_loss step=2 trim=on loss=0.1379622668 acc=0.048333 ar=0.043199 n_sup=600 L=11735
+MCTRIM_SCB step=2 hid_maxdiff=4.000e+00
+MCTRIM_SC4 step=2 n_sup=642 ref_full=0.4818450809 ref_trim=0.4818557501 ker_full=0.4818451107 ker_trim=0.4818557501
+MCTRIM_SC step=2 tp=2.980e-07 tpd=0.000e+00 tok=0 pm=0.000e+00 logits=1.719e-01
+MCTRIM_loss step=2 trim=on loss=0.4818557501 acc=0.031153 ar=0.045003 n_sup=642 L=11735
+Training Epoch 0:   0%|          | 1/1920 [06:51<209:41:45, 393.38s/it, loss=0.19, acc=0.09, acceptance_rate=0.13, time=17.82s] Training Epoch 0:   0%|          | 1/1920 [06:51<219:14:32, 411.29s/it, loss=0.19, acc=0.09, acceptance_rate=0.13, time=17.82s]
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:821: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  prev_state_dict_settings = FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:821: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  prev_state_dict_settings = FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:821: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  prev_state_dict_settings = FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:821: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  prev_state_dict_settings = FullyShardedDataParallel.set_state_dict_type(
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.44s/it]Writing model shards: 100%|██████████| 1/1 [00:01<00:00,  1.44s/it]
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:828: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:828: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:828: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  FullyShardedDataParallel.set_state_dict_type(
+/home/yilin/anaconda3/envs/specforge/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:828: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  FullyShardedDataParallel.set_state_dict_type(
+RETRAIN_DONE_preflight exit=0

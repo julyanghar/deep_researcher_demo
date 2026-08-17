@@ -1,0 +1,319 @@
+{
+ "label": "k1",
+ "summary": {
+  "n": 20,
+  "gen": 11506,
+  "tps_decode": 39.62022420783923,
+  "tps_wall": 35.49567990702263,
+  "accept": 0.28901604398070235
+ },
+ "report": {
+  "n": 10,
+  "gen": 25000,
+  "tps_decode": 32.72904874589505,
+  "tps_wall": 31.327191430810892,
+  "accept": 0.36540457848440144
+ },
+ "calls": [
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:0",
+   "tag": "summary",
+   "gen": 463,
+   "decode_s": 12.731424,
+   "ttft_s": 1.926993,
+   "wall": 14.66532572451979,
+   "chash": "256afe31746adfc7e257adb31dbd3b74",
+   "clen": 786
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:1",
+   "tag": "summary",
+   "gen": 572,
+   "decode_s": 14.535175,
+   "ttft_s": 1.57255,
+   "wall": 16.113388068974018,
+   "chash": "e6030d65571e52642f4b42eff4f7af22",
+   "clen": 922
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:2",
+   "tag": "summary",
+   "gen": 667,
+   "decode_s": 16.590545,
+   "ttft_s": 1.632075,
+   "wall": 18.228904747404158,
+   "chash": "fd8a88b39aa06a785c4780b98631d8fd",
+   "clen": 1082
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:3",
+   "tag": "summary",
+   "gen": 597,
+   "decode_s": 15.644488,
+   "ttft_s": 1.677841,
+   "wall": 17.328249051235616,
+   "chash": "f1adc3f8eaf16bc4f9e3186d631dc5a4",
+   "clen": 992
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:4",
+   "tag": "summary",
+   "gen": 706,
+   "decode_s": 17.122002,
+   "ttft_s": 1.771015,
+   "wall": 18.899151293560863,
+   "chash": "15bfbd5a79017c316a6d7f5c9614b8eb",
+   "clen": 1078
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:5",
+   "tag": "summary",
+   "gen": 1121,
+   "decode_s": 28.765675,
+   "ttft_s": 1.810676,
+   "wall": 30.583481545560062,
+   "chash": "3f7274574c12cb9421f19bac3f567de1",
+   "clen": 1718
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:6",
+   "tag": "summary",
+   "gen": 763,
+   "decode_s": 18.497434,
+   "ttft_s": 1.593398,
+   "wall": 20.097340664826334,
+   "chash": "3d2a0d4bbca26d92540552961354549f",
+   "clen": 1234
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:7",
+   "tag": "summary",
+   "gen": 922,
+   "decode_s": 22.717148,
+   "ttft_s": 1.751013,
+   "wall": 24.47378559038043,
+   "chash": "308571178f7bceaa2543799712228a8e",
+   "clen": 1517
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:8",
+   "tag": "summary",
+   "gen": 598,
+   "decode_s": 15.130309,
+   "ttft_s": 1.857996,
+   "wall": 16.991735618561506,
+   "chash": "3921b620a3094f4eec85737081bc7c70",
+   "clen": 908
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:9",
+   "tag": "summary",
+   "gen": 178,
+   "decode_s": 4.316202,
+   "ttft_s": 1.781426,
+   "wall": 6.1001474456861615,
+   "chash": "47bdf478ef4c04140355280e7b55f2a5",
+   "clen": 273
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:10",
+   "tag": "summary",
+   "gen": 416,
+   "decode_s": 10.524405,
+   "ttft_s": 1.563642,
+   "wall": 12.090525848791003,
+   "chash": "ae90c58d56c666e3410e995fb422bcec",
+   "clen": 729
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:11",
+   "tag": "summary",
+   "gen": 496,
+   "decode_s": 12.684909,
+   "ttft_s": 1.708242,
+   "wall": 14.397038410417736,
+   "chash": "eae53c2b3c553be060c0a9a999086c62",
+   "clen": 846
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:12",
+   "tag": "summary",
+   "gen": 565,
+   "decode_s": 14.631201,
+   "ttft_s": 1.827423,
+   "wall": 16.46144910994917,
+   "chash": "ff1e9ffbac3bcc238ca8ef47602bf36e",
+   "clen": 912
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:13",
+   "tag": "summary",
+   "gen": 558,
+   "decode_s": 14.366414,
+   "ttft_s": 1.465259,
+   "wall": 15.835493199527264,
+   "chash": "13c63c161d675979010e839696fb2975",
+   "clen": 969
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:14",
+   "tag": "summary",
+   "gen": 603,
+   "decode_s": 15.423254,
+   "ttft_s": 1.710377,
+   "wall": 17.1385707706213,
+   "chash": "1b0209bee33d2cca1eb8ed18004b3486",
+   "clen": 1021
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:15",
+   "tag": "summary",
+   "gen": 547,
+   "decode_s": 13.859071,
+   "ttft_s": 1.703457,
+   "wall": 15.567892964929342,
+   "chash": "e53d41adbd770aa78effeb938d5c4d45",
+   "clen": 945
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:16",
+   "tag": "summary",
+   "gen": 699,
+   "decode_s": 16.868487,
+   "ttft_s": 1.713647,
+   "wall": 18.587826197966933,
+   "chash": "13ad18f5070eb0ed2d6d5a0e703220fb",
+   "clen": 1081
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:17",
+   "tag": "summary",
+   "gen": 496,
+   "decode_s": 12.695613,
+   "ttft_s": 1.499521,
+   "wall": 14.20176469348371,
+   "chash": "7058ce6410fafc828862ca4b0c8535a5",
+   "clen": 861
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:18",
+   "tag": "summary",
+   "gen": 216,
+   "decode_s": 5.101418,
+   "ttft_s": 1.513556,
+   "wall": 6.621071362867951,
+   "chash": "e650db0b42a1245751c1ce80666d421e",
+   "clen": 374
+  },
+  {
+   "pid": "RESEARCH_SUMMARY_TEXT:1:19",
+   "tag": "summary",
+   "gen": 323,
+   "decode_s": 8.202067,
+   "ttft_s": 1.560967,
+   "wall": 9.768980713561177,
+   "chash": "411b4a32e1e657d355d0e0cbbde21b31",
+   "clen": 589
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:1:0",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 89.226593,
+   "ttft_s": 5.196073,
+   "wall": 94.43027327489108,
+   "chash": "24800e28cde5a923dd0953a66355d203",
+   "clen": 4261
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:10:1",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 88.923647,
+   "ttft_s": 4.625902,
+   "wall": 93.5578540917486,
+   "chash": "ab88ddfe641436d73022bf4136669de9",
+   "clen": 4175
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:11:2",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 60.024596,
+   "ttft_s": 1.465712,
+   "wall": 61.49550061952323,
+   "chash": "d00b6dc1527f18c9262f597ad6bba829",
+   "clen": 3972
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:12:3",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 61.352498,
+   "ttft_s": 1.589579,
+   "wall": 62.945432524196804,
+   "chash": "8353cfef9d1dbc7a40ae5fac7fbd009c",
+   "clen": 4701
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:13:4",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 82.966488,
+   "ttft_s": 4.044213,
+   "wall": 87.01423099264503,
+   "chash": "eea2f6ee84333d541be3d3987e467509",
+   "clen": 4409
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:14:5",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 103.125819,
+   "ttft_s": 5.889541,
+   "wall": 109.02116939239204,
+   "chash": "ec1183a4eeb6cd9ef23abc504e7bb594",
+   "clen": 4614
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:15:6",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 74.217206,
+   "ttft_s": 3.39643,
+   "wall": 77.61849085986614,
+   "chash": "403b0c77f317af24be8d970656815a9a",
+   "clen": 6040
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:16:7",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 67.694677,
+   "ttft_s": 1.892384,
+   "wall": 69.59100487176329,
+   "chash": "8ab007a6017e6cdab674b349c97cb0c9",
+   "clen": 4532
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:17:8",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 66.63185,
+   "ttft_s": 3.190368,
+   "wall": 69.82755626924336,
+   "chash": "9e84571dd5dab9d38ed26ef860e79c10",
+   "clen": 4709
+  },
+  {
+   "pid": "FINAL_REPORT_MARKDOWN:18:9",
+   "tag": "report",
+   "gen": 2500,
+   "decode_s": 69.684063,
+   "ttft_s": 2.837572,
+   "wall": 72.52725566457957,
+   "chash": "8dca85b7515d39cce0faed6056fe994b",
+   "clen": 4644
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+推导:suffix 每步吐 1+acc_i 个 token → 总 gen = 步数 + 总 acc → 步数 = gen − acc
+
+[summary] n=20调用
+  gen=11830  acc=7553(metrics差分)  → steps = 11830−7553 = 4277
+  decode总 = 146.9s → 每步 = 34.4ms   AL = gen/steps = 2.77
+  自检: 接受率 acc/draft = 7553/17284 = 43.7%
+
+[report] n=10调用
+  gen=25000  acc=19582(metrics差分)  → steps = 25000−19582 = 5418
+  decode总 = 249.5s → 每步 = 46.0ms   AL = gen/steps = 4.61
+  自检: 接受率 acc/draft = 19582/32532 = 60.2%

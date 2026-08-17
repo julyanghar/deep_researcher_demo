@@ -1,0 +1,46 @@
+=== eagle3_angelslim (port 30000, spec=True) 受控回放 ===
+载入 summary 20 / report 10
+-- summary --
+  RESEARCH_SUMMARY_TEXT:1:0  gen=485 decode=12.50s tps=38.8
+  RESEARCH_SUMMARY_TEXT:1:1  gen=565 decode=14.73s tps=38.4
+  RESEARCH_SUMMARY_TEXT:1:2  gen=564 decode=14.72s tps=38.3
+  RESEARCH_SUMMARY_TEXT:1:3  gen=524 decode=13.67s tps=38.3
+  RESEARCH_SUMMARY_TEXT:1:4  gen=650 decode=16.17s tps=40.2
+  RESEARCH_SUMMARY_TEXT:1:5  gen=962 decode=24.67s tps=39.0
+  RESEARCH_SUMMARY_TEXT:1:6  gen=718 decode=17.51s tps=41.0
+  RESEARCH_SUMMARY_TEXT:1:7  gen=821 decode=20.50s tps=40.1
+  RESEARCH_SUMMARY_TEXT:1:8  gen=975 decode=24.41s tps=39.9
+  RESEARCH_SUMMARY_TEXT:1:9  gen=185 decode=4.76s tps=38.9
+  RESEARCH_SUMMARY_TEXT:1:10  gen=467 decode=11.99s tps=39.0
+  RESEARCH_SUMMARY_TEXT:1:11  gen=482 decode=12.74s tps=37.8
+  RESEARCH_SUMMARY_TEXT:1:12  gen=582 decode=15.18s tps=38.4
+  RESEARCH_SUMMARY_TEXT:1:13  gen=431 decode=10.94s tps=39.4
+  RESEARCH_SUMMARY_TEXT:1:14  gen=578 decode=15.35s tps=37.7
+  RESEARCH_SUMMARY_TEXT:1:15  gen=526 decode=13.59s tps=38.7
+  RESEARCH_SUMMARY_TEXT:1:16  gen=750 decode=18.81s tps=39.9
+  RESEARCH_SUMMARY_TEXT:1:17  gen=476 decode=12.37s tps=38.5
+  RESEARCH_SUMMARY_TEXT:1:18  gen=201 decode=4.89s tps=41.1
+  RESEARCH_SUMMARY_TEXT:1:19  gen=300 decode=7.68s tps=39.1
+-- report --
+  FINAL_REPORT_MARKDOWN:1:0  gen=2500 decode=77.97s tps=32.1
+  FINAL_REPORT_MARKDOWN:10:1  gen=2500 decode=82.82s tps=30.2
+  FINAL_REPORT_MARKDOWN:11:2  gen=2500 decode=53.34s tps=46.9
+  FINAL_REPORT_MARKDOWN:12:3  gen=2500 decode=58.05s tps=43.1
+  FINAL_REPORT_MARKDOWN:13:4  gen=2500 decode=76.54s tps=32.7
+  FINAL_REPORT_MARKDOWN:14:5  gen=2500 decode=90.04s tps=27.8
+  FINAL_REPORT_MARKDOWN:15:6  gen=2500 decode=72.22s tps=34.6
+  FINAL_REPORT_MARKDOWN:16:7  gen=2500 decode=60.36s tps=41.4
+  FINAL_REPORT_MARKDOWN:17:8  gen=2500 decode=68.15s tps=36.7
+  FINAL_REPORT_MARKDOWN:18:9  gen=2410 decode=60.07s tps=40.1
+
+[summary 分析] n=20 totGen=11242
+   decode tok/s = 39.1   (client-wall tok/s = 35.0)
+   均 decode=14.36s 均 ttft=1.689s 均 wall=16.05s
+   接受率 accepted/draft = 10.7% (draft=25464 acc=2734)
+
+[report 照抄] n=10 totGen=24910
+   decode tok/s = 35.6   (client-wall tok/s = 33.9)
+   均 decode=69.96s 均 ttft=3.441s 均 wall=73.40s
+   接受率 accepted/draft = 17.7% (draft=48831 acc=8626)
+
+存 /home/yilin/modify-code-runs/eagle3-test/speedup_eagle3_angelslim.json
